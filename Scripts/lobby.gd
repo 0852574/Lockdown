@@ -251,6 +251,8 @@ func _on_Quit_button_pressed() -> void:
 			Global.taskMode = false
 			print("player closed minitask")
 
+				
+
 func swap_to_new_instance():
 	if is_instance_valid(active_instance):
 		active_instance.queue_free()
