@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b8crchnkrw0ss"]
+
+[ext_resource type="Script" uid="uid://dx20c47uo1kqj" path="res://gameMechanics/Traps/death_cube.gd" id="1_4g4tt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u72bo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i87kb"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7aftq"]
+material = SubResource("StandardMaterial3D_i87kb")
+flip_faces = true
+
+[node name="DeathCube" type="Node3D" unique_id=145201229]
+script = ExtResource("1_4g4tt")
+
+[node name="DeathCubeArea" type="Area3D" parent="." unique_id=193981294]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathCubeArea" unique_id=1044854174]
+transform = Transform3D(1.1827568, 0, 0, 0, 1.1827568, 0, 0, 0, 1.1827568, 0, 0, 0)
+shape = SubResource("BoxShape3D_u72bo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=7468992]
+transform = Transform3D(1.1702365, 0, 0, 0, 1.1702365, 0, 0, 0, 1.1702365, 0, 0, 0)
+mesh = SubResource("BoxMesh_7aftq")
+
+[connection signal="body_entered" from="DeathCubeArea" to="." method="_on_death_cube_area_body_entered"]
