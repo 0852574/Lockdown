@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://currrrlwvf71l" path="res://Scenes/Item Collection Volume.tscn" id="13_dbplf"]
 [ext_resource type="PackedScene" uid="uid://b8crchnkrw0ss" path="res://gameMechanics/Traps/DeathCube.tscn" id="14_0roqs"]
 [ext_resource type="PackedScene" uid="uid://1gk8wgub7vvt" path="res://Scenes/chatbox.tscn" id="14_qagcc"]
+[ext_resource type="Script" uid="uid://bpyh1pj66vo3u" path="res://Scenes/death_button.gd" id="16_j4ew0"]
+[ext_resource type="PackedScene" uid="uid://c3r01pii0mcrd" path="res://Scenes/InteractObject.tscn" id="17_wm471"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u5pdl"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -40,6 +42,10 @@ font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_cdpo3"]
 font_size = 64
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x68ij"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yy6u7"]
 
 [node name="World" type="Node" unique_id=1730723652]
 script = ExtResource("1_ctiuy")
@@ -439,9 +445,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.093616, 2.6249995, 10.6197
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.676233, 2.624999, 5.9977307)
 
 [node name="DeathCube" parent="." unique_id=145201229 instance=ExtResource("14_0roqs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72637606, 1.5444541, 3.1448512)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.60838294, 1.5444541, 6.6486945)
 
 [node name="chatbox" parent="." unique_id=18944203 instance=ExtResource("14_qagcc")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2017855827 groups=["InteractableObject"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6369176, 0.476655, 5.0990524)
+script = ExtResource("16_j4ew0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1508321642 groups=["InteractableObject"]]
+shape = SubResource("BoxShape3D_x68ij")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=848534167 groups=["InteractableObject"]]
+mesh = SubResource("BoxMesh_yy6u7")
+
+[node name="InteractObject" parent="." unique_id=1565446478 instance=ExtResource("17_wm471")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.93946, 2.4999998, -5.326315)
 
 [connection signal="body_entered" from="Terminal/Area3D" to="." method="_GUI_window_open"]
 [connection signal="close_requested" from="GUIwindow" to="GUIwindow" method="_GUI_window_close"]

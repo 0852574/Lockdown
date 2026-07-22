@@ -178,6 +178,5 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="GUIwindow" unique_id=259624928]
 transform = Transform3D(0.6735674, 0, -0.7391258, 0, 1, 0, 0.7391258, 0, 0.6735674, 1.9815508, 1.2883507, -3.0262659)
-visible = false
 
 [connection signal="close_requested" from="GUIwindow" to="GUIwindow" method="_GUI_window_close"]
