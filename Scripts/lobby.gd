@@ -217,6 +217,8 @@ func pause(): #this probably isnt the best way to do this but it works
 		pauseHUD.visible = false
 	print(str(Global.isPaused))
 
+func _on_Quit_button_pressed() -> void:
+	get_tree().quit()
 
 
 # GUI window code :
@@ -225,19 +227,7 @@ var minitask = preload("res://gameMechanics/hacking_minitask.tscn").instantiate(
 var active_instance: Node = null
 
 func _GUI_window_open(_body: Player) -> void:
-	var minitask = preload("res://gameMechanics/hacking_minitask.tscn").instantiate()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE # Release mouse
-	Global.taskMode = true
-	GUI.show()
-	GUI_viewport.add_child(minitask)
-	print("player interacted with minitask")
-	if GUI_window != null:
-		GUI_window.emit_signal("close_requested")
-		Global.taskMode = false
-
-
-func _on_Quit_button_pressed() -> void:
-	if player.is_multiplayer_authority():
+	if _body.is_multiplayer_authority():
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE # Release mouse
 		Global.taskMode = true
 		GUI.show()
