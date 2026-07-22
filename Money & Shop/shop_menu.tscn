@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://cq1d8wc3jt1fp"]
+
+[ext_resource type="Texture2D" uid="uid://rariwxbo4hpu" path="res://Items/Item Models/Itemsglb_Horse.jpg" id="1_0agmq"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_esxia"]
+color = Color(1, 1, 1, 0.39215687)
+grow_begin = 8.0
+grow_end = 8.0
+thickness = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lch3s"]
+bg_color = Color(0, 0, 0, 0.19607843)
+
+[node name="shopMenu" type="Control" unique_id=1105306829]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=707474684]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 1154.0
+offset_bottom = 647.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer2" unique_id=1592986208]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer2/ScrollContainer" unique_id=225306314]
+layout_mode = 2
+columns = 3
+
+[node name="Label" type="Label" parent="." unique_id=1082756227]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 8.0
+offset_right = 1154.0
+offset_bottom = 77.0
+theme_override_font_sizes/font_size = 50
+text = "SHOP"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=584262962]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 20.0
+offset_right = 1155.0
+offset_bottom = 154.0
+theme_override_constants/separation = 4
+theme_override_styles/separator = SubResource("StyleBoxLine_esxia")
+
+[node name="ItemList" type="ItemList" parent="." unique_id=320390609]
+layout_mode = 0
+offset_left = 745.0
+offset_top = 211.0
+offset_right = 1113.0
+offset_bottom = 599.0
+item_count = 2
+max_columns = 3
+icon_mode = 0
+item_0/text = "Horse"
+item_0/icon = ExtResource("1_0agmq")
+item_1/text = "horse"
+item_1/icon = ExtResource("1_0agmq")
+
+[node name="shopItem" type="Control" parent="." unique_id=858485459]
+anchors_preset = 0
+offset_left = 47.0
+offset_top = 120.0
+offset_right = 47.0
+offset_bottom = 120.0
+scale = Vector2(1.0800006, 1)
+layout_direction = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="shopItem" unique_id=250479945]
+layout_mode = 0
+offset_left = -5.3571396
+offset_top = -7.0
+offset_right = 160.7142
+offset_bottom = 225.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lch3s")
+
+[node name="TextureRect" type="TextureRect" parent="shopItem" unique_id=736322402]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 156.0
+offset_bottom = 160.0
+texture = ExtResource("1_0agmq")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="shopItem" unique_id=234386035]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 162.0
+offset_right = 159.0
+offset_bottom = 185.0
+text = "horse                  1 $"
+
+[node name="Button" type="Button" parent="shopItem" unique_id=1410378267]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 188.0
+offset_right = 135.0
+offset_bottom = 219.0
+text = "buy"
