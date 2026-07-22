@@ -147,18 +147,18 @@ transform = Transform3D(0.6735674, 0, -0.7391258, 0, 1, 0, 0.7391258, 0, 0.67356
 visible = false
 visibility_parent = NodePath("../../InteractableTest")
 
-[node name="SpawnPoints2" type="Node3D" parent="." unique_id=863307615]
+[node name="SpawnPoints" type="Node3D" parent="." unique_id=863307615]
 
-[node name="Robber" type="Node3D" parent="SpawnPoints2" unique_id=2060114088]
+[node name="Robber" type="Node3D" parent="SpawnPoints" unique_id=2060114088]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.357935, 2, 0)
 
-[node name="Marker3D" type="Marker3D" parent="SpawnPoints2/Robber" unique_id=2026920293]
+[node name="Marker3D" type="Marker3D" parent="SpawnPoints/Robber" unique_id=2026920293]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -0.71219444)
 
-[node name="Cops" type="Node3D" parent="SpawnPoints2" unique_id=183918976]
+[node name="Cops" type="Node3D" parent="SpawnPoints" unique_id=183918976]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.373262, 2, 0)
 
-[node name="Marker3D" type="Marker3D" parent="SpawnPoints2/Cops" unique_id=106706201]
+[node name="Marker3D" type="Marker3D" parent="SpawnPoints/Cops" unique_id=106706201]
 transform = Transform3D(0.2774824, 0, 0.96073073, 0, 1, 0, -0.96073073, 0, 0.2774824, 0, -2, 0)
 
 [node name="Enemy" parent="." unique_id=204833997 instance=ExtResource("4_pqjlb")]
@@ -460,5 +460,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.676233, 2.624999, 5.997730
 
 [connection signal="body_entered" from="InteractableTest/Area3D" to="." method="_GUI_window_open"]
 [connection signal="close_requested" from="GUIwindow" to="GUIwindow" method="_GUI_window_close"]
-[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
-[connection signal="spawned" from="SpawnPoints" to="." method="_on_multiplayer_spawner_spawned"]

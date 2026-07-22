@@ -66,7 +66,7 @@ func setModel(weaponType):
 	weaponReturning = loadedWeapon.returnThrownForce
 	weaponParent.scale = loadedWeapon.scale
 
-	var convex_shape = weaponMesh.mesh.create_convex_shape()
+	var convex_shape = weaponMesh.mesh.create_convex_shape(true, true)
 	collision.shape = convex_shape
 	collision.scale = loadedWeapon.scale
 	

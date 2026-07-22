@@ -88,7 +88,7 @@ func _ready() -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	print(Input.get_joy_name(0))
 	get_viewport().set_embedding_subwindows(false)
-	Global.recreatePlayers()
+	Global.recreatePlayers(cop_spawns, robber_spawns)
 	
 	
 	#var DebugPanel = debWin.instantiate()

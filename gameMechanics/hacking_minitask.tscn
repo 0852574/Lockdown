@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://c7l2n6j51pv0e"]
 
 [ext_resource type="Script" uid="uid://c1wvmwqpcdne2" path="res://gameMechanics/hacking_minitask.gd" id="1_a4q0h"]
-[ext_resource type="Texture2D" path="/home/cindysayer/Downloads/Lockdown-main/icon.svg" id="4_2dyur"]
 [ext_resource type="Texture2D" uid="uid://buvxdbhao4n7y" path="res://icon.svg" id="4_vim1e"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vim1e"]
@@ -48,7 +47,6 @@ position = Vector2(741, 283)
 material = SubResource("CanvasItemMaterial_vim1e")
 position = Vector2(1, -1)
 scale = Vector2(0.3046875, 0.28125)
-texture = ExtResource("4_2dyur")
 
 [node name="Area2D" type="Area2D" parent="reward/Sprite2D" unique_id=87722816]
 position = Vector2(-3.2819824, 3.555542)
@@ -88,7 +86,6 @@ scale = Vector2(0.99999994, 0.99999994)
 [node name="Sprite2D" type="Sprite2D" parent="Walls" unique_id=210127730]
 position = Vector2(300, 427.50003)
 scale = Vector2(0.9999999, 4.0078125)
-texture = ExtResource("4_2dyur")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls" unique_id=570015604]
 position = Vector2(297.9999, 422.4999)
@@ -98,7 +95,6 @@ shape = SubResource("RectangleShape2D_owrb1")
 [node name="Sprite2D2" type="Sprite2D" parent="Walls" unique_id=1886863735]
 position = Vector2(566.00006, 213.00002)
 scale = Vector2(0.9999999, 4.0078125)
-texture = ExtResource("4_2dyur")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls" unique_id=1050014693]
 position = Vector2(565, 219)
@@ -109,7 +105,6 @@ shape = SubResource("RectangleShape2D_owrb1")
 position = Vector2(757.00006, 425.00003)
 rotation = -1.5653714
 scale = Vector2(0.9999999, 4.0078125)
-texture = ExtResource("4_2dyur")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls" unique_id=1321839622]
 position = Vector2(757.00006, 425.00003)
@@ -121,7 +116,6 @@ shape = SubResource("RectangleShape2D_owrb1")
 position = Vector2(949.908, 304.33456)
 rotation = -3.1439736
 scale = Vector2(0.9999999, 2.8374693)
-texture = ExtResource("4_2dyur")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls" unique_id=1878366025]
 position = Vector2(949.99963, 304.99994)
