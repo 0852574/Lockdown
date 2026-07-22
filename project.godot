@@ -13,7 +13,7 @@ config_version=5
 config/name="Lockdown"
 config/tags=PackedStringArray("2026", "multiplayer")
 run/main_scene="res://Scenes/testWorld.tscn"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="uid://el1jrwdua5i0"
 
 [autoload]
