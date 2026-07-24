@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://cw5iw0tdrx43u" path="res://gameMechanics/guiwindow.gd" id="3_ftq4a"]
 [ext_resource type="PackedScene" uid="uid://5k1o5ctvtah6" path="res://Scenes/enemy.tscn" id="3_nule3"]
 [ext_resource type="Script" uid="uid://da4bqfupciool" path="res://controllers/reticle.gd" id="4_0ddhe"]
-[ext_resource type="Script" uid="uid://yvot1ygg27px" path="res://Money & Shop/shop_items.gd" id="4_qagcc"]
 [ext_resource type="Theme" uid="uid://de2nek577lf7m" path="res://controllers/Themes/UI/Debug.tres" id="5_lwfgy"]
 [ext_resource type="Script" uid="uid://dvspsmhr73myh" path="res://controllers/scripts/debug_panel.gd" id="6_r1245"]
 [ext_resource type="LabelSettings" uid="uid://dskxen8j6183q" path="res://controllers/materials/Ammo Counter Label Settings.tres" id="7_ftq4a"]
@@ -179,7 +178,6 @@ autoplay = true
 [node name="ShopMenu" type="CanvasLayer" parent="." unique_id=1110994879]
 
 [node name="ShopItems" type="ResourcePreloader" parent="ShopMenu" unique_id=2084493552]
-script = ExtResource("4_qagcc")
 
 [node name="SpawnPoints2" type="Node3D" parent="." unique_id=863307615]
 

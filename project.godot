@@ -20,7 +20,7 @@ config/icon="uid://el1jrwdua5i0"
 
 Global="*uid://fpoxeuvyuyg5"
 weaponGlobal="*uid://dv1ap210n0c1r"
-MoneyGlobal="*uid://cu6pt5kgvjpdd"
+moneyGlobal="*uid://cu6pt5kgvjpdd"
 
 [dotnet]
 
