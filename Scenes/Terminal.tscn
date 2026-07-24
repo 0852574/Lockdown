@@ -1,0 +1,182 @@
+[gd_scene format=4 uid="uid://bq0ma4aux3fpr"]
+
+[ext_resource type="Script" uid="uid://bgaqq88vtlrtd" path="res://Scenes/terminal.gd" id="1_o5w4h"]
+[ext_resource type="Script" uid="uid://cw5iw0tdrx43u" path="res://gameMechanics/guiwindow.gd" id="2_tjxev"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8ipk"]
+resource_name = "Body"
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.57199997, 0.5902, 0.65, 1)
+metallic = 0.5
+roughness = 0.98
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oclfs"]
+resource_name = "Screen"
+albedo_color = Color(0.106632225, 0.105656154, 0.2037664, 1)
+metallic = 0.8
+metallic_specular = 0.3
+roughness = 0.54
+emission = Color(1, 1, 1, 1)
+rim = 0.0
+clearcoat_enabled = true
+clearcoat_roughness = 0.1
+backlight = Color(1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_40dey"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0d6js"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dgasi"]
+noise = SubResource("FastNoiseLite_0d6js")
+color_ramp = SubResource("Gradient_40dey")
+seamless = true
+invert = true
+as_normal_map = true
+bump_strength = 2.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b0tep"]
+resource_name = "'keyboard'"
+albedo_color = Color(0.174452, 0.17445627, 0.19435668, 1)
+metallic = 0.810924
+roughness = 0.64
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_dgasi")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_geu3d"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2.6, 3, 2),
+"format": 34896613377,
+"index_count": 192,
+"index_data": PackedByteArray("GQABAAIAAQAZABoAGQACAAAAGgAZAAAAAAAbABoAGgAbAAEAAAACABwAAgABABAAAgAQABwAHAAdAAAAHQAbAAAAHgAdABwAHgADAB0AHwAeABwAHAAQAB8AHgAgAAMAHQADAAQAHQAEABsAIAAEAAMAIQAeAB8AIQAgAB4AEAAIAB8AHwAIACEABgAEACAAGwAEAAYAIAAhACIABgAgACMAIwAgACIAIgAhACQAJQAGACMAGwAGACUAIgAkAAUAIQAJACQABQAkAAkACAAJACEABwAiAAUAIwAiAAcACQAHAAUABwAKACMACgAHAAkAIwAKACUAJQAPABsACgAPACUAAQAbAA8ACQALAAoACwANAAoACgANAA8ADAALAAkACAAMAAkADQAOAA8ADgAMAAgADwAOAAgADwAUAAEACAASAA8AEgAUAA8AFQAUABIAEQASAAgAEwASABEAEAARAAgAFAAWAAEAAQAWABAAFgARABAAGAAWABQAFwARABYA"),
+"lods": [2.4406152, PackedByteArray("AAABAAIAAgADAAAAAAADAAQAAgAFAAMABQAEAAMAAAAEAAYABgAEAAUAAAAGAAEABgAFAAcACAAFAAIACQAHAAUABQAIAAkACgAHAAkACgAGAAcACQALAAoADAALAAkACAAMAAkACwANAAoADgAMAAgACgANAA8ADQAOAA8ACgAPAAYADwAOAAgAAQAGAA8ACAACABAAAgABABAAEAARAAgACAASAA8AEQASAAgAEwASABEAEgAUAA8ADwAUAAEAFQAUABIAFgARABAAAQAWABAAFAAWAAEAFwARABYAGAAWABQA")],
+"name": "Body",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 38,
+"vertex_data": PackedByteArray("AAAg9QAAAACJnf//ThAAAIoM//+w7wAAAAAAAP//AAAAAAAAAAAAAE3sAACw7wAAOrEAAAAAAABN7AAAThAAADqxqqqw7wAA//8horDvAAD//yGiThAAACTxvaPDIwAAJPG9ozvcAAAUwA6pwyMAABTADqk73AAAOrGqqk4QAACJnf//sO8AAAWv2rMv1QAABa/as88qAAAtsMev/38AAESg5PbPKgAA+adt1ecgAABEoOT2L9UAAPmnbdUX3wAAxJ8S+/9/AACKDP//ThAAAECTIPUAAAAAs6bZoAAAAAAAACD1//8AAAAAqqoAAAAAAACqqv//AABAkyD1//8AADqxAAD//wAAs6bZoP//AACx3wAA//8AALHfAAAAAAAAPPKqmP//AAA88qqYAAAAAA==")
+}, {
+"aabb": AABB(0.622681, 1.059958, -0.742933, 0.26803195, 0.882352, 1.485866),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("AQACAAsACQABAAsAAAABAAkACwACAAgAAgAGAAgADAAAAAkACQALAAwABAAAAAwACAAGAA0ACwAIAA4ADAALAA4ADgAIAA0ABgAFAA0ADAAOAAoACgAEAAwAAwAEAAoADQAFAA8ABQAHAA8ADgANABAACgAOABAAEAANAA8AEAADAAoADwAHABAABwADABAA"),
+"lods": [0.12071388, PackedByteArray("AQACAAgAAgAGAAgABgAFAAgACQABAAgAAAABAAkABAAAAAkACQAIAAoACgAEAAkACgAIAAUAAwAEAAoABQAHAAoABwADAAoA"), 0.22350362, PackedByteArray("AAABAAIAAAACAAMAAwAEAAAAAwACAAUABgAFAAIABQAHAAMA")],
+"name": "Screen",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 17,
+"vertex_data": PackedByteArray("+JPYDVUNAAAqnwAA/38AAPiT2A2p8gAA2ATJ8VUNAACVT/9/AAAAANgEyfGp8gAAlU//f///AAAAAP///38AAMTxaTUl0QAAxPFpNdkuAAC9jGXX2S4AAP//zi3/fwAAlMjwht0mAACUyPCGIdkAAJXki4j/fwAAvYxl1yXRAAApkRLg/38AAA==")
+}, {
+"aabb": AABB(0.95086, 0.918858, -0.720579, 0.49827993, 0.102029026, 1.441158),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAQAEAAMABQAAAAIAAwAFAAIABgAAAAUAAwAEAAcABAAGAAcABwAFAAMABwAGAAUA"),
+"name": "'keyboard'",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("//8AAAAAAAD//wAA//8AAAT/GmiWAwAABP8aaGj8AAAAAEac//8AADIG//+WAwAAAABGnAAAAAAyBv//aPwAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dcjh3"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2.6, 3, 2),
+"attribute_data": PackedByteArray("aAJJ8f08cPYDCJb94D2W/ZIC3IhpRNyI/Txw9l1EFtKhYXPObFphibeDPNn0wJb9FouW/adtiJCBxQKQcmaa1fOqhB2crzKLcmacInJmMotstD91bLRmM+34MouW/WYzFbkyi0BCSj9AQgyEaAJKP2gCDIQmB+Um+wlxNfsJXxhoAmcUaAJvOUBCZxStOnE1VCI3N0BCbzmtOl8YVCKSFoE95Sb3B4o69wcvPmgCbzloAko/QEJvObA8Lz6wPIo6QEJKPx8HcPauh4jUn8W32PeOb/irxW/4qoMCkGdyApCdawzRnK9hQnJmYUKcr5wilv0/dWy0goaW/YKGdAKQ0WVAYs0cOUnxdlzlyaxV3IirxW/4945v+BtrhB1yZpwinK+cIv08cPYfB3D2HDlJ8WgCSfEWi5b9945v+K6HiNQcOUnxZUBizaxV3Ih2XOXJZ3ICkJ1rDNG3gzzZcmaa1a6HiNSdawzRoWFzzl1EFtJ2XOXJZUBizfsJXxj7CXE1rTpxNa06XxitOnE1+wlxNfsJcTWtOnE1aAJvOUBCbzn7CV8YrTpfGK06Xxj7CV8YQEJnFGgCZxQ="),
+"format": 34896613399,
+"index_count": 192,
+"index_data": PackedByteArray("MQABAAIAAgABAAMAMgAzADQANAAzADUAMgA2ADMAMwA2AA4ANgAyADcANwAyADgAOQARADoAOgARABMAOQA6ADsAOwA6ABIAFAAVADwAPAAVABcAFAA8AD0APQA8AD4APQA+ABgAGAA+ABYAGQAaABsAGwAaABwAPwAEAEAAPwBAAAAAAABAAEEAQAAEAAUAQAAFAEIAQgAFAEMACwAMAEQARAAMAEUARgAQAEcARwAQAEgASQBKAEsASwBKAEwATQAKAE4ATgAKAE8AUABRAAYABgBRAAcACQAIAFIAUgAIAFMAVABVAA0ADQBVAA8AVgBXAFgAWABXAFkAWgBbAFwAXABbAF0AHQAeAB8AXgBfACAAIABfACEAKAAmACMAYABhACUAJQBhACIAJABiAGMAZABlAGYAZgBlAGcAJwBoAGkAagBrAGwAbABrAG0AKQAqACsAKwAqACwALQApACsAKgAuACwALwApAC0ALAAuADAALgAvADAAMAAvAC0A"),
+"lods": [2.4406152, PackedByteArray("AAABAAIAAgABAAMAAAAEAAUAAAAFAAYABgAFAAcACAAHAAUACAAFAAkACgALAAwACgANAAsACwANAA4ADQAKAA8AEAARABIAEgARABMAFAAVABYAFgAVABcAFAAWABgAGQAaABsAGwAaABwAHQAeAB8AHwAeACAAIAAeACEAIgAfACAAHgAjACEAJAAjAB4AIQAjACUAJQAmACIAJgAfACIAIwAmACUAJwAfACYAKAAmACMAKQAqACsAKwAqACwALQApACsAKgAuACwALwApAC0ALAAuADAALgAvADAAMAAvAC0A")],
+"material": SubResource("StandardMaterial3D_c8ipk"),
+"name": "Body",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 110,
+"vertex_data": PackedByteArray("AAAg9QAA//+Jnf//ThD/v4oM//+w7/+/iZ3//7Dv/78AAAAAAAD//zqxAAAAAP//iZ3//04Qivk6saqqThCK+f//IaJOEHP+TewAAE4Qc/46saqqsO8t/4oM//+w7///iZ3//7Dv//9N7AAAsO/V+wAAAAD///////8horDv1fuKDP//sO/8xQAAAAD///+/AAAg9QAA/78AAAAAAAD/vzqxAAAAAFTVAAAAAAAAVNVN7AAAsO9U1QAAAAD//1TVTewAAE4QVNX//yGiThAbwE3sAABOEBvA//8horDvG8BN7AAAsO8bwPmnbdUX32q/Ba/asy/Var9EoOT2L9Vqv4md//+w72K/OrGqqrDvZb+Jnf//ThBgwQWv2rPPKlfBLbDHr/9/Y8A6saqqThBcwUSg5PbPKlfBxJ8S+/9/2cD5p23V5yBXwRTADqk73HjSJPG9ozvceNI6saqqsO940v//IaKw73jSOrGqqk4Qd9Ik8b2jwyN40hTADqnDI3fS//8hok4QeNKKDP//ThD/v7Om2aD/////AACqqv////9AkyD1/////wAAIPX/////OrEAAP////+x3wAA/////zzyqpj/////AACqqv///78AAKqqAAD/vwAAIPX///+/OrEAAP//VNWx3wAAAABU1bHfAAD//1TVAACqqgAA//+zptmgAAD//0CTIPUAAP//PPKqmAAA//+x3wAAAAD//wAAIPX/////QJMg9f////+KDP//ThD8xQAAIPUAAPzFAAAg9f///MWJnf//ThD/34oM//9OEP/fQJMg9QAA/98AACD1AAD/34md//+w7y3/QJMg9f//Lf+zptmg//8t/0CTIPUAAIr5s6bZoAAAivmx3wAAAABz/jzyqpgAAHP+sd8AAP//1fs88qqY///V+zqxqqqw78D+//8horDvwP6zptmg///A/jzyqpj//8D+//8hok4QVOA6saqqThBU4DzyqpgAAFTgs6bZoAAAVOBEoOT2L9VhvwWv2rMv1WW/Ba/as88qW8FEoOT2zypfwQWv2rPPKmPABa/asy/VY8AFr9qzL9VjwAWv2rPPKmPAOrGqqrDvY8A6saqqThBjwESg5PYv1dnARKDk9s8q2cBEoOT2zyrZwESg5PYv1dnAiZ3//04Q2cCJnf//sO/ZwP7//3////9/////f////3/+//9/////f2HaBH9h2gN/0QTnqNEE5qhaB8si/398pf9/fKXVAQnb/3//f9UBCdv+nADG/3////9/////f///qipU1aoqVNWqKlTVqipU1aoqVNXqeSkM6nkpDOp5KQzqeSkMHJUkChyVJAoclSQKG5WZChuVZgqslEUKsZTAChKViQqulHgKsZTACvmcfA6xlMAKttHbKLbR2yi20dsottHbKLbR2yi20dsottHbKLbR2yj///9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9/////f////3///6oqVNWqKlTVqipU1f7//3/+//9/////f////3////9//398pf9/fKX+nADG/pwAxv6cAMb///9/////f////3////9/WgfLIloHyyJaB8siYdoEf2HaBH/RBOeo0QTnqNUBCdvVAQnbEYXAoxGFwKMRhcCjEYXAoxj394EZ9/eBGPf3gRn394EblacKG5VtCq+UhgqtlEwKEpWJChKViQoSlYkKEpWJChKViQoSlYkK+Zx8DvmcfA75nHwO+Zx8DvmcfA75nHwO")
+}, {
+"aabb": AABB(0.622681, 1.059958, -0.742933, 0.26803195, 0.882352, 1.485866),
+"attribute_data": PackedByteArray("rTpxNVQiNzf7CXE1rTpfGIE95Sb7CV8YJgflJlQikhYZEb0wjzO9MI8zFRxUIr0xQTVfJmcPXyZUIkAmGREVHFQiARs="),
+"format": 34896613399,
+"index_count": 72,
+"index_data": PackedByteArray("AQACAAsACQABAAsAAAABAAkACwACAAgAAgAGAAgADAAAAAkACQALAAwABAAAAAwACAAGAA0ACwAIAA4ADAALAA4ADgAIAA0ABgAFAA0ADAAOAAoACgAEAAwAAwAEAAoADQAFAA8ABQAHAA8ADgANABAACgAOABAAEAANAA8AEAADAAoADwAHABAABwADABAA"),
+"lods": [0.12071388, PackedByteArray("AQACAAgAAgAGAAgABgAFAAgACQABAAgAAAABAAkABAAAAAkACQAIAAoACgAEAAkACgAIAAUAAwAEAAoABQAHAAoABwADAAoA"), 0.22350362, PackedByteArray("AAABAAIAAAACAAMAAwAEAAAAAwACAAUABgAFAAIABQAHAAMA")],
+"material": SubResource("StandardMaterial3D_oclfs"),
+"name": "Screen",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 17,
+"vertex_data": PackedByteArray("+JPYDVUNB88qnwAA/38vw/iT2A2p8qix2ATJ8VUNOdKVT/9/AABL1dgEyfGp8ryzlU//f///W6sAAP///39qyMTxaTUl0e23xPFpNdkuqsi9jGXX2S6uy///zi3/f5DAlMjwht0mkcyUyPCGIdketJXki4j/f1rAvYxl1yXRP7opkRLg/3+gw2V6YxB/aBEvNnF5FhCovxF3j3MHMrQXHX+YsQyNwE0g3nNlFO14GBFpqrIT5HNlGIiRhQi4lq8LNZQbCkCxLBpnsdEY")
+}, {
+"aabb": AABB(0.95086, 0.918858, -0.720579, 0.49827993, 0.102029026, 1.441158),
+"attribute_data": PackedByteArray("6WFmKulhWXaKYXcrimFJddFHSXXRR3crimFJdYphdytyR2Yq6WFmKtFHdyuKYXcrckdZdnJHZirRR0l10Ud3K+lhWXZyR1l2imFJddFHSXU="),
+"format": 34896613399,
+"index_count": 30,
+"index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMA"),
+"material": SubResource("StandardMaterial3D_b0tep"),
+"name": "'keyboard'",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("//8AAAAAQtT//wAA//9C1AT/GmiWA0LUBP8aaGj8QtQyBv//aPwnwDIG//+WAyfABP8aaGj8J8AE/xpolgMnwAAARpwAAFnt//8AAAAAWe0yBv//lgNZ7QT/GmiWA1ntAABGnP//xs4AAEacAADGzjIG//9o/MbOMgb//5YDxs7//wAA//9XkwAARpz//1eTBP8aaGj8V5MyBv//aPxXk/qr/VX7q/1V+qv9Vfur/VXT8el40/HpeNPx6XjT8el43vaYeN72mHje9ph43vaYeMXZcszF2XLMxdlyzMXZcsxO4AB6TuAAek7gAHpO4AB6")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_geu3d")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i83bj"]
+
+[node name="Terminal" type="Node3D" unique_id=1493030678]
+script = ExtResource("1_o5w4h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1860184303]
+mesh = SubResource("ArrayMesh_dcjh3")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D" unique_id=1199599617]
+transform = Transform3D(-0.07378054, 0, 2.0552044, 0, 2.056528, 0, -2.0552044, 0, -0.07378054, 0.3518734, 0.16322285, 0.0135240555)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D" unique_id=1268668025]
+shape = SubResource("BoxShape3D_i83bj")
+
+[node name="GUIwindow" type="Window" parent="." unique_id=775877433]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Minitask test"
+initial_position = 2
+size = Vector2i(900, 500)
+transient_to_focused = true
+exclusive = true
+script = ExtResource("2_tjxev")
+
+[node name="GUI" type="CanvasLayer" parent="GUIwindow" unique_id=1964733532]
+
+[node name="Panel" type="Panel" parent="GUIwindow/GUI" unique_id=1679074814]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="GUIwindow/GUI/Panel" unique_id=1519200353]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="GUIwindow/GUI/Panel/SubViewportContainer" unique_id=1562636751]
+unique_name_in_owner = true
+handle_input_locally = false
+size = Vector2i(900, 500)
+size_2d_override = Vector2i(1150, 650)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="GUIwindow" unique_id=259624928]
+transform = Transform3D(0.6735674, 0, -0.7391258, 0, 1, 0, 0.7391258, 0, 0.6735674, 1.9815508, 1.2883507, -3.0262659)
+
+[connection signal="close_requested" from="GUIwindow" to="GUIwindow" method="_GUI_window_close"]
