@@ -24,6 +24,10 @@ var enet_peer = ENetMultiplayerPeer.new()
 #func _on_multiplayer_spawner_spawned(node):
 	#if node.is_multiplayer_authority():
 		#node.health_changed.connect(update_health_bar)
+
+#Game Manager Variables
+
+
 func upnp_setup():
 	var upnp = UPNP.new()
 	

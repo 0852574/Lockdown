@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cx1gaprr1a6j0"]
+
+[ext_resource type="Script" uid="uid://daadx55kvtrv4" path="res://Scripts/start_round_button.gd" id="1_tdcxo"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_eqax0"]
+top_radius = 0.2
+bottom_radius = 0.25
+height = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xpc2p"]
+size = Vector3(0.5, 1, 0.5)
+
+[node name="StartRoundButton" type="Node3D" unique_id=308019239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=978226506 groups=["InteractableObject"]]
+script = ExtResource("1_tdcxo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=585807985]
+mesh = SubResource("CylinderMesh_eqax0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=327546367]
+shape = SubResource("BoxShape3D_xpc2p")

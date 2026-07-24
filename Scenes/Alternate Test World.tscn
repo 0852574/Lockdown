@@ -11,6 +11,7 @@
 [ext_resource type="LabelSettings" uid="uid://ymbpk3yphr8i" path="res://controllers/materials/InteractionLabelSettings.tres" id="10_wi7b8"]
 [ext_resource type="Theme" uid="uid://b4n6esmn2elnd" path="res://controllers/Themes/PauseMenuTheme.tres" id="11_6axgn"]
 [ext_resource type="PackedScene" uid="uid://currrrlwvf71l" path="res://Scenes/Item Collection Volume.tscn" id="12_q2aa2"]
+[ext_resource type="PackedScene" uid="uid://cx1gaprr1a6j0" path="res://Scenes/Start_Round_Button.tscn" id="13_dfwm5"]
 [ext_resource type="PackedScene" uid="uid://dyf8bobfk30yv" path="res://Scenes/Item pedestal.tscn" id="13_yqj0m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u5pdl"]
@@ -457,6 +458,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.093616, 2.6249995, 10.6197
 
 [node name="ItemPedestal6" parent="." unique_id=1155773454 instance=ExtResource("13_yqj0m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.676233, 2.624999, 5.9977307)
+
+[node name="StartRoundButton" parent="." unique_id=308019239 instance=ExtResource("13_dfwm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, -5)
 
 [connection signal="body_entered" from="InteractableTest/Area3D" to="." method="_GUI_window_open"]
 [connection signal="close_requested" from="GUIwindow" to="GUIwindow" method="_GUI_window_close"]

@@ -79,11 +79,14 @@ func recreatePlayers():
 			o.reparent(get_tree().root.get_node("World"), false)
 
 func respawnPlayers(cop_spawns, robber_spawns):
-	if player.is_multiplayer_authority() == true:
-		if Global.myCurrentTeam == "Robber":
-			player.global_position = robber_spawns.pick_random().global_position 
-		else:
-			player.global_position = cop_spawns.pick_random().global_position 
+	var players = get_tree().get_nodes_in_group("player")
+	if players:
+		for o in players:
+			if o.is_multiplayer_authority() == true:
+				if Global.myCurrentTeam == "Robber":
+					o.global_position = robber_spawns.pick_random().global_position 
+				else:
+					o.global_position = cop_spawns.pick_random().global_position 
 	
 	#Recursivley gather all players and move them to root node
 	#Change Scene
