@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cq1d8wc3jt1fp"]
+
+[ext_resource type="Script" uid="uid://b5g668qktmd8u" path="res://shopSystem/shop_menu.gd" id="1_5rqve"]
+
+[node name="shopMenu" type="Control" unique_id=1105306829]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_5rqve")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1996545252]
+unique_name_in_owner = true
+
+[node name="Currency" type="Label" parent="UI" unique_id=626878106]
+offset_left = 492.0
+offset_top = 19.0
+offset_right = 819.0
+offset_bottom = 86.0
+theme_override_font_sizes/font_size = 50
+text = "Money : 0"
+
+[node name="Panel" type="Panel" parent="UI" unique_id=929355827]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -683.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/Panel" unique_id=2010906277]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -74.0
+offset_right = 74.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Shop"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Panel" unique_id=398592466]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 83.0
+offset_right = -13.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShopInventory" type="VBoxContainer" parent="UI/Panel/ScrollContainer" unique_id=910800430]
+layout_mode = 2
