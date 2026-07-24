@@ -26,7 +26,7 @@ var enet_peer = ENetMultiplayerPeer.new()
 		#node.health_changed.connect(update_health_bar)
 
 #Game Manager Variables
-
+var trapSetupMode = true
 
 func upnp_setup():
 	var upnp = UPNP.new()
@@ -108,3 +108,8 @@ func swap_to_new_instance():
 		var new_instance = minitask.instantiate()
 		add_child(new_instance)
 		active_instance = new_instance
+
+func exitTrapSetup():
+	if trapSetupMode == true:
+		trapSetupMode = false
+		Global.respawnPlayers(cop_spawns, robber_spawns)
