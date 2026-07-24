@@ -13,7 +13,7 @@ func _physics_process(_delta: float) -> void:
 	if not is_multiplayer_authority(): return
 	collidedObject = get_collider()
 	if collidedObject:
-		if collidedObject.is_in_group("InteractableObject") and Global.myCurrentTeam == collidedObject.teamFilter:
+		if collidedObject.is_in_group("InteractableObject") and (Global.myCurrentTeam == collidedObject.teamFilter or collidedObject.teamFilter == "Both"):
 			collidedObject.update()
 			Global.interactionLabel.text = "Press F to interact with " + collidedObject.objectName
 			if Input.is_action_just_pressed("interact"):
