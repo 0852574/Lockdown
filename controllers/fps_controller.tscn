@@ -907,6 +907,7 @@ properties/7/spawn = true
 properties/7/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D" unique_id=1200792928 groups=["player", "player_group"]]
+safe_margin = 0.01
 script = ExtResource("1_pgc1p")
 MOUSE_SENSITIVITY = 0.15
 

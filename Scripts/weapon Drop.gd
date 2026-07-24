@@ -6,6 +6,7 @@ extends RigidBody3D
 @onready var weaponBolt : MeshInstance3D = %WeaponBolt
 @onready var weaponShadow : MeshInstance3D = %WeaponShadow
 @onready var weaponParent = $Weapon
+@onready var collision = $CollisionShape3D
 
 @export var objectName : String = ""
 @export_file("*.tres") var weaponPath
@@ -30,7 +31,7 @@ var loadedWeapon
 func _ready():
 	if weaponPath != null:
 		setModel(weaponPath)
-		
+	
 
 
 func update():
@@ -65,6 +66,12 @@ func setModel(weaponType):
 	weaponReturning = loadedWeapon.returnThrownForce
 	weaponParent.scale = loadedWeapon.scale
 
+	var convex_shape = weaponMesh.mesh.create_convex_shape(true, true)
+	collision.shape = convex_shape
+	collision.scale = loadedWeapon.scale
+	
+
+	
 func setTeam(team):
 	teamFilter = team
 

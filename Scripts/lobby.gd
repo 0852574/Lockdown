@@ -89,6 +89,7 @@ func _ready() -> void:
 	print(Input.get_joy_name(0))
 	get_viewport().set_embedding_subwindows(false)
 	Global.recreatePlayers()
+	Global.respawnPlayers(cop_spawns, robber_spawns)
 	
 	
 	#var DebugPanel = debWin.instantiate()
@@ -240,6 +241,8 @@ func _GUI_window_open(_body: Player) -> void:
 			GUI_window.emit_signal("close_requested")
 			Global.taskMode = false
 			print("player closed minitask")
+
+				
 
 func swap_to_new_instance():
 	if is_instance_valid(active_instance):

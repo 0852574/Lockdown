@@ -1,5 +1,6 @@
 extends Window
 
+@onready var subViewport = %SubViewport
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,3 +17,4 @@ func _GUI_window_close() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Global.taskMode = false
 	print("player closed minitask")
+	subViewport.get_child(0).queue_free()
