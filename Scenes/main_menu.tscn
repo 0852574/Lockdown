@@ -180,6 +180,9 @@ anchor_bottom = 0.23600002
 offset_right = -236.48001
 offset_bottom = -129.92801
 text = "asdfasdfasdfasdfasdfasdfa"
+[node name="ShopMenu" type="CanvasLayer" parent="." unique_id=1110994879]
+
+[node name="ShopItems" type="ResourcePreloader" parent="ShopMenu" unique_id=2084493552]
 
 [node name="SpawnPoints2" type="Node3D" parent="." unique_id=863307615]
 
