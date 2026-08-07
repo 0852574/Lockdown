@@ -1,6 +1,7 @@
 @tool
 
 extends Node
+signal roundReset
 
 var player
 var playerPoints = 0:
@@ -26,6 +27,9 @@ var totalValue = 0
 
 var taskMode = false
 var isMainMenu = true
+
+var copSpawnpoints
+var robberSpawnpoints
 
 func updateLabels(clipAmmo, reserveAmmo):
 	clipLabel.text = str(clipAmmo)
@@ -78,15 +82,19 @@ func recreatePlayers():
 		for o in players:
 			o.reparent(get_tree().root.get_node("World"), false)
 
-func respawnPlayers(cop_spawns, robber_spawns):
+func updateSpawnPoints(cop_spawns, robber_spawns):
+	copSpawnpoints = cop_spawns
+	robberSpawnpoints = robber_spawns
+
+func respawnPlayers():
 	var players = get_tree().get_nodes_in_group("player")
 	if players:
 		for o in players:
 			if o.is_multiplayer_authority() == true:
 				if Global.myCurrentTeam == "Robber":
-					o.global_position = robber_spawns.pick_random().global_position 
+					o.global_position = robberSpawnpoints.pick_random().global_position 
 				else:
-					o.global_position = cop_spawns.pick_random().global_position 
+					o.global_position = copSpawnpoints.pick_random().global_position 
 	
 	#Recursivley gather all players and move them to root node
 	#Change Scene

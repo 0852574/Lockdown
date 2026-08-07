@@ -14,6 +14,7 @@ var itemPaths = [
 
 func _ready() -> void:
 	rng.randomize()
+	Global.roundReset.connect(spawnItem)
 	call_deferred("spawnItem")
 
 func spawnItem():
@@ -24,3 +25,4 @@ func spawnItem():
 	dropInstance.setWeapon(loadedItem)
 	dropInstance.setModel(loadedItem)
 	dropInstance.setAttribute("isItem", true)
+	get_tree().current_scene.totalItems += 1

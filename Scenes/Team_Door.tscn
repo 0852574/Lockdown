@@ -6,6 +6,7 @@
 size = Vector3(0.25, 3, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xpc2p"]
+size = Vector3(0.5, 3, 4)
 
 [node name="TeamDoor" type="Node3D" unique_id=214082965]
 script = ExtResource("1_vaedh")

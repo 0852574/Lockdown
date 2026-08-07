@@ -434,18 +434,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.826765, 2.4615893, -0.733
 [node name="ItemPedestal" parent="." unique_id=1849080789 instance=ExtResource("9_lwfgy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.560696, 2.6249995, 7.0469966)
 
-[node name="ItemPedestal2" parent="." unique_id=1231719221 instance=ExtResource("9_lwfgy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.008234, 2.624999, 10.674433)
-
-[node name="ItemPedestal3" parent="." unique_id=1117779505 instance=ExtResource("9_lwfgy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.990599, 2.6249995, 12.220156)
-
-[node name="ItemPedestal4" parent="." unique_id=512494851 instance=ExtResource("9_lwfgy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.585321, 2.6249995, 8.144159)
-
-[node name="ItemPedestal5" parent="." unique_id=1140641617 instance=ExtResource("9_lwfgy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.093616, 2.6249995, 10.619704)
-
 [node name="ItemPedestal6" parent="." unique_id=1155773454 instance=ExtResource("9_lwfgy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.676233, 2.624999, 5.9977307)
 
