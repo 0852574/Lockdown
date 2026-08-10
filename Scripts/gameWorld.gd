@@ -19,14 +19,10 @@ var teams = {} # peer_id -> "Cop" or "Robber"
 var playercount = 0
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
-#var debWin = preload("res://Scenes/Debug.tscn")
-
-#func _on_multiplayer_spawner_spawned(node):
-	#if node.is_multiplayer_authority():
-		#node.health_changed.connect(update_health_bar)
 
 #Game Manager Variables
-
+var trapSetupMode = true
+var totalItems = 0
 
 func upnp_setup():
 	var upnp = UPNP.new()
@@ -59,7 +55,8 @@ func _ready() -> void:
 	print(Input.get_joy_name(0))
 	get_viewport().set_embedding_subwindows(false)
 	Global.recreatePlayers()
-	Global.respawnPlayers(cop_spawns, robber_spawns)
+	Global.updateSpawnPoints(cop_spawns, robber_spawns)
+	Global.respawnPlayers()
 	#var DebugPanel = debWin.instantiate()
 	#add_child(DebugPanel)
 	#DebugPanel.visible = true
@@ -108,3 +105,12 @@ func swap_to_new_instance():
 		var new_instance = minitask.instantiate()
 		add_child(new_instance)
 		active_instance = new_instance
+
+func exitTrapSetup():
+	if trapSetupMode == true:
+		trapSetupMode = false
+		Global.respawnPlayers()
+
+func resetRound():
+	Global.roundReset.emit()
+	Global.respawnPlayers()

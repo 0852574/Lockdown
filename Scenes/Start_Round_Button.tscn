@@ -11,9 +11,9 @@ height = 1.0
 size = Vector3(0.5, 1, 0.5)
 
 [node name="StartRoundButton" type="Node3D" unique_id=308019239]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=978226506 groups=["InteractableObject"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_tdcxo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=585807985]

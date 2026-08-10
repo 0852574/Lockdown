@@ -8,6 +8,7 @@
 [ext_resource type="Theme" uid="uid://de2nek577lf7m" path="res://controllers/Themes/UI/Debug.tres" id="7_bwd1a"]
 [ext_resource type="Script" uid="uid://dvspsmhr73myh" path="res://controllers/scripts/debug_panel.gd" id="8_qfr4y"]
 [ext_resource type="LabelSettings" uid="uid://dskxen8j6183q" path="res://controllers/materials/Ammo Counter Label Settings.tres" id="9_ip6dh"]
+[ext_resource type="PackedScene" uid="uid://dedl2xmulv57u" path="res://Scenes/Team_Door.tscn" id="10_62ac6"]
 [ext_resource type="LabelSettings" uid="uid://ymbpk3yphr8i" path="res://controllers/materials/InteractionLabelSettings.tres" id="10_wi7b8"]
 [ext_resource type="Theme" uid="uid://b4n6esmn2elnd" path="res://controllers/Themes/PauseMenuTheme.tres" id="11_6axgn"]
 [ext_resource type="PackedScene" uid="uid://currrrlwvf71l" path="res://Scenes/Item Collection Volume.tscn" id="12_q2aa2"]
@@ -73,6 +74,12 @@ font_size = 64
 
 [node name="World" type="Node" unique_id=1730723652]
 script = ExtResource("1_t8h2s")
+
+[node name="TeamDoor" parent="." unique_id=214082965 instance=ExtResource("10_62ac6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+
+[node name="StartRoundButton" parent="." unique_id=308019239 instance=ExtResource("13_dfwm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1539882701]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
@@ -372,10 +379,8 @@ grow_vertical = 2
 
 [node name="Spawn Label" type="Label" parent="UserInterface/Spawn Text" unique_id=38426444]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 6
-text = "TestTest"
 label_settings = SubResource("LabelSettings_cdpo3")
 
 [node name="MYidVbox" type="VBoxContainer" parent="UserInterface" unique_id=413844586]
@@ -458,9 +463,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.093616, 2.6249995, 10.6197
 
 [node name="ItemPedestal6" parent="." unique_id=1155773454 instance=ExtResource("13_yqj0m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.676233, 2.624999, 5.9977307)
-
-[node name="StartRoundButton" parent="." unique_id=308019239 instance=ExtResource("13_dfwm5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, -5)
 
 [connection signal="body_entered" from="InteractableTest/Area3D" to="." method="_GUI_window_open"]
 [connection signal="close_requested" from="GUIwindow" to="GUIwindow" method="_GUI_window_close"]

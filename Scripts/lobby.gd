@@ -34,6 +34,8 @@ var enet_peer = ENetMultiplayerPeer.new()
 var debWin = preload("res://Menus/Debug.tscn")
 
 
+var trapSetupMode = true
+var totalItems = 0
 
 func _on_host_button_pressed():
 
@@ -84,6 +86,29 @@ func _on_join_button_pressed():
 	loading.hide()
 
 
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Global.reserveLabel = %Reserve
+	Global.interactionLabel = %InteractionLabel
+	Global.clipLabel = %Clip
+	Global.pointsLabel = %TotalValue
+	Global.healthLabel = %Health
+	Global.totalValue = 0
+	GUI.hide()
+	if Global.isMainMenu == false:
+		main_menu.hide()
+		hud.show()
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	print(Input.get_joy_name(0))
+	get_viewport().set_embedding_subwindows(false)
+	Global.recreatePlayers()
+	Global.updateSpawnPoints(cop_spawns, robber_spawns)
+	Global.respawnPlayers()
+	
+	
+	#var DebugPanel = debWin.instantiate()
+	#add_child(DebugPanel)
+	#DebugPanel.visible = true
 
 func _on_peer_connected(peer_id: int):
 
@@ -424,3 +449,12 @@ func swap_to_new_instance():
 func _on_exit_game_pressed() -> void:
 
 	get_tree().quit()
+
+func exitTrapSetup():
+	if trapSetupMode == true:
+		trapSetupMode = false
+		Global.respawnPlayers()
+
+func resetRound():
+	Global.roundReset.emit()
+	Global.respawnPlayers()
