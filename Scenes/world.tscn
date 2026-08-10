@@ -1,23 +1,20 @@
-[gd_scene format=3 uid="uid://c8oqxmm2w2wvv"]
+[gd_scene format=3 uid="uid://dvfp4utyi4vvo"]
 
-[ext_resource type="Script" uid="uid://demmf2hbrwaat" path="res://Scripts/lobby.gd" id="1_ctiuy"]
-[ext_resource type="PackedScene" uid="uid://c1j7an8woikyd" path="res://Scenes/environment.tscn" id="2_fr3vy"]
-[ext_resource type="ArrayMesh" uid="uid://rrvrjqelypi5" path="res://Models/Terminal.obj" id="2_qagcc"]
-[ext_resource type="AudioStream" uid="uid://dbwy7vdmgmifi" path="res://Scenes/starostin-crime-heist-investigation-music-259668.mp3" id="3_8b5ia"]
-[ext_resource type="Script" uid="uid://cw5iw0tdrx43u" path="res://gameMechanics/guiwindow.gd" id="3_ftq4a"]
-[ext_resource type="PackedScene" uid="uid://5k1o5ctvtah6" path="res://Scenes/enemy.tscn" id="3_nule3"]
-[ext_resource type="Script" uid="uid://da4bqfupciool" path="res://controllers/reticle.gd" id="4_0ddhe"]
-[ext_resource type="Texture2D" uid="uid://c8wkg88dvxlhj" path="res://Textures/1_kNm9rtz-Ud5jmP9qGynmog.webp" id="4_0roqs"]
-[ext_resource type="Theme" uid="uid://de2nek577lf7m" path="res://controllers/Themes/UI/Debug.tres" id="5_lwfgy"]
-[ext_resource type="Script" uid="uid://dvspsmhr73myh" path="res://controllers/scripts/debug_panel.gd" id="6_r1245"]
-[ext_resource type="LabelSettings" uid="uid://dskxen8j6183q" path="res://controllers/materials/Ammo Counter Label Settings.tres" id="7_ftq4a"]
-[ext_resource type="LabelSettings" uid="uid://ymbpk3yphr8i" path="res://controllers/materials/InteractionLabelSettings.tres" id="8_8b5ia"]
-[ext_resource type="PackedScene" uid="uid://dyf8bobfk30yv" path="res://Scenes/Item pedestal.tscn" id="9_lwfgy"]
-[ext_resource type="PackedScene" uid="uid://currrrlwvf71l" path="res://Scenes/Item Collection Volume.tscn" id="13_dbplf"]
-[ext_resource type="PackedScene" uid="uid://b8crchnkrw0ss" path="res://gameMechanics/Traps/DeathCube.tscn" id="14_0roqs"]
-[ext_resource type="PackedScene" uid="uid://1gk8wgub7vvt" path="res://Scenes/chatbox.tscn" id="14_qagcc"]
-[ext_resource type="Script" uid="uid://bpyh1pj66vo3u" path="res://Scenes/death_button.gd" id="16_j4ew0"]
-[ext_resource type="PackedScene" uid="uid://c3r01pii0mcrd" path="res://Scenes/InteractObject.tscn" id="17_wm471"]
+[ext_resource type="Script" uid="uid://demmf2hbrwaat" path="res://Scripts/lobby.gd" id="1_kn0ld"]
+[ext_resource type="Script" uid="uid://cw5iw0tdrx43u" path="res://gameMechanics/guiwindow.gd" id="2_hgpy0"]
+[ext_resource type="Texture2D" uid="uid://c8wkg88dvxlhj" path="res://Textures/1_kNm9rtz-Ud5jmP9qGynmog.webp" id="3_t2t4p"]
+[ext_resource type="AudioStream" uid="uid://dbwy7vdmgmifi" path="res://Scenes/starostin-crime-heist-investigation-music-259668.mp3" id="4_0pcbe"]
+[ext_resource type="PackedScene" uid="uid://5k1o5ctvtah6" path="res://Scenes/enemy.tscn" id="5_axeuq"]
+[ext_resource type="PackedScene" uid="uid://c1j7an8woikyd" path="res://Scenes/environment.tscn" id="6_1cojt"]
+[ext_resource type="Script" uid="uid://da4bqfupciool" path="res://controllers/reticle.gd" id="7_yq1aw"]
+[ext_resource type="Theme" uid="uid://de2nek577lf7m" path="res://controllers/Themes/UI/Debug.tres" id="8_pyn1s"]
+[ext_resource type="Script" uid="uid://dvspsmhr73myh" path="res://controllers/scripts/debug_panel.gd" id="9_no8kt"]
+[ext_resource type="LabelSettings" uid="uid://dskxen8j6183q" path="res://controllers/materials/Ammo Counter Label Settings.tres" id="10_xbk3s"]
+[ext_resource type="LabelSettings" uid="uid://ymbpk3yphr8i" path="res://controllers/materials/InteractionLabelSettings.tres" id="11_i4fjy"]
+[ext_resource type="PackedScene" uid="uid://currrrlwvf71l" path="res://Scenes/Item Collection Volume.tscn" id="12_pt3ps"]
+[ext_resource type="PackedScene" uid="uid://dyf8bobfk30yv" path="res://Scenes/Item pedestal.tscn" id="13_hmc15"]
+[ext_resource type="PackedScene" uid="uid://b8crchnkrw0ss" path="res://gameMechanics/Traps/DeathCube.tscn" id="14_dt0r1"]
+[ext_resource type="PackedScene" uid="uid://1gk8wgub7vvt" path="res://Scenes/chatbox.tscn" id="15_qebug"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u5pdl"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -32,6 +29,12 @@ sky = SubResource("Sky_w2qqb")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwfgy"]
+albedo_color = Color(0.74138474, 0.7413847, 0.74138457, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1245"]
+albedo_color = Color(0.06863427, 0.015218134, 0, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ftq4a"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_rmptm"]
@@ -44,12 +47,8 @@ font_size = 48
 [sub_resource type="LabelSettings" id="LabelSettings_cdpo3"]
 font_size = 64
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_x68ij"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_yy6u7"]
-
 [node name="World" type="Node" unique_id=1730723652]
-script = ExtResource("1_ctiuy")
+script = ExtResource("1_kn0ld")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1539882701]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
@@ -58,14 +57,26 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1553380858]
 environment = SubResource("Environment_6knbf")
 
-[node name="Terminal" type="MeshInstance3D" parent="." unique_id=60924750]
-transform = Transform3D(-0.33470446, 0, -0.3527296, 0, 0.48625642, 0, 0.3527296, 0, -0.33470446, 3.1942828, 0.46212637, -4.1550255)
-mesh = ExtResource("2_qagcc")
+[node name="InteractableTest" type="CSGBox3D" parent="." unique_id=1913512822]
+transform = Transform3D(0.7496261, 0, -0.66186154, 0, 1, 0, 0.66186154, 0, 0.7496261, 3.0717387, 0.42535555, -4.0354357)
+material = SubResource("StandardMaterial3D_lwfgy")
 
-[node name="Area3D" type="Area3D" parent="Terminal" unique_id=2031648996]
-transform = Transform3D(-0.07378054, 0, 2.0552044, 0, 2.056528, 0, -2.0552044, 0, -0.07378054, 0.3518734, -0.075620234, 0.0135240555)
+[node name="box1" type="CSGBox3D" parent="InteractableTest" unique_id=1095838843]
+transform = Transform3D(0.99896884, 0.03652684, 0.02698183, -0.04016888, 0.98789424, 0.14983608, -0.021181762, -0.15076561, 0.9883425, 0.017092466, 0.6663114, -0.18535471)
+size = Vector3(0.991333, 0.51708984, 0.84484863)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terminal/Area3D" unique_id=1640450757]
+[node name="box2" type="CSGBox3D" parent="InteractableTest" unique_id=1519202313]
+transform = Transform3D(0.9999504, 0.0012059435, -0.00995627, -0.0033301376, 0.976345, -0.21619232, 0.009460539, 0.21621434, 0.9762998, 0.0040130615, 0.05216068, 0.15871859)
+size = Vector3(0.991333, 0.923584, 0.84484863)
+
+[node name="box3" type="CSGBox3D" parent="InteractableTest" unique_id=53582541]
+transform = Transform3D(0.99841845, 0.0024832934, 0.056176186, -0.020202108, 0.948165, 0.31713584, -0.052476585, -0.31776893, 0.9467151, 0.014845133, 0.6550026, 0.24667215)
+size = Vector3(0.7612793, 0.48344725, 0.14035645)
+material = SubResource("StandardMaterial3D_r1245")
+
+[node name="Area3D" type="Area3D" parent="InteractableTest" unique_id=2031648996]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableTest/Area3D" unique_id=1640450757]
 shape = SubResource("BoxShape3D_ftq4a")
 
 [node name="GUIwindow" type="Window" parent="." unique_id=830631381]
@@ -77,7 +88,7 @@ size = Vector2i(900, 500)
 visible = false
 transient_to_focused = true
 exclusive = true
-script = ExtResource("3_ftq4a")
+script = ExtResource("2_hgpy0")
 
 [node name="GUI" type="CanvasLayer" parent="GUIwindow" unique_id=183574257]
 
@@ -112,6 +123,7 @@ render_target_update_mode = 4
 [node name="Camera3D" type="Camera3D" parent="GUIwindow" unique_id=144988928]
 transform = Transform3D(0.6735674, 0, -0.7391258, 0, 1, 0, 0.7391258, 0, 0.6735674, 1.9815508, 1.2883507, -3.0262659)
 visible = false
+visibility_parent = NodePath("../../InteractableTest")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=781029339]
 
@@ -121,7 +133,7 @@ offset_right = 1155.0
 offset_bottom = 663.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_0roqs")
+texture = ExtResource("3_t2t4p")
 
 [node name="MainMenu" type="PanelContainer" parent="CanvasLayer" unique_id=1311570075]
 anchors_preset = 15
@@ -169,7 +181,7 @@ placeholder_text = "Enter Address to Join Here"
 alignment = 1
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CanvasLayer" unique_id=323138804]
-stream = ExtResource("3_8b5ia")
+stream = ExtResource("4_0pcbe")
 autoplay = true
 
 [node name="Loading" type="Label" parent="CanvasLayer" unique_id=2091700247]
@@ -180,9 +192,6 @@ anchor_bottom = 0.23600002
 offset_right = -236.48001
 offset_bottom = -129.92801
 text = "asdfasdfasdfasdfasdfasdfa"
-[node name="ShopMenu" type="CanvasLayer" parent="." unique_id=1110994879]
-
-[node name="ShopItems" type="ResourcePreloader" parent="ShopMenu" unique_id=2084493552]
 
 [node name="SpawnPoints2" type="Node3D" parent="." unique_id=863307615]
 
@@ -202,13 +211,13 @@ transform = Transform3D(0.2774824, 0, 0.96073073, 0, 1, 0, -0.96073073, 0, 0.277
 _spawnable_scenes = PackedStringArray("uid://c3ffql15mo0aj")
 spawn_path = NodePath("..")
 
-[node name="Enemy" parent="." unique_id=204833997 instance=ExtResource("3_nule3")]
+[node name="Enemy" parent="." unique_id=204833997 instance=ExtResource("5_axeuq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.00742, 1.03476, 0.74423)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1849368165]
 navigation_mesh = SubResource("NavigationMesh_rmptm")
 
-[node name="Environment" parent="NavigationRegion3D" unique_id=1851466389 instance=ExtResource("2_fr3vy")]
+[node name="Environment" parent="NavigationRegion3D" unique_id=1851466389 instance=ExtResource("6_1cojt")]
 
 [node name="UserInterface" type="Control" parent="." unique_id=499654013]
 unique_name_in_owner = true
@@ -235,7 +244,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("4_0ddhe")
+script = ExtResource("7_yq1aw")
 reticleLines = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
 
 [node name="Top" type="Line2D" parent="UserInterface/Reticle" unique_id=1732098349]
@@ -272,8 +281,8 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 210.0
 offset_bottom = 50.0
-theme = ExtResource("5_lwfgy")
-script = ExtResource("6_r1245")
+theme = ExtResource("8_pyn1s")
+script = ExtResource("9_no8kt")
 
 [node name="MarginContainer" type="MarginContainer" parent="UserInterface/DebugPanel" unique_id=1271961410]
 layout_mode = 2
@@ -301,18 +310,18 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "<null>"
-label_settings = ExtResource("7_ftq4a")
+label_settings = ExtResource("10_xbk3s")
 
 [node name="Label" type="Label" parent="UserInterface/Ammo" unique_id=544039431]
 layout_mode = 2
 text = "/"
-label_settings = ExtResource("7_ftq4a")
+label_settings = ExtResource("10_xbk3s")
 
 [node name="Reserve" type="Label" parent="UserInterface/Ammo" unique_id=1059840185]
 unique_name_in_owner = true
 layout_mode = 2
 text = "<null>"
-label_settings = ExtResource("7_ftq4a")
+label_settings = ExtResource("10_xbk3s")
 
 [node name="TotalValue" type="HBoxContainer" parent="UserInterface" unique_id=498307884]
 layout_mode = 1
@@ -329,7 +338,7 @@ grow_vertical = 0
 unique_name_in_owner = true
 layout_mode = 2
 text = "0"
-label_settings = ExtResource("7_ftq4a")
+label_settings = ExtResource("10_xbk3s")
 
 [node name="Health" type="HBoxContainer" parent="UserInterface" unique_id=1968887300]
 layout_mode = 1
@@ -366,7 +375,7 @@ grow_vertical = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-label_settings = ExtResource("8_8b5ia")
+label_settings = ExtResource("11_i4fjy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -446,46 +455,33 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Quit Game"
 
-[node name="ItemCollectionVolume" parent="." unique_id=409276444 instance=ExtResource("13_dbplf")]
+[node name="ItemCollectionVolume" parent="." unique_id=409276444 instance=ExtResource("12_pt3ps")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.826765, 2.4615893, -0.73392963)
 
-[node name="ItemPedestal" parent="." unique_id=1849080789 instance=ExtResource("9_lwfgy")]
+[node name="ItemPedestal" parent="." unique_id=1849080789 instance=ExtResource("13_hmc15")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.560696, 2.6249995, 7.0469966)
 
-[node name="ItemPedestal2" parent="." unique_id=1231719221 instance=ExtResource("9_lwfgy")]
+[node name="ItemPedestal2" parent="." unique_id=1231719221 instance=ExtResource("13_hmc15")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.008234, 2.624999, 10.674433)
 
-[node name="ItemPedestal3" parent="." unique_id=1117779505 instance=ExtResource("9_lwfgy")]
+[node name="ItemPedestal3" parent="." unique_id=1117779505 instance=ExtResource("13_hmc15")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.990599, 2.6249995, 12.220156)
 
-[node name="ItemPedestal4" parent="." unique_id=512494851 instance=ExtResource("9_lwfgy")]
+[node name="ItemPedestal4" parent="." unique_id=512494851 instance=ExtResource("13_hmc15")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.585321, 2.6249995, 8.144159)
 
-[node name="ItemPedestal5" parent="." unique_id=1140641617 instance=ExtResource("9_lwfgy")]
+[node name="ItemPedestal5" parent="." unique_id=1140641617 instance=ExtResource("13_hmc15")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.093616, 2.6249995, 10.619704)
 
-[node name="ItemPedestal6" parent="." unique_id=1155773454 instance=ExtResource("9_lwfgy")]
+[node name="ItemPedestal6" parent="." unique_id=1155773454 instance=ExtResource("13_hmc15")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.676233, 2.624999, 5.9977307)
 
-[node name="DeathCube" parent="." unique_id=145201229 instance=ExtResource("14_0roqs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.60838294, 1.5444541, 6.6486945)
+[node name="DeathCube" parent="." unique_id=145201229 instance=ExtResource("14_dt0r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.254775, 1.5444541, 1.8076433)
 
-[node name="chatbox" parent="." unique_id=18944203 instance=ExtResource("14_qagcc")]
+[node name="chatbox" parent="." unique_id=18944203 instance=ExtResource("15_qebug")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2017855827 groups=["InteractableObject"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6369176, 0.476655, 5.0990524)
-script = ExtResource("16_j4ew0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1508321642 groups=["InteractableObject"]]
-shape = SubResource("BoxShape3D_x68ij")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=848534167 groups=["InteractableObject"]]
-mesh = SubResource("BoxMesh_yy6u7")
-
-[node name="InteractObject" parent="." unique_id=1565446478 instance=ExtResource("17_wm471")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.93946, 2.4999998, -5.326315)
-
-[connection signal="body_entered" from="Terminal/Area3D" to="." method="_GUI_window_open"]
+[connection signal="body_entered" from="InteractableTest/Area3D" to="." method="_GUI_window_open"]
 [connection signal="close_requested" from="GUIwindow" to="GUIwindow" method="_GUI_window_close"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/SinglePlayer" to="." method="_on_single_player_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
