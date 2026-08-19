@@ -230,6 +230,28 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
+[node name="moneyLabel" type="Label" parent="UserInterface" unique_id=359434876]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 998.0
+offset_top = 4.0
+offset_right = 1141.0
+offset_bottom = 39.0
+text = "moneylabel"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="shopLabel" type="Label" parent="UserInterface" unique_id=656321435]
+layout_mode = 0
+offset_left = 998.0
+offset_top = 30.0
+offset_right = 1141.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 14
+text = "press \"L\" for shop"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="Reticle" type="CenterContainer" parent="UserInterface" unique_id=949750882 node_paths=PackedStringArray("reticleLines")]
 visible = false
 layout_mode = 1

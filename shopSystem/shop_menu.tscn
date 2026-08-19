@@ -1,22 +1,26 @@
 [gd_scene format=3 uid="uid://cq1d8wc3jt1fp"]
 
 [ext_resource type="Script" uid="uid://b5g668qktmd8u" path="res://shopSystem/shop_menu.gd" id="1_5rqve"]
+[ext_resource type="Script" uid="uid://cjrabvlxo7iud" path="res://shopSystem/shopResources/shop_item.gd" id="2_c5m3r"]
+[ext_resource type="Resource" uid="uid://dkynsiup1mai8" path="res://shopSystem/shopResources/horse.tres" id="3_3jt4y"]
 
-[node name="shopMenu" type="Control" unique_id=1105306829]
+[node name="shopMenu" type="Control" unique_id=1105306829 node_paths=PackedStringArray("shop_container")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_5rqve")
+shop_items = Array[ExtResource("2_c5m3r")]([ExtResource("3_3jt4y"), ExtResource("3_3jt4y"), ExtResource("3_3jt4y")])
+shop_container = NodePath("UI/Panel/ScrollContainer/ShopInventory")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1996545252]
 unique_name_in_owner = true
 
-[node name="Currency" type="Label" parent="UI" unique_id=626878106]
+[node name="moneyLabel" type="Label" parent="UI" unique_id=626878106]
 offset_left = 492.0
 offset_top = 19.0
 offset_right = 819.0
 offset_bottom = 86.0
 theme_override_font_sizes/font_size = 50
-text = "Money : 0"
+text = "$$$"
 
 [node name="Panel" type="Panel" parent="UI" unique_id=929355827]
 anchors_preset = 15
@@ -56,3 +60,18 @@ grow_vertical = 2
 
 [node name="ShopInventory" type="VBoxContainer" parent="UI/Panel/ScrollContainer" unique_id=910800430]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="UI" unique_id=2028802453]
+offset_left = 673.0
+offset_top = 253.0
+offset_right = 1069.0
+offset_bottom = 290.0
+theme_override_font_sizes/font_size = 25
+text = "player inventory"
+
+[node name="Inventory" type="Panel" parent="UI" unique_id=389275337]
+offset_left = 665.0
+offset_top = 287.0
+offset_right = 1103.0
+offset_bottom = 601.0
+size_flags_horizontal = 4

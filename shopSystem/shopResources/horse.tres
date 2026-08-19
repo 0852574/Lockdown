@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dkynsiup1mai8"]
+
+[ext_resource type="Script" uid="uid://cjrabvlxo7iud" path="res://shopSystem/shopResources/shop_item.gd" id="1_jmsx6"]
+[ext_resource type="Texture2D" uid="uid://rariwxbo4hpu" path="res://Items/Item Models/Itemsglb_Horse.jpg" id="1_pbx46"]
+
+[resource]
+script = ExtResource("1_jmsx6")
+title = "horse"
+icon = ExtResource("1_pbx46")
+price = 100
+description = "its a horse..."
+metadata/_custom_type_script = "uid://cjrabvlxo7iud"

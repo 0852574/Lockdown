@@ -104,7 +104,8 @@ func _ready() -> void:
 	Global.recreatePlayers()
 	Global.updateSpawnPoints(cop_spawns, robber_spawns)
 	Global.respawnPlayers()
-	
+	update_money_display()
+
 	
 	#var DebugPanel = debWin.instantiate()
 	#add_child(DebugPanel)
@@ -331,37 +332,6 @@ func _physics_process(delta):
 
 
 
-func _ready() -> void:
-
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
-	Global.reserveLabel = %Reserve
-	Global.interactionLabel = %InteractionLabel
-	Global.clipLabel = %Clip
-	Global.pointsLabel = %TotalValue
-	Global.healthLabel = %Health
-
-	Global.totalValue = 0
-
-	GUI.hide()
-
-	if Global.isMainMenu == false:
-
-		main_menu.hide()
-		hud.show()
-
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
-	print(Input.get_joy_name(0))
-
-	get_viewport().set_embedding_subwindows(false)
-
-	Global.recreatePlayers()
-
-	Global.respawnPlayers(cop_spawns, robber_spawns)
-
-
-
 func _unhandled_input(_event):
 
 	if Input.is_action_just_pressed("quit"):
@@ -400,9 +370,7 @@ func _on_Quit_button_pressed() -> void:
 
 
 
-var minitask = preload(
-	"res://gameMechanics/hacking_minitask.tscn"
-).instantiate()
+var minitask = preload("res://gameMechanics/hacking_minitask.tscn").instantiate()
 
 var active_instance: Node = null
 
@@ -458,3 +426,11 @@ func exitTrapSetup():
 func resetRound():
 	Global.roundReset.emit()
 	Global.respawnPlayers()
+
+# Money balance
+var current_balance = moneyGlobal.get_bank_balance()
+@onready var money = $%moneyLabel
+
+func update_money_display() -> void:
+	money.text = "Money: " + str(current_balance)
+	print("Player wallet: " + str(current_balance))

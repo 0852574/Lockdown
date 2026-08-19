@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://8vwc35mdols7"]
+
+[ext_resource type="Texture2D" uid="uid://buvxdbhao4n7y" path="res://icon.svg" id="1_etqha"]
+[ext_resource type="Script" uid="uid://ba6n8bt7rhw5f" path="res://shopSystem/shop_slot.gd" id="1_hc4yn"]
+
+[node name="shop_slot" type="Panel" unique_id=1828301916]
+custom_minimum_size = Vector2(85, 30)
+offset_right = 85.0
+offset_bottom = 30.0
+script = ExtResource("1_hc4yn")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=2143078233]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("1_etqha")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Price" type="Label" parent="." unique_id=1445108194]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 83.0
+offset_bottom = 28.0
+text = "$"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
