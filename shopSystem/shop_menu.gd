@@ -27,9 +27,11 @@ var mode : MODE = MODE.OFF:
 		if value == MODE.OFF:
 			$UI.hide()
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			Global.taskMode = false
 		elif value == MODE.ON:
 			$UI.show()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			Global.taskMode = true
 
 
 func _input(event):
