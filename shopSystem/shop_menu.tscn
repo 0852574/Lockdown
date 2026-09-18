@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://b5g668qktmd8u" path="res://shopSystem/shop_menu.gd" id="1_5rqve"]
 [ext_resource type="Script" uid="uid://cjrabvlxo7iud" path="res://shopSystem/shopResources/shop_item.gd" id="2_c5m3r"]
 [ext_resource type="Resource" uid="uid://dkynsiup1mai8" path="res://shopSystem/shopResources/horse.tres" id="3_3jt4y"]
+[ext_resource type="Resource" uid="uid://doud8s5s4h6ly" path="res://shopSystem/shopResources/new_resource.tres" id="3_c5m3r"]
 
 [node name="shopMenu" type="Control" unique_id=1105306829 node_paths=PackedStringArray("shop_container")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_5rqve")
-shop_items = Array[ExtResource("2_c5m3r")]([ExtResource("3_3jt4y"), ExtResource("3_3jt4y"), ExtResource("3_3jt4y"), ExtResource("3_3jt4y"), ExtResource("3_3jt4y"), ExtResource("3_3jt4y")])
+shop_items = Array[ExtResource("2_c5m3r")]([ExtResource("3_c5m3r"), ExtResource("3_c5m3r"), ExtResource("3_c5m3r"), ExtResource("3_3jt4y"), ExtResource("3_3jt4y"), ExtResource("3_c5m3r"), ExtResource("3_3jt4y"), ExtResource("3_c5m3r"), ExtResource("3_3jt4y"), ExtResource("3_3jt4y"), ExtResource("3_3jt4y")])
 shop_container = NodePath("UI/Panel/ScrollContainer/ShopInventory")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1996545252]
@@ -39,6 +40,7 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -74.0
+offset_top = 6.0
 offset_right = 74.0
 offset_bottom = 79.0
 grow_horizontal = 2
@@ -51,10 +53,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
+offset_left = 24.0
 offset_top = 83.0
-offset_right = -13.0
-offset_bottom = -12.0
+offset_right = -22.0
+offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 2
 draw_focus_border = true
@@ -63,6 +65,7 @@ draw_focus_border = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="UI" unique_id=2028802453]
 offset_left = 865.0
@@ -78,3 +81,11 @@ offset_top = 287.0
 offset_right = 1103.0
 offset_bottom = 601.0
 size_flags_horizontal = 4
+
+[node name="PlayerInventory" type="VBoxContainer" parent="UI/Inventory" unique_id=1270723748]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 15.0
+offset_top = 13.0
+offset_right = 420.0
+offset_bottom = 295.0

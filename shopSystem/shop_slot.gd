@@ -1,6 +1,6 @@
 extends Panel
 
-var inventory
+signal add_item
 
 @export var item : Item:
 	set(value):
@@ -11,6 +11,7 @@ var inventory
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and Shop.mode == Shop.MODE.ON:
-		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 			if Shop.buy_item(item):
-				inventory.add_item(item, 1)
+				add_item.emit(item, 1)
+				print("item added to inventory")

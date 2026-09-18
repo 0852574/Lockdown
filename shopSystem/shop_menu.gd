@@ -5,15 +5,18 @@ extends Control
 @export var shop_container : VBoxContainer
 
 var current_balance = moneyGlobal.get_bank_balance()
-@onready var money = $UI/moneyLabel
+@onready var money = moneyGlobal.bank_balance
+@onready var moneylabel = $UI/moneyLabel
+
 
 func _ready() -> void:
 	$UI.hide()
 	load_shop_inventory()
 	update_money_display()
+	
 
 func update_money_display() -> void:
-	money.text = "Money: " + str(current_balance)
+	moneylabel.text = "Money: " + str(current_balance)
 
 enum MODE {
 	ON,
@@ -38,10 +41,11 @@ func _input(event):
 	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_L:
 			if mode == MODE.ON:
+				print("shop closed")
 				mode = MODE.OFF
 			elif mode == MODE.OFF:
+				print("shop opened")
 				mode = MODE.ON
-			print("shop op")
 
 func sell_item(item : Item):
 	if item == null:
@@ -53,6 +57,7 @@ func buy_item(item : Item):
 		return false
  
 	if item.price > money:
+		print("not enough funds")
 		return false
  
 	money -= item.price
