@@ -120,6 +120,7 @@ func exitTrapSetup():
 		trapSetupMode = false
 		Global.roundReset.emit()
 		Global.respawnPlayers()
+		rpc("recieveReset")
 		showAnnounceText("Rob stuff I guess")
 
 func resetRound():
@@ -157,3 +158,12 @@ func updateAlivePlayers(team):
 				elif t == "Robber":
 					Global.aliveRobberCount += 1
 			resetRound()
+
+
+# Money balance
+var current_balance = moneyGlobal.get_bank_balance()
+@onready var money = $%moneyLabel
+
+func update_money_display() -> void:
+	money.text = "Money: " + str(current_balance)
+	print("Player wallet: " + str(current_balance))

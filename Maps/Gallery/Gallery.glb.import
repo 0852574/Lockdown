@@ -67,6 +67,15 @@ _subresources={
 "save_to_file/enabled": true,
 "save_to_file/fallback_path": "res://Maps/Gallery/Gallery_Plane.res",
 "save_to_file/path": "uid://htaq6qe205kp"
+},
+"Gallery_Plane_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://Maps/Gallery/Gallery_Plane_001.res",
+"save_to_file/path": "uid://q7ulaameghln"
 }
 }
 }
