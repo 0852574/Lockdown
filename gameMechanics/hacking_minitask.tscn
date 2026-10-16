@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c7l2n6j51pv0e"]
 
 [ext_resource type="Script" uid="uid://c1wvmwqpcdne2" path="res://gameMechanics/hacking_minitask.gd" id="1_a4q0h"]
+[ext_resource type="Texture2D" uid="uid://b2cr0cnti10wg" path="res://addons/kenney_prototype_textures/green/texture_09.png" id="3_mue2p"]
 [ext_resource type="Texture2D" uid="uid://buvxdbhao4n7y" path="res://icon.svg" id="4_vim1e"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vim1e"]
@@ -84,9 +85,11 @@ shape = SubResource("RectangleShape2D_vim1e")
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="Sprite2D" type="Sprite2D" parent="Walls" unique_id=210127730]
+texture_repeat = 2
 position = Vector2(300, 427.50003)
-scale = Vector2(0.9999999, 4.0078125)
-texture = ExtResource("4_vim1e")
+scale = Vector2(0.12310102, 0.51942647)
+texture = ExtResource("3_mue2p")
+region_rect = Rect2(21.94, 14.9, 16.355, 10.025)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls" unique_id=570015604]
 position = Vector2(297.9999, 422.4999)
