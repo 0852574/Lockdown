@@ -23,6 +23,9 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 			if get_tree().current_scene.totalItems == itemCount:
 				var bodies = area3D.get_overlapping_bodies()
 				for i in bodies:
+					if i.multiplayer_synchronizer:
+						i.multiplayer_synchronizer.public_visibility = false
+						await get_tree().physics_frame 
 					i.queue_free()
 				get_tree().current_scene.totalItems = 0
 				get_tree().current_scene.resetRound()

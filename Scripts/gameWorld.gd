@@ -19,6 +19,12 @@ var teams = {} # peer_id -> "Cop" or "Robber"
 var playercount = 0
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
+var rng = RandomNumberGenerator.new()
+
+var avaliableTraps = [
+	"res://trapSystem/sawbladeTrap.tscn",
+	"res://trapSystem/sawbladeTrap.tscn",
+]
 
 #Game Manager Variables
 var trapSetupMode = true
@@ -57,6 +63,7 @@ func _ready() -> void:
 	Global.recreatePlayers()
 	Global.updateSpawnPoints(cop_spawns, robber_spawns)
 	Global.respawnPlayers()
+	resetRound()
 	#var DebugPanel = debWin.instantiate()
 	#add_child(DebugPanel)
 	#DebugPanel.visible = true
@@ -120,8 +127,7 @@ func exitTrapSetup():
 		trapSetupMode = false
 		Global.roundReset.emit()
 		Global.respawnPlayers()
-		rpc("recieveReset")
-		showAnnounceText("Rob stuff I guess")
+
 
 func resetRound():
 	Global.roundReset.emit()
@@ -129,7 +135,11 @@ func resetRound():
 	trapSetupMode = true
 	rpc("recieveReset")
 	if Global.myCurrentTeam == "Cop":
+		Global.player.currentHeldTrap = avaliableTraps.pick_random()
 		showAnnounceText("Trap setup mode")
+		await get_tree().create_timer(3.0).timeout
+		showAnnounceText("Place your traps and ready yourselves")
+		
 		
 @rpc("reliable", "any_peer")
 func recieveReset():
@@ -137,7 +147,11 @@ func recieveReset():
 	Global.respawnPlayers()
 	trapSetupMode = true
 	if Global.myCurrentTeam == "Cop":
+		Global.player.currentHeldTrap = avaliableTraps.pick_random()
 		showAnnounceText("Trap setup mode")
+		await get_tree().create_timer(3.0).timeout
+		showAnnounceText("Place your traps and ready yourselves")
+		
 
 @rpc("reliable", "call_local", "any_peer")
 func updateAlivePlayers(team):
