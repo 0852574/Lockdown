@@ -60,6 +60,7 @@ visible = false
 shape = SubResource("ConcavePolygonShape3D_or6gt")
 
 [node name="OverUnderCubeRamp" type="MeshInstance3D" parent="." unique_id=2011228755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.1495, 0, 0, 0)
 mesh = ExtResource("3_k134p")
 surface_material_override/0 = ExtResource("5_y7c4k")
 
@@ -90,6 +91,7 @@ visible = false
 shape = SubResource("ConcavePolygonShape3D_uijab")
 
 [node name="OverUnderCylinderWalkway" type="MeshInstance3D" parent="." unique_id=2045585537]
+transform = Transform3D(1, 0, 0, 0, 1.0142168, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("6_y7c4k")
 surface_material_override/0 = ExtResource("9_k84wk")
 
