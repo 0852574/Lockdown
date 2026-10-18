@@ -191,12 +191,13 @@ func remove_player(peer_id: int):
 
 func _on_single_player_button_pressed():
 
-	main_menu.hide()
+	hideMainMenu()
 	hud.show()
 
 	var my_id = multiplayer.get_unique_id()
 
 	add_player(my_id)
+	loading.visible = false
 
 
 

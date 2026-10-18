@@ -5,6 +5,7 @@ extends Node
 signal roundReset
 @warning_ignore("unused_signal")
 signal playerJoined
+signal playerWonTask
 
 var player
 var playerPoints = 0:

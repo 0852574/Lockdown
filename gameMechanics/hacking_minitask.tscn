@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://c7l2n6j51pv0e"]
 
 [ext_resource type="Script" uid="uid://c1wvmwqpcdne2" path="res://gameMechanics/hacking_minitask.gd" id="1_a4q0h"]
-[ext_resource type="Texture2D" uid="uid://b2cr0cnti10wg" path="res://addons/kenney_prototype_textures/green/texture_09.png" id="3_mue2p"]
-[ext_resource type="Texture2D" uid="uid://buvxdbhao4n7y" path="res://icon.svg" id="4_vim1e"]
+[ext_resource type="Texture2D" uid="uid://c256kaxbs5xf2" path="res://addons/kenney_prototype_textures/dark/texture_06.png" id="2_2dyur"]
+[ext_resource type="Texture2D" uid="uid://d7woagtoy54t" path="res://addons/kenney_prototype_textures/green/texture_04.png" id="3_mue2p"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vim1e"]
 blend_mode = 1
 
+[sub_resource type="MeshTexture" id="MeshTexture_7upkj"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_vim1e"]
+radius = 24.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vim1e"]
 bounce = 1.0
@@ -28,12 +31,12 @@ size = Vector2(126.00043, 362.00018)
 script = ExtResource("1_a4q0h")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1415991992]
-visible = false
-offset_left = -79.0
-offset_top = -101.0
-offset_right = 1209.0
-offset_bottom = 699.0
-texture = ExtResource("4_vim1e")
+offset_left = -1087.0
+offset_top = -1040.0
+offset_right = 201.0
+offset_bottom = -16.0
+scale = Vector2(2.6131716, 2.6131716)
+texture = ExtResource("2_2dyur")
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1165734737]
 unique_name_in_owner = true
@@ -48,6 +51,7 @@ position = Vector2(741, 283)
 material = SubResource("CanvasItemMaterial_vim1e")
 position = Vector2(1, -1)
 scale = Vector2(0.3046875, 0.28125)
+texture = SubResource("MeshTexture_7upkj")
 
 [node name="Area2D" type="Area2D" parent="reward/Sprite2D" unique_id=87722816]
 position = Vector2(-3.2819824, 3.555542)
@@ -55,6 +59,13 @@ scale = Vector2(3.2820513, 3.5555556)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="reward/Sprite2D/Area2D" unique_id=873807813]
 shape = SubResource("CircleShape2D_vim1e")
+
+[node name="ColorRect" type="ColorRect" parent="reward/Sprite2D/Area2D" unique_id=1741034675]
+offset_left = -21.0
+offset_top = -19.0
+offset_right = 19.0
+offset_bottom = 21.0
+color = Color(1, 1, 0, 1)
 
 [node name="Barriers" type="StaticBody2D" parent="." unique_id=1635634473]
 position = Vector2(545.00006, 508.00006)
@@ -98,8 +109,8 @@ shape = SubResource("RectangleShape2D_owrb1")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Walls" unique_id=1886863735]
 position = Vector2(566.00006, 213.00002)
-scale = Vector2(0.9999999, 4.0078125)
-texture = ExtResource("4_vim1e")
+scale = Vector2(0.12502885, 0.50109226)
+texture = ExtResource("3_mue2p")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls" unique_id=1050014693]
 position = Vector2(565, 219)
@@ -109,8 +120,8 @@ shape = SubResource("RectangleShape2D_owrb1")
 [node name="Sprite2D3" type="Sprite2D" parent="Walls" unique_id=1432695066]
 position = Vector2(757.00006, 425.00003)
 rotation = -1.5653714
-scale = Vector2(0.9999999, 4.0078125)
-texture = ExtResource("4_vim1e")
+scale = Vector2(0.12740615, 0.51062)
+texture = ExtResource("3_mue2p")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls" unique_id=1321839622]
 position = Vector2(757.00006, 425.00003)
@@ -121,8 +132,8 @@ shape = SubResource("RectangleShape2D_owrb1")
 [node name="Sprite2D4" type="Sprite2D" parent="Walls" unique_id=1213747607]
 position = Vector2(949.908, 304.33456)
 rotation = -3.1439736
-scale = Vector2(0.9999999, 2.8374693)
-texture = ExtResource("4_vim1e")
+scale = Vector2(0.12575454, 0.35682467)
+texture = ExtResource("3_mue2p")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls" unique_id=1878366025]
 position = Vector2(949.99963, 304.99994)

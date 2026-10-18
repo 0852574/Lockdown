@@ -19,4 +19,4 @@ func spawn_player():
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.name == "2DPlayer":
-		print("You Win!")
+		Global.emit_signal("playerWonTask")

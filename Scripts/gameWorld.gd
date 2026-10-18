@@ -92,7 +92,7 @@ var minitask = preload("res://gameMechanics/hacking_minitask.tscn").instantiate(
 var active_instance: Node = null
 
 func _GUI_window_open(_body: Player) -> void:
-	if _body.is_multiplayer_authority():
+	if _body.is_multiplayer_authority() and Global.myCurrentTeam == "Robber":
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE # Release mouse
 		Global.taskMode = true
 		GUI.show()
