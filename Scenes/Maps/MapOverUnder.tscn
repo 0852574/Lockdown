@@ -1,8 +1,78 @@
 [gd_scene format=3 uid="uid://beuh1jhkstmcr"]
 
 [ext_resource type="PackedScene" uid="uid://dx88njll5ou52" path="res://Scenes/Maps/OverUnder.tscn" id="1_f7n0p"]
+[ext_resource type="Script" uid="uid://cy2pypa3niayw" path="res://Scripts/gameWorld.gd" id="1_icex4"]
+[ext_resource type="PackedScene" uid="uid://dyf8bobfk30yv" path="res://Scenes/Item pedestal.tscn" id="3_58x0u"]
 
-[node name="MapOverUnder" type="Node3D" unique_id=1815573482]
+[node name="World" type="Node3D" unique_id=1815573482]
+script = ExtResource("1_icex4")
 
 [node name="OverUnder" parent="." unique_id=1118576280 instance=ExtResource("1_f7n0p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=1226312791]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, -3)
+light_energy = 54.425
+light_indirect_energy = 16.0
+light_volumetric_fog_energy = 0.0
+light_size = 11.195
+area_size = Vector2(54.552124, 29.160202)
+
+[node name="Items" type="Node3D" parent="." unique_id=1161397837]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="ItemPedestal" parent="Items" unique_id=1849080789 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0)
+
+[node name="ItemPedestal2" parent="Items" unique_id=1795769382 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -6)
+
+[node name="ItemPedestal3" parent="Items" unique_id=627519478 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 15)
+
+[node name="ItemPedestal6" parent="Items" unique_id=1679823728 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 2, 15)
+
+[node name="ItemPedestal5" parent="Items" unique_id=1508382324 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 2, 15)
+
+[node name="ItemPedestal8" parent="Items" unique_id=44814751 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 2, 15)
+
+[node name="ItemPedestal7" parent="Items" unique_id=1040026828 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 2, 15)
+
+[node name="ItemPedestal11" parent="Items" unique_id=1555619054 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -21)
+
+[node name="ItemPedestal13" parent="Items" unique_id=883177986 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 2, -19)
+
+[node name="ItemPedestal12" parent="Items" unique_id=198323233 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 2, 13)
+
+[node name="ItemPedestal15" parent="Items" unique_id=1297743119 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 2, 11)
+
+[node name="ItemPedestal14" parent="Items" unique_id=166165991 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 2, -17)
+
+[node name="ItemPedestal10" parent="Items" unique_id=488270081 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 2, -21)
+
+[node name="ItemPedestal9" parent="Items" unique_id=2014833971 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 2, -21)
+
+[node name="ItemPedestal4" parent="Items" unique_id=382165044 instance=ExtResource("3_58x0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 15)
+
+[node name="SpawnPoints" type="Node3D" parent="." unique_id=2038640514]
+
+[node name="Robber" type="Node3D" parent="SpawnPoints" unique_id=1176946000]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76, 1, 0)
+
+[node name="Marker3D" type="Marker3D" parent="SpawnPoints/Robber" unique_id=1546083863]
+
+[node name="Cops" type="Node3D" parent="SpawnPoints" unique_id=1557058687]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49, 10, 0)
+
+[node name="Marker3D" type="Marker3D" parent="SpawnPoints/Cops" unique_id=753928206]
