@@ -1,0 +1,381 @@
+[gd_scene format=3 uid="uid://brs4mrffjkxwj"]
+
+[ext_resource type="Script" uid="uid://cy2pypa3niayw" path="res://Scripts/gameWorld.gd" id="1_dhllj"]
+[ext_resource type="PackedScene" uid="uid://dx88njll5ou52" path="res://Scenes/Maps/OverUnder.tscn" id="2_8abxs"]
+[ext_resource type="Script" uid="uid://cw5iw0tdrx43u" path="res://gameMechanics/guiwindow.gd" id="3_8abxs"]
+[ext_resource type="PackedScene" uid="uid://dedl2xmulv57u" path="res://Scenes/Team_Door.tscn" id="4_2xe3j"]
+[ext_resource type="PackedScene" uid="uid://cx1gaprr1a6j0" path="res://Scenes/Start_Round_Button.tscn" id="5_vkn7f"]
+[ext_resource type="Script" uid="uid://da4bqfupciool" path="res://controllers/reticle.gd" id="9_6yqnv"]
+[ext_resource type="Theme" uid="uid://de2nek577lf7m" path="res://controllers/Themes/UI/Debug.tres" id="10_da583"]
+[ext_resource type="Script" uid="uid://dvspsmhr73myh" path="res://controllers/scripts/debug_panel.gd" id="11_tj3ip"]
+[ext_resource type="LabelSettings" uid="uid://dskxen8j6183q" path="res://controllers/materials/Ammo Counter Label Settings.tres" id="12_8ajfq"]
+[ext_resource type="Theme" uid="uid://b4n6esmn2elnd" path="res://controllers/Themes/PauseMenuTheme.tres" id="12_bgpan"]
+[ext_resource type="LabelSettings" uid="uid://ymbpk3yphr8i" path="res://controllers/materials/InteractionLabelSettings.tres" id="13_7528b"]
+[ext_resource type="PackedScene" uid="uid://dyf8bobfk30yv" path="res://Scenes/Item pedestal.tscn" id="15_xndbf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ororn"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_s0y4t"]
+font_size = 64
+
+[node name="World" type="Node" unique_id=1730723652]
+script = ExtResource("1_dhllj")
+
+[node name="OverUnder" parent="." unique_id=1118576280 instance=ExtResource("2_8abxs")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="SpawnPoints" type="Node3D" parent="." unique_id=108989857]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="Robber" type="Node3D" parent="SpawnPoints" unique_id=1452821714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76, 1, 0)
+
+[node name="Marker3D" type="Marker3D" parent="SpawnPoints/Robber" unique_id=1524389101]
+
+[node name="Cops" type="Node3D" parent="SpawnPoints" unique_id=1984568892]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49, 10, 0)
+
+[node name="Marker3D" type="Marker3D" parent="SpawnPoints/Cops" unique_id=1621880341]
+
+[node name="Items" type="Node3D" parent="." unique_id=233975985]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 3)
+
+[node name="ItemPedestal" parent="Items" unique_id=1081497620 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0)
+
+[node name="ItemPedestal2" parent="Items" unique_id=1063068724 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -6)
+
+[node name="ItemPedestal3" parent="Items" unique_id=1994596314 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 15)
+
+[node name="ItemPedestal6" parent="Items" unique_id=398372010 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 2, 15)
+
+[node name="ItemPedestal5" parent="Items" unique_id=1709539444 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 2, 15)
+
+[node name="ItemPedestal8" parent="Items" unique_id=1905298867 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 2, 15)
+
+[node name="ItemPedestal7" parent="Items" unique_id=1171885651 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 2, 15)
+
+[node name="ItemPedestal11" parent="Items" unique_id=230600043 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -21)
+
+[node name="ItemPedestal13" parent="Items" unique_id=1468574291 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 2, -19)
+
+[node name="ItemPedestal12" parent="Items" unique_id=807271837 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 2, 13)
+
+[node name="ItemPedestal15" parent="Items" unique_id=1935344327 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 2, 11)
+
+[node name="ItemPedestal14" parent="Items" unique_id=755003558 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 2, -17)
+
+[node name="ItemPedestal10" parent="Items" unique_id=1377570783 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 2, -21)
+
+[node name="ItemPedestal9" parent="Items" unique_id=1145336553 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 2, -21)
+
+[node name="ItemPedestal4" parent="Items" unique_id=1479462767 instance=ExtResource("15_xndbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 15)
+
+[node name="TeamDoor" parent="." unique_id=214082965 instance=ExtResource("4_2xe3j")]
+transform = Transform3D(3, 0, 0, 0, 2.1, 0, 0, 0, 3, 56, 1, 11.377945)
+inverted_open = true
+
+[node name="TeamDoor2" parent="." unique_id=551769609 instance=ExtResource("4_2xe3j")]
+transform = Transform3D(3, 0, 0, 0, 2.1, 0, 0, 0, 3, 56, 1, -0.31874657)
+inverted_open = true
+
+[node name="TeamDoor3" parent="." unique_id=897188099 instance=ExtResource("4_2xe3j")]
+transform = Transform3D(3, 0, 0, 0, 2.1, 0, 0, 0, 3, 56, 1, -12.21714)
+inverted_open = true
+
+[node name="StartRoundButton" parent="." unique_id=308019239 instance=ExtResource("5_vkn7f")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 59, 1, -11)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=661029991]
+transform = Transform3D(-0.8660253, -0.4330129, 0.2500001, 0, 0.49999994, 0.86602545, -0.50000024, 0.74999994, -0.43301257, 15, 3, 0)
+shadow_enabled = true
+
+[node name="GUIwindow" type="Window" parent="." unique_id=1691143001]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Minitask test"
+initial_position = 2
+size = Vector2i(900, 500)
+transient_to_focused = true
+exclusive = true
+script = ExtResource("3_8abxs")
+
+[node name="GUI" type="CanvasLayer" parent="GUIwindow" unique_id=1352592187]
+
+[node name="Panel" type="Panel" parent="GUIwindow/GUI" unique_id=1932769388]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="GUIwindow/GUI/Panel" unique_id=1146984365]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="GUIwindow/GUI/Panel/SubViewportContainer" unique_id=1405586574]
+unique_name_in_owner = true
+handle_input_locally = false
+size = Vector2i(900, 500)
+size_2d_override = Vector2i(1150, 650)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="GUIwindow" unique_id=2005090928]
+transform = Transform3D(0.6735674, 0, -0.7391258, 0, 1, 0, 0.7391258, 0, 0.6735674, 1.9815508, 1.2883507, -3.0262659)
+visible = false
+visibility_parent = NodePath("../../InteractableTest")
+
+[node name="UserInterface" type="Control" parent="." unique_id=1716963854]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Reticle" type="CenterContainer" parent="UserInterface" unique_id=703992080 node_paths=PackedStringArray("reticleLines")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_6yqnv")
+reticleLines = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
+
+[node name="Top" type="Line2D" parent="UserInterface/Reticle" unique_id=1106858768]
+position = Vector2(20, 20)
+points = PackedVector2Array(0, -5, 0, -15)
+width = 2.0
+
+[node name="Bottom" type="Line2D" parent="UserInterface/Reticle" unique_id=1252431996]
+position = Vector2(20, 20)
+points = PackedVector2Array(0, 5, 0, 15)
+width = 2.0
+
+[node name="Right" type="Line2D" parent="UserInterface/Reticle" unique_id=1775054663]
+position = Vector2(20, 20)
+points = PackedVector2Array(5, 0, 15, 0)
+width = 2.0
+
+[node name="Left" type="Line2D" parent="UserInterface/Reticle" unique_id=67508085]
+position = Vector2(20, 20)
+points = PackedVector2Array(-5, 0, -15, 0)
+width = 2.0
+
+[node name="DebugPanel" type="PanelContainer" parent="UserInterface" unique_id=1691950671]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 50.0
+theme = ExtResource("10_da583")
+script = ExtResource("11_tj3ip")
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/DebugPanel" unique_id=1647442086]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/DebugPanel/MarginContainer" unique_id=1966325656]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Ammo" type="HBoxContainer" parent="UserInterface" unique_id=2044395167]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -204.0
+offset_top = -142.0
+offset_right = -97.0
+offset_bottom = -54.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Clip" type="Label" parent="UserInterface/Ammo" unique_id=1595622323]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "<null>"
+label_settings = ExtResource("12_8ajfq")
+
+[node name="Label" type="Label" parent="UserInterface/Ammo" unique_id=1055180451]
+layout_mode = 2
+text = "/"
+label_settings = ExtResource("12_8ajfq")
+
+[node name="Reserve" type="Label" parent="UserInterface/Ammo" unique_id=1658192541]
+unique_name_in_owner = true
+layout_mode = 2
+text = "<null>"
+label_settings = ExtResource("12_8ajfq")
+
+[node name="TotalValue" type="HBoxContainer" parent="UserInterface" unique_id=494060484]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = -259.0
+offset_right = 170.0
+offset_bottom = -171.0
+grow_vertical = 0
+
+[node name="TotalValue" type="Label" parent="UserInterface/TotalValue" unique_id=1147817179]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("12_8ajfq")
+
+[node name="Health" type="HBoxContainer" parent="UserInterface" unique_id=899981414]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = -113.0
+offset_right = 170.0
+offset_bottom = -25.0
+grow_vertical = 0
+
+[node name="Health" type="Label" parent="UserInterface/Health" unique_id=1461815313]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_ororn")
+
+[node name="InteractionHbox" type="HBoxContainer" parent="UserInterface" unique_id=1193745194]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.0
+offset_top = 120.0
+offset_right = 227.0
+offset_bottom = 187.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InteractionLabel" type="Label" parent="UserInterface/InteractionHbox" unique_id=327354191]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+label_settings = ExtResource("13_7528b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spawn Text" type="HBoxContainer" parent="UserInterface" unique_id=453353284]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -283.0
+offset_bottom = -195.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnnounceLabel" type="Label" parent="UserInterface/Spawn Text" unique_id=613728660]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+label_settings = SubResource("LabelSettings_s0y4t")
+
+[node name="MYidVbox" type="VBoxContainer" parent="UserInterface" unique_id=258477376]
+layout_mode = 0
+offset_left = 528.0
+offset_top = 6.0
+offset_right = 1143.0
+offset_bottom = 77.0
+
+[node name="MyIdLabel" type="Label" parent="UserInterface/MYidVbox" unique_id=158020611]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PauseLayer" type="CanvasLayer" parent="." unique_id=1319718259]
+visible = false
+
+[node name="PausePanel" type="Panel" parent="PauseLayer" unique_id=1627817328]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -298.0
+offset_top = -215.0
+offset_right = 298.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_bgpan")
+
+[node name="PauseVbox" type="VBoxContainer" parent="PauseLayer/PausePanel" unique_id=2076012582]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -25.0
+offset_right = 48.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="PauseLayer/PausePanel/PauseVbox" unique_id=676164828]
+layout_mode = 2
+text = "heeheehoo"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="PauseLayer/PausePanel/PauseVbox" unique_id=652406961]
+layout_mode = 2
+text = "ooheehehee"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="PauseLayer/PausePanel/PauseVbox" unique_id=1588671644]
+layout_mode = 2
+text = "Button that does nothing"
+
+[connection signal="close_requested" from="GUIwindow" to="GUIwindow" method="_GUI_window_close"]

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c138u06rm1bec"]
+
+[ext_resource type="Texture2D" uid="uid://c4ak3dpri1opi" path="res://addons/kenney_prototype_textures/red/texture_10.png" id="1_vimvq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yy6u7"]
+albedo_texture = ExtResource("1_vimvq")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_x68ij"]
+material = SubResource("StandardMaterial3D_yy6u7")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_x68ij"]
+
+[node name="Noughts" type="Node3D" unique_id=1829196593]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=55051465]
+transform = Transform3D(128, 0, 0, 0, 1, 0, 0, 0, 63.600002, 0, 0, 0)
+mesh = SubResource("PlaneMesh_x68ij")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D" unique_id=22690904]
+shape = SubResource("WorldBoundaryShape3D_x68ij")
+debug_fill = false
