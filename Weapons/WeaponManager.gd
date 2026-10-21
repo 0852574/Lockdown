@@ -10,6 +10,7 @@ class_name WeaponController
 @onready var weaponBolt : MeshInstance3D = %WeaponBolt
 @onready var weaponShadow : MeshInstance3D = %WeaponShadow
 @onready var bulletSpawnPoint = %"Bullet Spawn"
+@onready var damageParticle = preload("res://Scenes/Enemy Hurt Effect.tscn")
 
 # Exported variables
 @export var weaponType : Weapons:
@@ -303,9 +304,12 @@ func shoot() -> void:
 				var hitBody = castBulletRay()
 				if hitBody and hitBody != null:
 					if hitBody.has_method("take_enemy_damage"):
+						RayDamageParticle(hitBody.global_position)
 						hitBody.take_enemy_damage(weaponType.Damage, "bullet")
 					elif hitBody.has_method("take_damage"):
+						RayDamageParticle(hitBody.global_position)
 						hitBody.take_damage.rpc_id(hitBody.get_multiplayer_authority(), weaponType.Damage, "bullet", Global.myCurrentTeam)  # Deal damage to the enemy
+						
 
 		#If the weapon is a projectile weapon then shoot a projectile not a raycast
 		if weaponGlobal.weaponBulletPhysics == "Projectile":
@@ -340,6 +344,17 @@ func shoot() -> void:
 		if weaponGlobal.reserveAmmo > 0 and weaponGlobal.clipAmmo == 0:
 			await weaponAnimationPlayer.animation_finished
 			reloadWeapon()
+
+
+func RayDamageParticle(bodyPos):
+	var instance = damageParticle.instantiate()
+	instance.global_position = bodyPos
+	instance.rotation = Vector3 (
+				weaponGlobal.rng.randi_range(0, 360),
+				weaponGlobal.rng.randi_range(0, 360),
+				weaponGlobal.rng.randi_range(0, 360)
+				)
+	get_tree().get_root().add_child(instance)
 
 #Functions to create and test a raycast for hitting another player or enemy
 func castBulletRay():

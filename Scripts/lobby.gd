@@ -66,6 +66,7 @@ func _on_host_button_pressed():
 	loading.visible = false
 
 func _on_join_button_pressed():
+	Global.joinButtonPressed.emit()
 	hideMainMenu()
 	hud.show()
 
@@ -108,6 +109,8 @@ func _ready() -> void:
 	update_money_display()
 	resetRound()
 
+func _process(delta: float) -> void:
+	Global.playerHealth = 100
 	
 	#var DebugPanel = debWin.instantiate()
 	#add_child(DebugPanel)

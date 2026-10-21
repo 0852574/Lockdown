@@ -5,8 +5,10 @@ extends Node
 signal roundReset
 @warning_ignore("unused_signal")
 signal playerJoined
+@warning_ignore("unused_signal")
 signal playerWonTask
-
+@warning_ignore("unused_signal")
+signal joinButtonPressed
 var player
 var playerPoints = 0:
 	set(value):

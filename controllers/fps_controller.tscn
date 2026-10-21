@@ -1071,7 +1071,6 @@ weaponBobV = 6.0
 
 [node name="SprintingPlayerState" type="Node" parent="PlayerStateMachine" unique_id=1477314477]
 script = ExtResource("9_bneyr")
-speed = 24.0
 weaponBobH = 10.0
 weaponBobV = 8.0
 metadata/_custom_type_script = "uid://chrx5rfmff27h"
