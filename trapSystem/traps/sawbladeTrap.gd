@@ -32,4 +32,4 @@ func _on_damage_timer_timeout() -> void:
 	var bodies = hurtArea.get_overlapping_bodies()
 	for i in bodies:
 		if i.has_method("take_damage"):
-			i.take_damage(5, "bullet", "Cop")  # Deal damage to the enemy
+			i.take_damage(5, "trap", "Cop")  # Deal damage to the enemy

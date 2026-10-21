@@ -256,6 +256,7 @@ func holdingTrap():
 					trapInstance.global_position = interactionCast.get_collision_point()
 				else:
 					trapInstance.global_position = interactionCast.global_position + interactionCast.global_transform.basis * interactionCast.target_position
+				trapInstance.look_at(global_position, Vector3.UP)
 				if Input.is_action_just_pressed("interact"):
 					rpc("replicateTrapPlacement", currentHeldTrap, trapInstance.name, trapInstance.global_position)
 					trapInstance = null

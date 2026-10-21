@@ -3,6 +3,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dcnv0bi2o8ark" path="res://Models/traps/sawblade/sawbladeMesh_sawblade.res" id="1_0ymjq"]
 [ext_resource type="Script" uid="uid://cv1og3r3yrdwb" path="res://trapSystem/traps/sawbladeTrap.gd" id="1_ckddn"]
 [ext_resource type="ArrayMesh" uid="uid://f1vp455bi143" path="res://Models/traps/sawblade/sawbladeMesh_sawbladeBase.res" id="2_ckddn"]
+[ext_resource type="Script" uid="uid://dkpba2dqtfqyx" path="res://trapSystem/TrapHealth.gd" id="3_060vf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xpc2p"]
 size = Vector3(1.75, 1.75, 0.25)
@@ -78,7 +79,7 @@ properties/3/path = NodePath("Timer:wait_time")
 properties/3/spawn = true
 properties/3/replication_mode = 1
 
-[node name="SawbladeTrap" type="Node3D" unique_id=1923715929]
+[node name="SawbladeTrap" type="Node3D" unique_id=435046376]
 script = ExtResource("1_ckddn")
 
 [node name="Blade" type="MeshInstance3D" parent="." unique_id=1613625338]
@@ -105,6 +106,7 @@ autostart = true
 
 [node name="Base" type="StaticBody3D" parent="." unique_id=620153568]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+script = ExtResource("3_060vf")
 
 [node name="BaseMesh" type="MeshInstance3D" parent="Base" unique_id=1780070740]
 mesh = ExtResource("2_ckddn")
