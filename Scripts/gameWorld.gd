@@ -13,12 +13,19 @@ extends Node
 @onready var robber_spawns = $SpawnPoints/Robber.get_children()
 
 @onready var pauseHUD = $PauseLayer
+
+@export var terminalDoor: Node3D
 var tracked = false
 var player
-var teams = {} # peer_id -> "Cop" or "Robber"
 var playercount = 0
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
+var rng = RandomNumberGenerator.new()
+
+var avaliableTraps = [
+	"res://trapSystem/sawbladeTrap.tscn",
+	"res://trapSystem/sawbladeTrap.tscn",
+]
 
 #Game Manager Variables
 var trapSetupMode = true
@@ -57,6 +64,7 @@ func _ready() -> void:
 	Global.recreatePlayers()
 	Global.updateSpawnPoints(cop_spawns, robber_spawns)
 	Global.respawnPlayers()
+	resetRound()
 	#var DebugPanel = debWin.instantiate()
 	#add_child(DebugPanel)
 	#DebugPanel.visible = true
@@ -85,7 +93,7 @@ var minitask = preload("res://gameMechanics/hacking_minitask.tscn").instantiate(
 var active_instance: Node = null
 
 func _GUI_window_open(_body: Player) -> void:
-	if _body.is_multiplayer_authority():
+	if _body.is_multiplayer_authority() and Global.myCurrentTeam == "Robber":
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE # Release mouse
 		Global.taskMode = true
 		GUI.show()
@@ -106,6 +114,11 @@ func swap_to_new_instance():
 		add_child(new_instance)
 		active_instance = new_instance
 
+func openTerminalDoors():
+	if terminalDoor:
+		terminalDoor.open()
+
+@rpc("any_peer", "call_local")
 func showAnnounceText(text : String):
 	var announceBox = $"UserInterface/Spawn Text"
 	var announceLabel = %AnnounceLabel
@@ -120,7 +133,7 @@ func exitTrapSetup():
 		trapSetupMode = false
 		Global.roundReset.emit()
 		Global.respawnPlayers()
-		showAnnounceText("Rob stuff I guess")
+
 
 func resetRound():
 	Global.roundReset.emit()
@@ -128,7 +141,11 @@ func resetRound():
 	trapSetupMode = true
 	rpc("recieveReset")
 	if Global.myCurrentTeam == "Cop":
+		Global.player.currentHeldTrap = avaliableTraps.pick_random()
 		showAnnounceText("Trap setup mode")
+		await get_tree().create_timer(4.0).timeout
+		showAnnounceText("Place your traps and ready yourselves")
+		
 		
 @rpc("reliable", "any_peer")
 func recieveReset():
@@ -136,7 +153,11 @@ func recieveReset():
 	Global.respawnPlayers()
 	trapSetupMode = true
 	if Global.myCurrentTeam == "Cop":
+		Global.player.currentHeldTrap = avaliableTraps.pick_random()
 		showAnnounceText("Trap setup mode")
+		await get_tree().create_timer(4.0).timeout
+		showAnnounceText("Place your traps and ready yourselves")
+		
 
 @rpc("reliable", "call_local", "any_peer")
 func updateAlivePlayers(team):
@@ -146,14 +167,40 @@ func updateAlivePlayers(team):
 		elif team == "Robber":
 			Global.aliveRobberCount -= 1
 		
-		if Global.aliveCopCount <= 0 or Global.aliveRobberCount <= 0:
-			Global.aliveCopCount = 0
-			Global.aliveRobberCount = 0
-			for t in teams.values():
-
-				if t == "Cop":
-					Global.aliveCopCount += 1
-
-				elif t == "Robber":
-					Global.aliveRobberCount += 1
+		if Global.aliveCopCount <= 0:
+			rpc("showAnnounceText", "Robbers have won")
+			Global.robberWins += 1
+			await get_tree().create_timer(3.0).timeout
+			if Global.robberWins >= 1:
+				Global.rpc("changeScene", "res://Scenes/lobby.tscn")
+				Global.changeScene("res://Scenes/lobby.tscn")
+				return
+			recalculateTeamNumbers()
 			resetRound()
+		elif Global.aliveRobberCount <= 0:
+			rpc("showAnnounceText", "Cops have won")
+			Global.copWins += 1
+			await get_tree().create_timer(3.0).timeout
+			if Global.copWins >= 1:
+				Global.rpc("changeScene", "res://Scenes/lobby.tscn")
+				Global.changeScene("res://Scenes/lobby.tscn")
+				return
+			recalculateTeamNumbers()
+			resetRound()
+
+func recalculateTeamNumbers():
+	Global.aliveCopCount = 0
+	Global.aliveRobberCount = 0
+	for t in Global.teams.values():
+		if t == "Cop":
+			Global.aliveCopCount += 1
+		elif t == "Robber":
+			Global.aliveRobberCount += 1
+
+# Money balance
+var current_balance = moneyGlobal.get_bank_balance()
+@onready var money = $%moneyLabel
+
+func update_money_display() -> void:
+	money.text = "Money: " + str(current_balance)
+	print("Player wallet: " + str(current_balance))

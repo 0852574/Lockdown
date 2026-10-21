@@ -17,8 +17,6 @@
 [ext_resource type="Script" uid="uid://cednwk8gblcux" path="res://controllers/scripts/State Machine/sliding_player_state.gd" id="11_rk4xh"]
 [ext_resource type="Script" uid="uid://bttldsvuv6dwb" path="res://controllers/scripts/State Machine/jumping_player_state.gd" id="12_uovkr"]
 [ext_resource type="Script" uid="uid://ts5ba16nqwfv" path="res://controllers/scripts/State Machine/falling_player_state.gd" id="13_l8yvu"]
-[ext_resource type="Script" uid="uid://crj6eucr0c4ha" path="res://controllers/scripts/State Machine/dashing_player_state.gd" id="18_2lhxf"]
-[ext_resource type="Script" uid="uid://cdfdcxn0ohdeu" path="res://controllers/scripts/State Machine/slamming_player_state.gd" id="20_ijaog"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bygp4"]
 
@@ -641,6 +639,30 @@ tracks/14/keys = {
 "points": PackedFloat32Array(0.5, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("CollisionShape3D/Cop model:scale")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.75, 1, 0.75)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("CollisionShape3D/Robber model:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.75, 1, 0.75)]
+}
 
 [sub_resource type="Animation" id="Animation_rk4xh"]
 resource_name = "Sliding"
@@ -861,6 +883,30 @@ tracks/3/keys = {
 "points": PackedFloat32Array(0.5, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape3D/Cop model:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.75, 1, 0.75), Vector3(0.75, 0.66, 0.75)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionShape3D/Robber model:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.75, 1, 0.75), Vector3(0.75, 0.66, 0.75)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t6fw5"]
 _data = {
@@ -896,26 +942,30 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath("CameraController/Camera3D/WeaponRig/weaponAnimations:current_animation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
-properties/3/path = NodePath("AnimationPlayer:current_animation")
+properties/3/path = NodePath("CameraController/Camera3D:rotation")
 properties/3/spawn = true
 properties/3/replication_mode = 1
-properties/4/path = NodePath("CameraController/Camera3D:rotation")
+properties/4/path = NodePath("CameraController/Camera3D:position")
 properties/4/spawn = true
 properties/4/replication_mode = 1
-properties/5/path = NodePath("CameraController/Camera3D:position")
+properties/5/path = NodePath("CollisionShape3D/Robber model:visible")
 properties/5/spawn = true
 properties/5/replication_mode = 1
-properties/6/path = NodePath("CollisionShape3D/Robber model:visible")
+properties/6/path = NodePath("CollisionShape3D/Cop model:visible")
 properties/6/spawn = true
 properties/6/replication_mode = 1
-properties/7/path = NodePath("CollisionShape3D/Cop model:visible")
+properties/7/path = NodePath("Name Label:text")
 properties/7/spawn = true
 properties/7/replication_mode = 1
-properties/8/path = NodePath("Name Label:text")
+properties/8/path = NodePath("CollisionShape3D/Cop model:scale")
 properties/8/spawn = true
 properties/8/replication_mode = 1
+properties/9/path = NodePath("CollisionShape3D/Robber model:scale")
+properties/9/spawn = true
+properties/9/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D" unique_id=1200792928 groups=["player", "player_group"]]
+floor_max_angle = 1.3962634
 safe_margin = 0.01
 script = ExtResource("1_pgc1p")
 MOUSE_SENSITIVITY = 0.15
@@ -1021,6 +1071,7 @@ weaponBobV = 6.0
 
 [node name="SprintingPlayerState" type="Node" parent="PlayerStateMachine" unique_id=1477314477]
 script = ExtResource("9_bneyr")
+speed = 24.0
 weaponBobH = 10.0
 weaponBobV = 8.0
 metadata/_custom_type_script = "uid://chrx5rfmff27h"
@@ -1042,15 +1093,6 @@ metadata/_custom_type_script = "uid://chrx5rfmff27h"
 
 [node name="FallingPlayerState" type="Node" parent="PlayerStateMachine" unique_id=372573538]
 script = ExtResource("13_l8yvu")
-metadata/_custom_type_script = "uid://chrx5rfmff27h"
-
-[node name="DashingPlayerState" type="Node" parent="PlayerStateMachine" unique_id=1226447536 node_paths=PackedStringArray("Camera")]
-script = ExtResource("18_2lhxf")
-Camera = NodePath("../../CameraController/Camera3D")
-metadata/_custom_type_script = "uid://chrx5rfmff27h"
-
-[node name="SlammingPlayerState" type="Node" parent="PlayerStateMachine" unique_id=1158435371]
-script = ExtResource("20_ijaog")
 metadata/_custom_type_script = "uid://chrx5rfmff27h"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1236917909]

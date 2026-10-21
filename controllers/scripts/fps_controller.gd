@@ -25,6 +25,7 @@ var hasInstancedTrap = false
 @onready var robberModel = $"CollisionShape3D/Robber model"
 @onready var damageVignette = $CameraController/Camera3D/CanvasLayer/damageVignette
 @onready var interactionCast = %trapPlaceCast
+@onready var trapPlaceCast = %trapPlaceCast
 
 var _mouse_input : bool = false
 var _rotation_input : float
@@ -89,9 +90,9 @@ func _input(event):
 	
 	if event.is_action_pressed("debug"):
 		if sceneChanged == true:
-			Global.rpc("changeScene", "res://Scenes/Maps/OverUnderMapfinal.tscn")
+			Global.rpc("changeScene", "res://Maps/gallery.tscn")
 			await get_tree().process_frame
-			Global.changeScene("res://Scenes/Maps/OverUnderMapfinal.tscn")
+			Global.changeScene("res://Maps/gallery.tscn")
 			sceneChanged = !sceneChanged
 		else:
 			Global.rpc("changeScene", "res://Scenes/testWorld.tscn")
@@ -170,7 +171,6 @@ func _process(delta: float) -> void:
 		stamina += ceil(16.5 * delta)
 
 	if Input.is_action_just_pressed("debugAction"):
-		print("SET TRAPPEPD")
 		currentHeldTrap = "res://trapSystem/sawbladeTrap.tscn"
 
 func updateGravity(delta) -> void:
@@ -214,8 +214,9 @@ func updateVelocity() -> void:
 
 @rpc("any_peer")
 func take_damage(damage, type, team):
+	if not is_multiplayer_authority():
+		return
 	if team != Global.myCurrentTeam:
-
 		Global.playerHealth -= damage
 		damageVignette.material.set_shader_parameter("intensity", damageVignette.material.get_shader_parameter("intensity") + 0.25)
 		damageVignette.material.set_shader_parameter("intensity", clampf(damageVignette.material.get_shader_parameter("intensity"), 0.0, 0.75))  
@@ -237,8 +238,7 @@ func updatePlayerModel():
 	elif Global.myCurrentTeam == "Robber":
 		robberModel.visible = true
 
-func placeTrap():
-	pass
+
 
 func holdingTrap():
 	if Global.myCurrentTeam == "Cop":
@@ -252,25 +252,28 @@ func holdingTrap():
 				get_tree().root.get_node("World").add_child(trapInstance)
 				hasInstancedTrap = true
 				#rpc("replicateTrapPlacement", currentHeldTrap, trapName)
+				trapPlaceCast.add_exception(trapInstance)
+				for child in trapInstance.find_children("*", "CollisionObject3D", true, false):
+					trapPlaceCast.add_exception(child)
 			if trapInstance != null:
-				if interactionCast.is_colliding():
-					trapInstance.global_position = interactionCast.get_collision_point()
+				if trapPlaceCast.is_colliding():
+					trapInstance.global_position = trapPlaceCast.get_collision_point()
 				else:
-					trapInstance.global_position = interactionCast.global_position + interactionCast.global_transform.basis * interactionCast.target_position
+					trapInstance.global_position = trapPlaceCast.global_position + trapPlaceCast.global_transform.basis * trapPlaceCast.target_position
+				trapInstance.look_at(global_position, Vector3.UP)
+				trapInstance.rotation.x = 0
+				trapInstance.rotation.z = 0
+
 				if Input.is_action_just_pressed("interact"):
+					rpc("replicateTrapPlacement", currentHeldTrap, trapInstance.name, trapInstance.global_position, trapInstance.rotation)
 					trapInstance = null
 					loadedTrap = null
 					hasInstancedTrap = false
-#@rpc("any_peer")
-#func replicateTrapPlacement(trapPath, trapName):
-	#var clientTrapLoad = load(trapPath)
-	#var trapInstanceClient = clientTrapLoad.instantiate()
-	#trapInstanceClient.name = trapName
-	#get_tree().root.get_node("World").add_child(trapInstanceClient)
-#THIS NEEDS UPDATING TO NEW UI PLEASE
-#WILL BE ANNOUNCEMENT TEXT NOT LEVEL CHANGE
-#func showLevelText(spawnText):
-	#%"Spawn Label".text = spawnText
-	#animationPlayer.play("Level Fade", -1, 1, false)
-	#await animationPlayer.animation_finished
-	#animationPlayer.play("Level Fade", -1, -1, true)
+@rpc("any_peer")
+func replicateTrapPlacement(trapPath, trapName, trapPos, traprot):
+	var clientTrapLoad = load(trapPath)
+	var trapInstanceClient = clientTrapLoad.instantiate()
+	trapInstanceClient.name = trapName
+	trapInstanceClient.global_position = trapPos
+	trapInstanceClient.rotation = traprot
+	get_tree().root.get_node("World").add_child(trapInstanceClient)

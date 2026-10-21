@@ -18,30 +18,37 @@ func _ready() -> void:
 	Global.playerJoined.connect(spawnItem)
 
 func spawnItem():
-	if multiplayer.get_unique_id() == 1:
-		var dropInstance = weaponDrop.instantiate()
-		var dropName = "Item Drop %d" % rng.randi_range(1, 10000)
-		while find_child(dropName) != null:
-			dropName = "Item Drop %d" % rng.randi_range(1, 10000)
-		dropInstance.name = dropName
-		get_tree().root.get_node("World").add_child(dropInstance)
-		var loadedItem = itemPaths[rng.randi_range(0, itemPaths.size()-1)]
-		dropInstance.global_position = dropLocation.global_position
-		dropInstance.setWeapon(loadedItem)
-		dropInstance.setModel(loadedItem)
-		dropInstance.setAttribute("isItem", true)
-		dropInstance.setName(dropName)
-		get_tree().current_scene.totalItems += 1
-		await get_tree().create_timer(1).timeout
-		rpc("replicateDroppedItem", loadedItem, dropInstance.global_position, dropName)
+	if multiplayer.get_unique_id() != 1:
+		return
+		
+	# 1. Pick item and position immediately (no waiting)
+	var loadedItem = itemPaths[rng.randi_range(0, itemPaths.size()-1)]
+	var dropPos = dropLocation.global_position
 	
-@rpc("any_peer")
+	var dropName = "Item Drop %d" % rng.randi_range(1, 10000)
+	var world = get_tree().root.get_node_or_null("World")
+	while world and world.has_node(dropName):
+		dropName = "Item Drop %d" % rng.randi_range(1, 10000)
+		
+	# 2. Tell all peers (including server via call_local) to spawn it instantly
+	rpc("replicateDroppedItem", loadedItem, dropPos, dropName)
+
+@rpc("authority", "call_local", "reliable")
 func replicateDroppedItem(weapon, dropPos, dropName):
+	# Safety check: Prevent duplicate spawns if packet arrives twice
+	var world = get_tree().root.get_node_or_null("World")
+	if not world or world.has_node(dropName):
+		return
+		
 	var dropInstance = weaponDrop.instantiate()
-	dropInstance.setName(dropName)
-	get_tree().root.get_node("World").add_child(dropInstance)
+	dropInstance.name = dropName
+	world.add_child(dropInstance)
+	
+	# Configure item properties safely
 	dropInstance.global_position = dropPos
 	dropInstance.setWeapon(weapon)
 	dropInstance.setModel(weapon)
 	dropInstance.setAttribute("isItem", true)
-	get_tree().current_scene.totalItems += 1
+	
+	if multiplayer.is_server():
+		get_tree().current_scene.totalItems += 1
