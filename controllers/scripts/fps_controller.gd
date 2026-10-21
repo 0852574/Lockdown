@@ -25,6 +25,7 @@ var hasInstancedTrap = false
 @onready var robberModel = $"CollisionShape3D/Robber model"
 @onready var damageVignette = $CameraController/Camera3D/CanvasLayer/damageVignette
 @onready var interactionCast = %trapPlaceCast
+@onready var trapPlaceCast = %trapPlaceCast
 
 var _mouse_input : bool = false
 var _rotation_input : float
@@ -251,21 +252,28 @@ func holdingTrap():
 				get_tree().root.get_node("World").add_child(trapInstance)
 				hasInstancedTrap = true
 				#rpc("replicateTrapPlacement", currentHeldTrap, trapName)
+				trapPlaceCast.add_exception(trapInstance)
+				for child in trapInstance.find_children("*", "CollisionObject3D", true, false):
+					trapPlaceCast.add_exception(child)
 			if trapInstance != null:
-				if interactionCast.is_colliding():
-					trapInstance.global_position = interactionCast.get_collision_point()
+				if trapPlaceCast.is_colliding():
+					trapInstance.global_position = trapPlaceCast.get_collision_point()
 				else:
-					trapInstance.global_position = interactionCast.global_position + interactionCast.global_transform.basis * interactionCast.target_position
+					trapInstance.global_position = trapPlaceCast.global_position + trapPlaceCast.global_transform.basis * trapPlaceCast.target_position
 				trapInstance.look_at(global_position, Vector3.UP)
+				trapInstance.rotation.x = 0
+				trapInstance.rotation.z = 0
+
 				if Input.is_action_just_pressed("interact"):
-					rpc("replicateTrapPlacement", currentHeldTrap, trapInstance.name, trapInstance.global_position)
+					rpc("replicateTrapPlacement", currentHeldTrap, trapInstance.name, trapInstance.global_position, trapInstance.rotation)
 					trapInstance = null
 					loadedTrap = null
 					hasInstancedTrap = false
 @rpc("any_peer")
-func replicateTrapPlacement(trapPath, trapName, trapPos):
+func replicateTrapPlacement(trapPath, trapName, trapPos, traprot):
 	var clientTrapLoad = load(trapPath)
 	var trapInstanceClient = clientTrapLoad.instantiate()
 	trapInstanceClient.name = trapName
 	trapInstanceClient.global_position = trapPos
+	trapInstanceClient.rotation = traprot
 	get_tree().root.get_node("World").add_child(trapInstanceClient)

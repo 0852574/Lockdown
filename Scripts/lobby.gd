@@ -21,7 +21,6 @@ extends Node
 
 var tracked = false
 var player
-var teams = {} # peer_id -> "Cop" or "Robber"
 
 # Number of players currently in the game
 var playercount = 0
@@ -107,6 +106,7 @@ func _ready() -> void:
 	menuMusicNode.playing = true
 	
 	update_money_display()
+	resetRound()
 
 	
 	#var DebugPanel = debWin.instantiate()
@@ -177,8 +177,8 @@ func remove_player(peer_id: int):
 		player.queue_free()
 
 	# Remove them from the team dictionary
-	if teams.has(peer_id):
-		teams.erase(peer_id)
+	if Global.teams.has(peer_id):
+		Global.teams.erase(peer_id)
 
 	# Decrease player count
 	playercount -= 1
@@ -212,15 +212,17 @@ func assign_team(id):
 	Global.aliveCopCount = 0
 	Global.aliveRobberCount = 0
 
-	for t in teams.values():
+	for t in Global.teams.values():
 
 		if t == "Cop":
 			Global.cop_count += 1
-			Global.aliveCopCount += 1
+			if multiplayer.get_unique_id() == 1:
+				Global.aliveCopCount += 1
 
 		elif t == "Robber":
 			Global.robber_count += 1
-			Global.aliveRobberCount += 1
+			if multiplayer.get_unique_id() == 1:
+				Global.aliveRobberCount += 1
 
 	var team
 
@@ -234,7 +236,7 @@ func assign_team(id):
 	else:
 		team = "Cop" if randi() % 2 == 0 else "Robber"
 
-	teams[id] = team
+	Global.teams[id] = team
 
 	print("Player ", id, " assigned to ", team)
 	
@@ -287,7 +289,7 @@ func spawn_player(id, team):
 @rpc("any_peer", "reliable")
 func receive_team_assignment(id, team):
 
-	teams[id] = team
+	Global.teams[id] = team
 
 	if id == multiplayer.get_unique_id():
 
@@ -436,6 +438,8 @@ func _on_exit_game_pressed() -> void:
 
 	get_tree().quit()
 
+
+@rpc("any_peer", "call_local")
 func showAnnounceText(text : String):
 	var announceBox = $"UserInterface/Spawn Text"
 	var announceLabel = %AnnounceLabel
@@ -450,7 +454,7 @@ func exitTrapSetup():
 		trapSetupMode = false
 		Global.roundReset.emit()
 		Global.respawnPlayers()
-		showAnnounceText("Rob stuff I guess")
+
 
 func resetRound():
 	Global.roundReset.emit()
@@ -459,6 +463,9 @@ func resetRound():
 	rpc("recieveReset")
 	if Global.myCurrentTeam == "Cop":
 		showAnnounceText("Trap setup mode")
+		await get_tree().create_timer(4.0).timeout
+		showAnnounceText("Place your traps and ready yourselves")
+		
 		
 @rpc("reliable", "any_peer")
 func recieveReset():
@@ -467,6 +474,8 @@ func recieveReset():
 	trapSetupMode = true
 	if Global.myCurrentTeam == "Cop":
 		showAnnounceText("Trap setup mode")
+		await get_tree().create_timer(4.0).timeout
+		showAnnounceText("Place your traps and ready yourselves")
 
 @rpc("reliable", "call_local", "any_peer")
 func updateAlivePlayers(team):
@@ -476,17 +485,31 @@ func updateAlivePlayers(team):
 		elif team == "Robber":
 			Global.aliveRobberCount -= 1
 		
-		if Global.aliveCopCount <= 0 or Global.aliveRobberCount <= 0:
-			Global.aliveCopCount = 0
-			Global.aliveRobberCount = 0
-			for t in teams.values():
-
-				if t == "Cop":
-					Global.aliveCopCount += 1
-
-				elif t == "Robber":
-					Global.aliveRobberCount += 1
+		if Global.aliveCopCount <= 0:
+			rpc("showAnnounceText", "Robbers have won")
+			Global.robberWins += 1
+			await get_tree().create_timer(3.0).timeout
+			if Global.robberWins >= 3:
+				Global.changeScene("res://Scenes/lobby.tscn")
+			recalculateTeamNumbers()
 			resetRound()
+		elif Global.aliveRobberCount <= 0:
+			rpc("showAnnounceText", "Cops have won")
+			Global.copWins += 1
+			await get_tree().create_timer(3.0).timeout
+			if Global.copWins >= 3:
+				Global.changeScene("res://Scenes/lobby.tscn")
+			recalculateTeamNumbers()
+			resetRound()
+
+func recalculateTeamNumbers():
+	Global.aliveCopCount = 0
+	Global.aliveRobberCount = 0
+	for t in Global.teams.values():
+		if t == "Cop":
+			Global.aliveCopCount += 1
+		elif t == "Robber":
+			Global.aliveRobberCount += 1
 
 func hideMainMenu():
 	menuMusicNode.playing = false

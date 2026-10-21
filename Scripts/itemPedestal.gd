@@ -18,7 +18,7 @@ func _ready() -> void:
 	Global.playerJoined.connect(spawnItem)
 
 func spawnItem():
-	if not multiplayer.is_server():
+	if multiplayer.get_unique_id() != 1:
 		return
 		
 	# 1. Pick item and position immediately (no waiting)

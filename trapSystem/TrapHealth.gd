@@ -3,11 +3,9 @@ extends StaticBody3D
 
 @export var health = 250
 
-@rpc("any_peer")
+@rpc("any_peer", "call_local")
 func take_damage(damage, type, team):
 	#if team == "Robber":
-	print("TAKING DAMAGE")
-	print(health)
 	if type != "trap":
 		health -= damage
 	
@@ -16,4 +14,4 @@ func take_damage(damage, type, team):
 
 @rpc("any_peer", "call_local")
 func deleteTrap():
-	queue_free()
+	get_parent().queue_free()

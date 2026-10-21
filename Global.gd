@@ -39,6 +39,10 @@ var cop_count = 0
 var robber_count = 0
 var aliveCopCount = 0
 var aliveRobberCount = 0
+var teams = {} # peer_id -> "Cop" or "Robber"
+
+var copWins = 0
+var robberWins = 0
 
 func updateLabels(clipAmmo, reserveAmmo):
 	clipLabel.text = str(clipAmmo)
