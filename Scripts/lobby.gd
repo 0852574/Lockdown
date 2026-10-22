@@ -4,7 +4,6 @@ extends Node
 @onready var address_entry = $CanvasLayer/MainMenu/PanelContainer/VBoxContainer/AddressEntry
 @onready var hud = $UserInterface
 @onready var myIDref = multiplayer.get_unique_id()
-@onready var loading = $CanvasLayer/Loading
 @onready var menuMusicNode = $CanvasLayer/MenuMusic
 @onready var menuBackground = $"CanvasLayer/Menu Background"
 
@@ -63,7 +62,6 @@ func _on_host_button_pressed():
 
 	print("Server started.")
 	print("Maximum players: ", MAX_PLAYERS)
-	loading.visible = false
 
 func _on_join_button_pressed():
 	Global.joinButtonPressed.emit()
@@ -83,8 +81,6 @@ func _on_join_button_pressed():
 
 	multiplayer.multiplayer_peer = enet_peer
 
-	loading.visible = false
-
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -93,6 +89,7 @@ func _ready() -> void:
 	Global.clipLabel = %Clip
 	Global.pointsLabel = %TotalValue
 	Global.healthLabel = %Health
+	Global.staminaBar = %"Stamina Bar"
 	Global.totalValue = 0
 	GUI.hide()
 	if Global.isMainMenu == false:
@@ -108,6 +105,15 @@ func _ready() -> void:
 	
 	update_money_display()
 	resetRound()
+
+	if Global.cameFromGame == true:
+		Global.cameFromGame = false
+		hideMainMenu()
+		hud.show()
+		weaponGlobal.weaponAmmoInventory = [[0,0], [0,0]]
+		weaponGlobal.weaponInventory = ["res://Weapons/Empty Weapon.tres","res://Weapons/Empty Weapon.tres"]
+		Global.weaponManager.loadWeapon()
+		Global.weaponManager.addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
 
 func _process(delta: float) -> void:
 	Global.playerHealth = 100
@@ -200,7 +206,7 @@ func _on_single_player_button_pressed():
 	var my_id = multiplayer.get_unique_id()
 
 	add_player(my_id)
-	loading.visible = false
+
 
 
 
@@ -516,7 +522,6 @@ func recalculateTeamNumbers():
 
 func hideMainMenu():
 	menuMusicNode.playing = false
-	loading.visible = true
 	menuBackground.visible = false
 	main_menu.hide()
 

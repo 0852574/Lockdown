@@ -1,4 +1,4 @@
-
+@tool
 
 extends Node3D
 
@@ -17,7 +17,7 @@ class_name WeaponController
 	set(value):
 		weaponType = value
 		if Engine.is_editor_hint():
-			loadWeapon()
+			editorLoadWeapon()
 
 @export var swaySpeed : float = 1.2
 @export var reset : bool = false:
@@ -52,17 +52,19 @@ var weaponDrop = preload("res://Scenes/Weapon Drop.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not is_multiplayer_authority(): return
+	Global.roundReset.connect(updateAmmoLabels)
 	Global.weaponManager = self
 	loadWeapon()
-	addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
 	
 	#Checks if the player has spawned before, thus not giving new equipment
 	#Might not be needed
 	if weaponGlobal.hasSpawned == false:
 		weaponGlobal.hasSpawned = true
-	Global.clipLabel.text = str(weaponGlobal.clipAmmo)
-	Global.reserveLabel.text = str(weaponGlobal.reserveAmmo)
-	
+	Global.updateLabels(weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo) 
+
+func updateAmmoLabels():
+	Global.updateLabels(weaponGlobal.clipAmmo, weaponGlobal.reserveAmmo) 
+
 func _input(event):
 	if !Engine.is_editor_hint():
 		if not is_multiplayer_authority(): return
@@ -133,7 +135,26 @@ func switchWeapon(direction: int) -> void:
 	# Equip the weapon at the new index
 	loadWeapon()
 	
-	
+
+func editorLoadWeapon():
+	weaponMesh.mesh = weaponType.mesh
+	weaponMagazine.mesh = weaponType.magazine
+	weaponBolt.mesh = weaponType.bolt
+	weaponShadow.mesh = weaponType.mesh
+	#Gun Orientation
+	position = weaponType.position
+	rotation_degrees = weaponType.rotation
+	scale = weaponType.scale
+	#Magazine Orientation
+	weaponMagazine.position = weaponType.magazinePosition
+	weaponMagazine.rotation_degrees = weaponType.magazineRotation
+	weaponMagazine.scale = weaponType.magazineScale
+	#Bolt Orientation
+	weaponBolt.position = weaponType.boltPosition
+	weaponBolt.rotation_degrees = weaponType.boltRotation
+	weaponBolt.scale = weaponType.boltScale
+	weaponShadow.visible = weaponType.shadow
+
 func wrap_index(index: int, size: int) -> int:
 	# Wrap the index to stay within [0, size)
 	if size == 0:

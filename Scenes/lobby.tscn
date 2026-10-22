@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://cw5iw0tdrx43u" path="res://gameMechanics/guiwindow.gd" id="3_ftq4a"]
 [ext_resource type="PackedScene" uid="uid://5k1o5ctvtah6" path="res://Scenes/enemy.tscn" id="3_nule3"]
 [ext_resource type="Script" uid="uid://da4bqfupciool" path="res://controllers/reticle.gd" id="4_0ddhe"]
-[ext_resource type="Texture2D" uid="uid://c8wkg88dvxlhj" path="res://Textures/1_kNm9rtz-Ud5jmP9qGynmog.webp" id="4_0roqs"]
 [ext_resource type="Texture2D" uid="uid://b8c4woxccl27v" path="res://Textures/Menu Background.png" id="5_bbmoa"]
 [ext_resource type="Theme" uid="uid://de2nek577lf7m" path="res://controllers/Themes/UI/Debug.tres" id="5_lwfgy"]
 [ext_resource type="PackedScene" uid="uid://ha8gav5g5u7l" path="res://trapSystem/sawbladeTrap.tscn" id="6_0f3vc"]
@@ -18,9 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://dyf8bobfk30yv" path="res://Scenes/Item pedestal.tscn" id="9_lwfgy"]
 [ext_resource type="PackedScene" uid="uid://currrrlwvf71l" path="res://Scenes/Item Collection Volume.tscn" id="13_dbplf"]
 [ext_resource type="PackedScene" uid="uid://b8crchnkrw0ss" path="res://gameMechanics/Traps/DeathCube.tscn" id="14_0roqs"]
+[ext_resource type="LabelSettings" uid="uid://dhrv0v6x54hrn" path="res://Materials/AnnounceLabel.tres" id="14_4jmuv"]
 [ext_resource type="PackedScene" uid="uid://1gk8wgub7vvt" path="res://Scenes/chatbox.tscn" id="14_qagcc"]
 [ext_resource type="Script" uid="uid://bpyh1pj66vo3u" path="res://Scenes/death_button.gd" id="16_j4ew0"]
-[ext_resource type="PackedScene" uid="uid://c3r01pii0mcrd" path="res://Scenes/InteractObject.tscn" id="17_wm471"]
+[ext_resource type="PackedScene" uid="uid://cp6m4co04ib6r" path="res://Scenes/Jump Pad.tscn" id="21_4jmuv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u5pdl"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -33,7 +33,9 @@ sky_material = SubResource("ProceduralSkyMaterial_u5pdl")
 background_mode = 2
 sky = SubResource("Sky_w2qqb")
 tonemap_mode = 2
+ssao_enabled = true
 glow_enabled = true
+glow_intensity = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ftq4a"]
 
@@ -52,9 +54,6 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[sub_resource type="LabelSettings" id="LabelSettings_0f3vc"]
-font_size = 32
-
 [sub_resource type="LabelSettings" id="LabelSettings_4jmuv"]
 font_size = 32
 font_color = Color(0.8388628, 0.70275867, 0, 1)
@@ -65,10 +64,35 @@ font_color = Color(0.8388628, 0.70275867, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_dbplf"]
 font_size = 48
-font_color = Color(0.33238596, 0.54421395, 1.92523e-07, 1)
+font_color = Color(0.3964681, 0.64266, 5.7756904e-07, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-3, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_cdpo3"]
-font_size = 64
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ngni"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.26667485, 0.20391619, 0, 0.3019608)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wbbk6"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.89411765, 0.5803922, 0, 0.64705884)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x68ij"]
 
@@ -78,6 +102,8 @@ font_size = 64
 
 [node name="World" type="Node" unique_id=1730723652]
 script = ExtResource("1_ctiuy")
+
+[node name="Environment" parent="." unique_id=1851466389 instance=ExtResource("2_fr3vy")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1539882701]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
@@ -143,15 +169,8 @@ visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=781029339]
 
-[node name="Loading-img" type="TextureRect" parent="CanvasLayer" unique_id=2100992392]
-visible = false
-offset_right = 1155.0
-offset_bottom = 663.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("4_0roqs")
-
 [node name="Menu Background" type="TextureRect" parent="CanvasLayer" unique_id=733069019]
+visible = false
 z_index = -10
 anchors_preset = 15
 anchor_right = 1.0
@@ -241,23 +260,6 @@ alignment = 1
 stream = ExtResource("3_8b5ia")
 volume_db = -5.0
 
-[node name="Loading" type="Label" parent="CanvasLayer" unique_id=2091700247]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -103.5
-offset_top = -11.5
-offset_right = 103.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Loading..."
-label_settings = SubResource("LabelSettings_0f3vc")
-horizontal_alignment = 1
-
 [node name="ShopMenu" type="CanvasLayer" parent="." unique_id=1110994879]
 
 [node name="ShopItems" type="ResourcePreloader" parent="ShopMenu" unique_id=2084493552]
@@ -282,10 +284,6 @@ spawn_path = NodePath("..")
 
 [node name="Enemy" parent="." unique_id=204833997 instance=ExtResource("3_nule3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.00742, 1.03476, 0.74423)
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1849368165]
-
-[node name="Environment" parent="NavigationRegion3D" unique_id=1851466389 instance=ExtResource("2_fr3vy")]
 
 [node name="UserInterface" type="Control" parent="." unique_id=499654013]
 unique_name_in_owner = true
@@ -449,7 +447,7 @@ grow_vertical = 0
 [node name="Health" type="Label" parent="UserInterface/Health" unique_id=36381877]
 unique_name_in_owner = true
 layout_mode = 2
-text = "100"
+text = "100 HP"
 label_settings = SubResource("LabelSettings_dbplf")
 
 [node name="InteractionHbox" type="HBoxContainer" parent="UserInterface" unique_id=2127920321]
@@ -491,7 +489,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 text = "TestTest"
-label_settings = SubResource("LabelSettings_cdpo3")
+label_settings = ExtResource("14_4jmuv")
 
 [node name="MYidVbox" type="VBoxContainer" parent="UserInterface" unique_id=413844586]
 layout_mode = 0
@@ -503,6 +501,18 @@ offset_bottom = 77.0
 [node name="MyIdLabel" type="Label" parent="UserInterface/MYidVbox" unique_id=1674277987]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="Stamina Bar" type="ProgressBar" parent="UserInterface" unique_id=1356165028]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 0
+offset_left = 24.0
+offset_top = 680.0
+offset_right = 264.0
+offset_bottom = 707.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3ngni")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wbbk6")
+rounded = true
 
 [node name="PauseLayer" type="CanvasLayer" parent="." unique_id=957366646]
 visible = false
@@ -578,17 +588,37 @@ shape = SubResource("BoxShape3D_x68ij")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=848534167 groups=["InteractableObject"]]
 mesh = SubResource("BoxMesh_yy6u7")
 
-[node name="InteractObject" parent="." unique_id=1565446478 instance=ExtResource("17_wm471")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.93946, 2.4999998, -5.326315)
-visible = false
-
 [node name="SawbladeTrap" parent="." unique_id=1923715929 instance=ExtResource("6_0f3vc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9474425, 2.047174, -27.178608)
 
 [node name="Roof" type="StaticBody3D" parent="." unique_id=1658063438]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 5.9691086, 0)
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 21.969109, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Roof" unique_id=1816375421]
+shape = SubResource("WorldBoundaryShape3D_xrivr")
+
+[node name="Roof2" type="StaticBody3D" parent="." unique_id=611986648]
+transform = Transform3D(-1, 4.371139e-08, -4.371139e-08, 4.3711392e-08, 4.3711385e-08, -1, -4.371139e-08, -1, -4.3711385e-08, 0, 11.969109, 30)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Roof2" unique_id=1306266522]
+shape = SubResource("WorldBoundaryShape3D_xrivr")
+
+[node name="Roof3" type="StaticBody3D" parent="." unique_id=1321144645]
+transform = Transform3D(3.5527137e-15, -1, -8.742277e-08, 8.742278e-08, 8.742277e-08, -1, 1, -7.1054274e-15, 8.742278e-08, 30, 11.969109, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Roof3" unique_id=1948519214]
+shape = SubResource("WorldBoundaryShape3D_xrivr")
+
+[node name="Roof4" type="StaticBody3D" parent="." unique_id=1336333649]
+transform = Transform3D(8.742278e-08, 1, 8.742277e-08, 0, 8.742278e-08, -1, -1, 8.742278e-08, 7.1054274e-15, -30, 11.969109, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Roof4" unique_id=41775615]
+shape = SubResource("WorldBoundaryShape3D_xrivr")
+
+[node name="Roof5" type="StaticBody3D" parent="." unique_id=256058093]
+transform = Transform3D(1, -1.3113417e-07, 4.3711378e-08, 4.3711392e-08, 1.3113416e-07, -1, 1.3113416e-07, 1, 1.3113416e-07, 1, 11.969109, -30)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Roof5" unique_id=1474589169]
 shape = SubResource("WorldBoundaryShape3D_xrivr")
 
 [node name="Tutorial Label" type="Label3D" parent="." unique_id=1901268677]
@@ -651,6 +681,9 @@ Only Robbers can pick up items
 Robbers must place all items in the white floor square to win"
 font_size = 48
 outline_size = 24
+
+[node name="JumpPad" parent="." unique_id=1947962995 instance=ExtResource("21_4jmuv")]
+transform = Transform3D(-1.0000001, 1.4210855e-14, 7.351372e-08, 0, 1, -8.742279e-08, -7.351371e-08, -8.742279e-08, -1.0000001, 0, 0, 5)
 
 [connection signal="body_entered" from="Terminal/Area3D" to="." method="_GUI_window_open"]
 [connection signal="close_requested" from="GUIwindow" to="GUIwindow" method="_GUI_window_close"]

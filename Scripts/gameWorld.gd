@@ -15,6 +15,9 @@ extends Node
 @onready var pauseHUD = $PauseLayer
 
 @export var terminalDoor: Node3D
+@export var copsSpectateLocation : Marker3D
+@export var robbersSpectateLocation : Marker3D
+@export var mapName : String
 var tracked = false
 var player
 var playercount = 0
@@ -30,6 +33,7 @@ var avaliableTraps = [
 #Game Manager Variables
 var trapSetupMode = true
 var totalItems = 0
+var hasCompletedMiniTask = false
 
 func upnp_setup():
 	var upnp = UPNP.new()
@@ -57,12 +61,16 @@ func _ready() -> void:
 	Global.clipLabel = %Clip
 	Global.pointsLabel = %TotalValue
 	Global.healthLabel = %Health
+	Global.staminaBar = %"Stamina Bar"
 	Global.totalValue = 0
 	GUI.hide()
 	print(Input.get_joy_name(0))
 	get_viewport().set_embedding_subwindows(false)
 	Global.recreatePlayers()
 	Global.updateSpawnPoints(cop_spawns, robber_spawns)
+	Global.player.spawnSpectate()
+	showAnnounceText("Welcome to " + mapName)
+	await get_tree().create_timer(6.0).timeout
 	Global.respawnPlayers()
 	resetRound()
 	#var DebugPanel = debWin.instantiate()
@@ -93,7 +101,7 @@ var minitask = preload("res://gameMechanics/hacking_minitask.tscn").instantiate(
 var active_instance: Node = null
 
 func _GUI_window_open(_body: Player) -> void:
-	if _body.is_multiplayer_authority() and Global.myCurrentTeam == "Robber":
+	if _body.is_multiplayer_authority() and Global.myCurrentTeam == "Robber" and hasCompletedMiniTask == false:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE # Release mouse
 		Global.taskMode = true
 		GUI.show()
@@ -131,14 +139,25 @@ func showAnnounceText(text : String):
 func exitTrapSetup():
 	if trapSetupMode == true:
 		trapSetupMode = false
+		Global.player.trapInstance = null
+		Global.player.loadedTrap = null
+		Global.player.hasInstancedTrap = false
 		Global.roundReset.emit()
 		Global.respawnPlayers()
+		weaponGlobal.weaponAmmoInventory = [[0,0], [0,0]]
+		weaponGlobal.weaponInventory = ["res://Weapons/Empty Weapon.tres","res://Weapons/Empty Weapon.tres"]
+		Global.weaponManager.loadWeapon()
+		Global.weaponManager.addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
 
 
 func resetRound():
 	Global.roundReset.emit()
 	Global.respawnPlayers()
 	trapSetupMode = true
+	weaponGlobal.weaponAmmoInventory = [[0,0], [0,0]]
+	weaponGlobal.weaponInventory = ["res://Weapons/Empty Weapon.tres","res://Weapons/Empty Weapon.tres"]
+	Global.weaponManager.loadWeapon()
+	Global.weaponManager.addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
 	rpc("recieveReset")
 	if Global.myCurrentTeam == "Cop":
 		Global.player.currentHeldTrap = avaliableTraps.pick_random()
@@ -152,6 +171,10 @@ func recieveReset():
 	Global.roundReset.emit()
 	Global.respawnPlayers()
 	trapSetupMode = true
+	weaponGlobal.weaponAmmoInventory = [[0,0], [0,0]]
+	weaponGlobal.weaponInventory = ["res://Weapons/Empty Weapon.tres","res://Weapons/Empty Weapon.tres"]
+	Global.weaponManager.loadWeapon()
+	Global.weaponManager.addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
 	if Global.myCurrentTeam == "Cop":
 		Global.player.currentHeldTrap = avaliableTraps.pick_random()
 		showAnnounceText("Trap setup mode")
@@ -172,6 +195,7 @@ func updateAlivePlayers(team):
 			Global.robberWins += 1
 			await get_tree().create_timer(3.0).timeout
 			if Global.robberWins >= 1:
+				rpc("cameFromGameUpdate")
 				Global.rpc("changeScene", "res://Scenes/lobby.tscn")
 				Global.changeScene("res://Scenes/lobby.tscn")
 				return
@@ -182,11 +206,15 @@ func updateAlivePlayers(team):
 			Global.copWins += 1
 			await get_tree().create_timer(3.0).timeout
 			if Global.copWins >= 1:
+				rpc("cameFromGameUpdate")
 				Global.rpc("changeScene", "res://Scenes/lobby.tscn")
 				Global.changeScene("res://Scenes/lobby.tscn")
 				return
 			recalculateTeamNumbers()
 			resetRound()
+@rpc("call_local", "reliable", "any_peer")
+func cameFromGameUpdate():
+	Global.cameFromGame = true
 
 func recalculateTeamNumbers():
 	Global.aliveCopCount = 0

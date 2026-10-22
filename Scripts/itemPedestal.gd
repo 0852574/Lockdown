@@ -19,7 +19,6 @@ func _ready() -> void:
 
 func spawnItem():
 	if multiplayer.get_unique_id() == 1:
-		print("SAPWNIG ITEMS")
 			
 		# 1. Pick item and position immediately (no waiting)
 		var loadedItem = itemPaths[rng.randi_range(0, itemPaths.size()-1)]
