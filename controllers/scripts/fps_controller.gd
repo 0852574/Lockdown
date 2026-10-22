@@ -90,9 +90,9 @@ func _input(event):
 	
 	if event.is_action_pressed("debug"):
 		if sceneChanged == true:
-			Global.rpc("changeScene", "res://Maps/gallery.tscn")
+			Global.rpc("changeScene", "res://Maps/OverUnder.tscn")
 			await get_tree().process_frame
-			Global.changeScene("res://Maps/gallery.tscn")
+			Global.changeScene("res://Maps/OverUnder.tscn")
 			sceneChanged = !sceneChanged
 		else:
 			Global.rpc("changeScene", "res://Scenes/testWorld.tscn")
