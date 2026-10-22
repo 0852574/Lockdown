@@ -7,10 +7,10 @@
 [ext_resource type="Script" uid="uid://chelsy2m60l2o" path="res://controllers/scripts/interaction_cast.gd" id="4_tg6sc"]
 [ext_resource type="Resource" uid="uid://sc0678yoejno" path="res://Weapons/Blaster.tres" id="4_yvtcv"]
 [ext_resource type="Script" uid="uid://dkk1lhseynn15" path="res://controllers/scripts/State Machine/stateMachine.gd" id="6_co0pi"]
-[ext_resource type="ArrayMesh" uid="uid://b1xaeejtpuktq" path="res://Weapons/Models/M1911/M1911_M1911 Body.res" id="6_yvtcv"]
+[ext_resource type="ArrayMesh" uid="uid://bigmbich8quw4" path="res://Weapons/Models/M1911/M1911_M1911 Body.res" id="6_yvtcv"]
 [ext_resource type="Script" uid="uid://dd8ov1iyaklk5" path="res://controllers/scripts/State Machine/idle_player_state.gd" id="7_gshig"]
-[ext_resource type="ArrayMesh" uid="uid://dn3jidwlbp3uf" path="res://Weapons/Models/M1911/M1911_M1911 Magazine.res" id="7_h7h5r"]
-[ext_resource type="ArrayMesh" uid="uid://sq8og6mxucq8" path="res://Weapons/Models/M1911/M1911_M1911 Slide.res" id="8_fdopr"]
+[ext_resource type="ArrayMesh" uid="uid://8dwu735fiw8a" path="res://Weapons/Models/M1911/M1911_M1911 Magazine.res" id="7_h7h5r"]
+[ext_resource type="ArrayMesh" uid="uid://cks5jufd25axm" path="res://Weapons/Models/M1911/M1911_M1911 Slide.res" id="8_fdopr"]
 [ext_resource type="Script" uid="uid://dv2uyfesuk4fh" path="res://controllers/scripts/State Machine/walking_player_state.gd" id="8_jmoha"]
 [ext_resource type="Script" uid="uid://7oev0hm280x0" path="res://controllers/scripts/State Machine/spriting_player_state.gd" id="9_bneyr"]
 [ext_resource type="Shader" uid="uid://8mf418acms3f" path="res://Shaders/damageVignette.gdshader" id="9_h7h5r"]
@@ -233,7 +233,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_yvtcv"]
 resource_name = "fullReload"
-length = 1.5999999999999999
+length = 1.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1090,7 +1090,7 @@ fov = 90.0
 [node name="WeaponRig" type="Node3D" parent="CameraController/Camera3D" unique_id=898275078]
 
 [node name="Weapon" parent="CameraController/Camera3D/WeaponRig" unique_id=606798246 node_paths=PackedStringArray("weaponAnimationPlayer") instance=ExtResource("3_eikvl")]
-transform = Transform3D(0.99999946, -2.0300993e-15, -7.348942e-21, 0, -3.6199888e-06, 1.0000001, -2.030099e-15, -0.99999964, -3.6199906e-06, 0.25, -0.4, -0.5)
+transform = Transform3D(1, -2.0301e-15, -7.3489416e-21, 0, -3.6199901e-06, 1, -2.0301e-15, -1, -3.6199901e-06, 0.25, -0.4, -0.5)
 weaponType = ExtResource("4_yvtcv")
 weaponAnimationPlayer = NodePath("../weaponAnimations")
 
