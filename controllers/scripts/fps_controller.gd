@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 @export var JUMP_VELOCITY : float = 4.5
-@export var MOUSE_SENSITIVITY : float = 0.5
+
 @export var controllerSensitivity = 2
 @export var TILT_LOWER_LIMIT := deg_to_rad(-90.0)
 @export var TILT_UPPER_LIMIT := deg_to_rad(90.0)
@@ -12,7 +12,8 @@ var hasInstancedTrap = false
 @export_file("*.tscn") var currentHeldTrap = "":
 	set(value):
 		currentHeldTrap = value
-		loadedTrap = load(currentHeldTrap)
+		if currentHeldTrap: 
+			loadedTrap = load(currentHeldTrap)
 
 @onready var CAMERA_CONTROLLER : Camera3D = $CameraController/Camera3D
 @onready var ANIMATIONPLAYER : AnimationPlayer = $AnimationPlayer
@@ -27,6 +28,7 @@ var hasInstancedTrap = false
 @onready var interactionCast = %trapPlaceCast
 @onready var trapPlaceCast = %trapPlaceCast
 
+var MOUSE_SENSITIVITY : float = 0.125
 var _mouse_input : bool = false
 var _rotation_input : float
 var _tilt_input : float
@@ -37,13 +39,17 @@ var isCrouching : bool = false
 
 var currentRotation : float
 var cameraOffset : Vector3
-var sceneChanged = true
 var spawnpoint
 
 var gravity = 12
 var stamina = 100
 
 var is_interacting: bool = false
+
+var mapFiles = [
+	"res://Maps/OverUnder.tscn",
+	"res://Maps/gallery.tscn"
+]
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
@@ -66,7 +72,10 @@ func _ready():
 	CROUCH_SHAPECAST.add_exception(self)
 	Global.isMainMenu = false
 	playerlabelname.text = str(multiplayer.get_unique_id())
-	
+	weaponGlobal.weaponAmmoInventory = [[0,0], [0,0]]
+	weaponGlobal.weaponInventory = ["res://Weapons/Empty Weapon.tres","res://Weapons/Empty Weapon.tres"]
+	Global.weaponManager.loadWeapon()
+	Global.weaponManager.addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -89,16 +98,11 @@ func _input(event):
 		get_tree().quit()
 	
 	if event.is_action_pressed("debug"):
-		if sceneChanged == true:
-			Global.rpc("changeScene", "res://Maps/gallery.tscn")
+		if get_tree().current_scene.scene_file_path == "res://Scenes/lobby.tscn":
+			var pickedMap = mapFiles.pick_random()
+			Global.rpc("changeScene", pickedMap)
 			await get_tree().process_frame
-			Global.changeScene("res://Maps/gallery.tscn")
-			sceneChanged = !sceneChanged
-		else:
-			Global.rpc("changeScene", "res://Scenes/testWorld.tscn")
-			await get_tree().process_frame
-			Global.changeScene("res://Scenes/testWorld.tscn")
-			sceneChanged = !sceneChanged
+			Global.changeScene(pickedMap)
 
 func _update_camera(delta):
 
@@ -168,7 +172,8 @@ func _process(delta: float) -> void:
 	damageVignette.material.set_shader_parameter("intensity", move_toward(damageVignette.material.get_shader_parameter("intensity"), 0.0, 0.01))  
 
 	if stamina < 101 and stateMachine.currentState != $PlayerStateMachine/SprintingPlayerState:
-		stamina += ceil(16.5 * delta)
+		stamina += 0.15
+	Global.staminaBar.value = stamina
 
 	if Input.is_action_just_pressed("debugAction"):
 		currentHeldTrap = "res://trapSystem/sawbladeTrap.tscn"
@@ -211,6 +216,12 @@ func updateVelocity() -> void:
 
 	move_and_slide()
 
+func spawnSpectate():
+	if Global.myCurrentTeam == "Cop":
+		position = get_tree().root.get_node("World").copsSpectateLocation.global_position
+	else:
+		position = get_tree().root.get_node("World").robbersSpectateLocation.global_position
+
 
 @rpc("any_peer")
 func take_damage(damage, type, team):
@@ -224,7 +235,7 @@ func take_damage(damage, type, team):
 
 		if Global.playerHealth <= 0:
 			Global.playerHealth = 100
-			position.z += 100
+			spawnSpectate()
 			damageVignette.material.set_shader_parameter("intensity", 1.0)
 			if multiplayer.get_unique_id() != 1:
 				get_node("/root/World").updateAlivePlayers.rpc(Global.myCurrentTeam)

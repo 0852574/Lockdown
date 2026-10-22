@@ -34,3 +34,8 @@ mesh = SubResource("CylinderMesh_tdcxo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=327546367]
 shape = SubResource("BoxShape3D_xpc2p")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1089700986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+billboard = 1
+text = "Start round"

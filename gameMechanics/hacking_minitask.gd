@@ -21,6 +21,7 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 	if body.name == "2DPlayer":
 		Global.emit_signal("playerWonTask")
 		get_tree().root.get_node("World").openTerminalDoors()
+		get_tree().root.get_node("World").hasCompletedMiniTask = true
 		get_tree().root.get_node("World").rpc("showAnnounceText", "Terminal has been breached")
 		await get_tree().create_timer(5).timeout
 		get_tree().root.get_node("World").rpc("showAnnounceText", "Secondary door now open")

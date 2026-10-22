@@ -18,20 +18,19 @@ func _ready() -> void:
 	Global.playerJoined.connect(spawnItem)
 
 func spawnItem():
-	if multiplayer.get_unique_id() != 1:
-		return
+	if multiplayer.get_unique_id() == 1:
+			
+		# 1. Pick item and position immediately (no waiting)
+		var loadedItem = itemPaths[rng.randi_range(0, itemPaths.size()-1)]
+		var dropPos = dropLocation.global_position
 		
-	# 1. Pick item and position immediately (no waiting)
-	var loadedItem = itemPaths[rng.randi_range(0, itemPaths.size()-1)]
-	var dropPos = dropLocation.global_position
-	
-	var dropName = "Item Drop %d" % rng.randi_range(1, 10000)
-	var world = get_tree().root.get_node_or_null("World")
-	while world and world.has_node(dropName):
-		dropName = "Item Drop %d" % rng.randi_range(1, 10000)
-		
-	# 2. Tell all peers (including server via call_local) to spawn it instantly
-	rpc("replicateDroppedItem", loadedItem, dropPos, dropName)
+		var dropName = "Item Drop %d" % rng.randi_range(1, 10000)
+		var world = get_tree().root.get_node_or_null("World")
+		while world and world.has_node(dropName):
+			dropName = "Item Drop %d" % rng.randi_range(1, 10000)
+			
+		# 2. Tell all peers (including server via call_local) to spawn it instantly
+		rpc("replicateDroppedItem", loadedItem, dropPos, dropName)
 
 @rpc("authority", "call_local", "reliable")
 func replicateDroppedItem(weapon, dropPos, dropName):

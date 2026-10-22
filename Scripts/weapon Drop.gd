@@ -34,6 +34,7 @@ func _ready():
 		setModel(weaponPath)
 	Global.roundReset.connect(deleteWeaponDrop)
 	Global.playerJoined.connect(deleteWeaponDrop)
+	Global.joinButtonPressed.connect(deleteWeaponDrop)
 	
 
 
