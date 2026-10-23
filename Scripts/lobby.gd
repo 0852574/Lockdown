@@ -6,6 +6,7 @@ extends Node
 @onready var myIDref = multiplayer.get_unique_id()
 @onready var menuMusicNode = $CanvasLayer/MenuMusic
 @onready var menuBackground = $"CanvasLayer/Menu Background"
+@onready var ipLabel = $"UserInterface/IP Label"
 
 @onready var GUI = $GUIwindow
 @onready var GUI_viewport = %SubViewport
@@ -36,6 +37,27 @@ var debWin = preload("res://Menus/Debug.tscn")
 
 var trapSetupMode = true
 var totalItems = 0
+
+func get_lan_ip() -> String:
+	var addresses = IP.get_local_addresses()
+	
+	# First pass: Look for standard home network IPv4 addresses
+	for ip in addresses:
+		# Skip IPv6 addresses and the Loopback (localhost)
+		if ip.contains(":") or ip.begins_with("127."):
+			continue
+			
+		# Filter for common private IPv4 ranges
+		if ip.begins_with("192.168.") or ip.begins_with("10.") or ip.begins_with("172."):
+			return ip
+			
+	# Second pass: Fallback to any active IPv4 address if the first pass fails
+	for ip in addresses:
+		if not ip.contains(":") and not ip.begins_with("127."):
+			return ip
+			
+	return "Offline"
+
 
 func _on_host_button_pressed():
 
@@ -105,6 +127,10 @@ func _ready() -> void:
 	
 	update_money_display()
 	resetRound()
+
+	var lan_ip = get_lan_ip()
+	ipLabel.text = "Host IP:\n" + lan_ip
+	ipLabel.show()
 
 	if Global.cameFromGame == true:
 		Global.cameFromGame = false

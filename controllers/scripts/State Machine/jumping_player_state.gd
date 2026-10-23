@@ -16,7 +16,8 @@ func enter(previousState) -> void:
 func update(delta):
 	PLAYER.updateGravity(delta)
 	#Can be used for boost jumping (MOVEMENT GAME YEAHHH)
-	PLAYER.updateInput(PLAYER.velocity.length() + speed * inputMultiplier, acceleration, deceleration)
+	#PLAYER.updateInput(PLAYER.velocity.length() + speed * inputMultiplier, acceleration, deceleration)
+	#PLAYER.updateInput(speed, acceleration, deceleration)
 	PLAYER.updateVelocity()
 	weapon.sway_weapon(delta, false)
 	
