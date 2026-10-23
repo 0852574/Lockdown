@@ -1191,6 +1191,7 @@ metadata/_custom_type_script = "uid://chrx5rfmff27h"
 
 [node name="FallingPlayerState" type="Node" parent="PlayerStateMachine" unique_id=372573538]
 script = ExtResource("13_l8yvu")
+speed = 6.0
 metadata/_custom_type_script = "uid://chrx5rfmff27h"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1236917909]
