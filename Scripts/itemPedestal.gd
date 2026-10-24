@@ -20,13 +20,13 @@ var spawned_items = []
 func _ready() -> void:
 	rng.randomize()
 	Global.roundReset.connect(spawnItem)
-	Global.playerJoined.connect(spawnItem)
+	#Global.playerJoined.connect(spawnItem)
 	
 	# 1. FIXING THE RACE CONDITION:
 	# When a client fully loads, they ask the server for any items that were 
 	# already spawned (in case they joined after the round started).
-	#if not multiplayer.is_server():
-		#rpc_id(1, "request_item_sync")
+	if not multiplayer.is_server():
+		rpc_id(1, "request_item_sync")
 
 func spawnItem():
 	# 2. FIXING THE SERVER CHECK:

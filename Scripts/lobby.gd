@@ -103,6 +103,7 @@ func _on_host_button_pressed():
 
 	print("Server started.")
 	print("Maximum players: ", MAX_PLAYERS)
+	Global.roundReset.emit()
 
 func _on_join_button_pressed():
 	Global.joinButtonPressed.emit()
@@ -162,6 +163,7 @@ func _ready() -> void:
 	
 	update_money_display()
 	resetRound()
+	
 
 	var lan_ip = get_lan_ip()
 	ipLabel.text = "Host IP:\n" + lan_ip
@@ -510,42 +512,47 @@ func _on_exit_game_pressed() -> void:
 
 
 @rpc("any_peer", "call_local")
-func showAnnounceText(text : String):
+func showAnnounceText(text : String, duration : int):
 	var announceBox = $"UserInterface/Spawn Text"
 	var announceLabel = %AnnounceLabel
 	announceLabel.text = text
 	announceBox.show()
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(duration).timeout
 	announceBox.hide()
 
 @rpc("reliable", "any_peer")
 func exitTrapSetup():
 	if trapSetupMode == true:
 		trapSetupMode = false
-		Global.roundReset.emit()
+		Global.player.trapInstance = null
+		Global.player.loadedTrap = null
+		Global.player.hasInstancedTrap = false
 		Global.respawnPlayers()
+		weaponGlobal.weaponAmmoInventory = [[0,0], [0,0]]
+		weaponGlobal.weaponInventory = ["res://Weapons/Empty Weapon.tres","res://Weapons/Empty Weapon.tres"]
+		Global.weaponManager.loadWeapon()
+		Global.weaponManager.addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
 
 
+@rpc("reliable", "any_peer", "call_local")
 func resetRound():
+	totalItems = 0
 	Global.roundReset.emit()
 	Global.respawnPlayers()
 	trapSetupMode = true
-	rpc("recieveReset")
+	weaponGlobal.weaponAmmoInventory = [[0,0], [0,0]]
+	weaponGlobal.weaponInventory = ["res://Weapons/Empty Weapon.tres","res://Weapons/Empty Weapon.tres"]
+	if Global.weaponManager:
+		Global.weaponManager.loadWeapon()
+		Global.weaponManager.addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
 	if Global.myCurrentTeam == "Cop":
-		showAnnounceText("Trap setup mode")
-		await get_tree().create_timer(4.0).timeout
-		showAnnounceText("Place your traps and ready yourselves")
-		
-		
-@rpc("reliable", "any_peer")
-func recieveReset():
-	Global.roundReset.emit()
-	Global.respawnPlayers()
-	trapSetupMode = true
-	if Global.myCurrentTeam == "Cop":
-		showAnnounceText("Trap setup mode")
-		await get_tree().create_timer(4.0).timeout
-		showAnnounceText("Place your traps and ready yourselves")
+		showAnnounceText("Trap setup mode", 3)
+		await get_tree().create_timer(3.0).timeout
+		showAnnounceText("Place your traps and ready yourselves", 4)
+	else:
+		showAnnounceText("Round setup", 3)
+		await get_tree().create_timer(3.0).timeout
+		showAnnounceText("Plan your attack!", 4)
 
 @rpc("reliable", "call_local", "any_peer")
 func updateAlivePlayers(team):
@@ -556,21 +563,25 @@ func updateAlivePlayers(team):
 			Global.aliveRobberCount -= 1
 		
 		if Global.aliveCopCount <= 0:
-			rpc("showAnnounceText", "Robbers have won")
+			rpc("showAnnounceText", "Robbers have won", 3)
 			Global.robberWins += 1
 			await get_tree().create_timer(3.0).timeout
 			if Global.robberWins >= 3:
+				Global.rpc("changeScene", "res://Scenes/lobby.tscn")
 				Global.changeScene("res://Scenes/lobby.tscn")
+				return
 			recalculateTeamNumbers()
-			resetRound()
+			rpc("resetRound")
 		elif Global.aliveRobberCount <= 0:
-			rpc("showAnnounceText", "Cops have won")
+			rpc("showAnnounceText", "Cops have won", 3)
 			Global.copWins += 1
 			await get_tree().create_timer(3.0).timeout
 			if Global.copWins >= 3:
+				Global.rpc("changeScene", "res://Scenes/lobby.tscn")
 				Global.changeScene("res://Scenes/lobby.tscn")
+				return
 			recalculateTeamNumbers()
-			resetRound()
+			rpc("resetRound")
 
 func recalculateTeamNumbers():
 	Global.aliveCopCount = 0
