@@ -106,7 +106,6 @@ func _on_host_button_pressed():
 	Global.roundReset.emit()
 
 func _on_join_button_pressed():
-	Global.joinButtonPressed.emit()
 	hideMainMenu()
 	hud.show()
 
@@ -129,6 +128,7 @@ func _on_join_button_pressed():
 	multiplayer.connected_to_server.connect(_on_client_connected)
 	multiplayer.connection_failed.connect(_on_client_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	Global.joinButtonPressed.emit()
 
 func _on_client_connected():
 	print("Successfully connected to the server!")
