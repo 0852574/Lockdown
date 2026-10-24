@@ -444,17 +444,17 @@ transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.37
 [node name="ItemPedestal3" parent="." unique_id=28812881 instance=ExtResource("2_q4oia")]
 transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -4.3711385e-08, -20.666664, 1.5000004, -0.033333898)
 
+[node name="ItemPedestal2" parent="." unique_id=2106139460 instance=ExtResource("2_q4oia")]
+transform = Transform3D(1, 0, 0, 0, 1, -1.6420284e-15, 0, -1.6420282e-15, 1, -4, 11, 4)
+
+[node name="ItemPedestal4" parent="." unique_id=815790846 instance=ExtResource("2_q4oia")]
+transform = Transform3D(1, 0, 0, 0, 1, -1.6420284e-15, 0, -1.6420282e-15, 1, -4, 11, -4)
+
+[node name="ItemPedestal6" parent="." unique_id=1395401276 instance=ExtResource("2_q4oia")]
+transform = Transform3D(1, 0, 0, 0, 1, -1.6420284e-15, 0, -1.6420282e-15, 1, -6, 11, 0)
+
 [node name="ItemPedestal5" parent="." unique_id=2000253223 instance=ExtResource("2_q4oia")]
 transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -4.3711385e-08, -20.666664, 1.5000004, 5.166666)
-
-[node name="ItemPedestal2" parent="." unique_id=894749991 instance=ExtResource("2_q4oia")]
-transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -4.3711385e-08, -4.666664, 11, -5.233334)
-
-[node name="ItemPedestal4" parent="." unique_id=1549331429 instance=ExtResource("2_q4oia")]
-transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -4.3711385e-08, -6.666664, 10.9, -0.033333898)
-
-[node name="ItemPedestal6" parent="." unique_id=1430450547 instance=ExtResource("2_q4oia")]
-transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -4.3711385e-08, -4.666664, 11, 5.166666)
 
 [node name="Terminal" type="MeshInstance3D" parent="." unique_id=965305013]
 transform = Transform3D(0.48608938, 1.5029517e-08, 0.012745708, -1.5975438e-08, 0.48625654, 3.5878045e-08, -0.012745708, -3.6284458e-08, 0.48608938, 1.3942832, 1.4621267, 4.0449743)

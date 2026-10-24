@@ -21,7 +21,7 @@ func _ready() -> void:
 	rng.randomize()
 	Global.roundReset.connect(spawnItem)
 	Global.joinButtonPressed.connect(requestItems)
-	#Global.playerJoined.connect(spawnItem)
+	Global.playerJoined.connect(spawnItem)
 	
 	# 1. FIXING THE RACE CONDITION:
 	# When a client fully loads, they ask the server for any items that were 
