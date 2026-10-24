@@ -144,7 +144,6 @@ func exitTrapSetup():
 		Global.player.trapInstance = null
 		Global.player.loadedTrap = null
 		Global.player.hasInstancedTrap = false
-		Global.roundReset.emit()
 		Global.respawnPlayers()
 		weaponGlobal.weaponAmmoInventory = [[0,0], [0,0]]
 		weaponGlobal.weaponInventory = ["res://Weapons/Empty Weapon.tres","res://Weapons/Empty Weapon.tres"]

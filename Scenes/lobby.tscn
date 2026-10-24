@@ -665,7 +665,6 @@ outline_size = 24
 
 [node name="Welcome Robbers" type="Label3D" parent="." unique_id=522454973]
 transform = Transform3D(1, -3.5527137e-15, 0, -3.5527137e-15, 1, 1.9106853e-15, 0, 1.9106853e-15, 1, 26.4, 3, -4.9)
-no_depth_test = true
 text = "Welcome to the lobby
 You are on team Robbers"
 font_size = 48
@@ -673,7 +672,6 @@ outline_size = 24
 
 [node name="Controls" type="Label3D" parent="." unique_id=1958262389]
 transform = Transform3D(1, -3.5527137e-15, 0, -3.5527137e-15, 1, 1.9106853e-15, 0, 1.9106853e-15, 1, 23, 3.2, -5)
-no_depth_test = true
 text = "------------------Controls------------------
 
 Drop item: Q
@@ -687,7 +685,6 @@ outline_size = 24
 
 [node name="Controls2" type="Label3D" parent="." unique_id=2133220117]
 transform = Transform3D(1, -3.5527137e-15, 0, -3.5527137e-15, 1, 1.9106853e-15, 0, 1.9106853e-15, 1, -22, 3.2, -5)
-no_depth_test = true
 text = "------------------Controls------------------
 
 Drop item: Q
@@ -701,7 +698,6 @@ outline_size = 24
 
 [node name="Welcome Cops" type="Label3D" parent="." unique_id=1197282151]
 transform = Transform3D(1, -3.5527137e-15, 0, 3.5527137e-15, 1, 1.9106853e-15, 0, 1.9106857e-15, 1, -25, 3, -5)
-no_depth_test = true
 text = "Welcome to the lobby
 You are on team Cops"
 font_size = 48
