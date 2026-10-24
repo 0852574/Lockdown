@@ -170,6 +170,7 @@ func resetRound():
 		showAnnounceText("Round setup", 3)
 		await get_tree().create_timer(3.0).timeout
 		showAnnounceText("Plan your attack!", 4)
+
 @rpc("reliable", "any_peer")
 func recieveReset():
 	Global.roundReset.emit()
@@ -198,7 +199,7 @@ func updateAlivePlayers(team):
 			Global.aliveRobberCount -= 1
 		
 		if Global.aliveCopCount <= 0:
-			rpc("showAnnounceText", "Robbers have won")
+			rpc("showAnnounceText", "Robbers have won", 3)
 			Global.robberWins += 1
 			await get_tree().create_timer(3.0).timeout
 			if Global.robberWins >= 3:
@@ -209,7 +210,7 @@ func updateAlivePlayers(team):
 			recalculateTeamNumbers()
 			resetRound()
 		elif Global.aliveRobberCount <= 0:
-			rpc("showAnnounceText", "Cops have won")
+			rpc("showAnnounceText", "Cops have won", 3)
 			Global.copWins += 1
 			await get_tree().create_timer(3.0).timeout
 			if Global.copWins >= 3:

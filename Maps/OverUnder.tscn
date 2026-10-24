@@ -235,8 +235,7 @@ mesh = SubResource("BoxMesh_ve51a")
 
 [node name="Label3D" type="Label3D" parent="Map/Cops Spectate Box" unique_id=618288497]
 transform = Transform3D(-4.371139e-08, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -1, -4.371139e-08, -4.3711385e-08, -11, 32, 0)
-text = "You have died
-Spectate the match until the next round"
+text = "Spectate the match until the next round"
 font_size = 128
 outline_size = 32
 
@@ -277,8 +276,7 @@ mesh = SubResource("BoxMesh_ve51a")
 
 [node name="Label3D" type="Label3D" parent="Map/Robbers Spectate Box" unique_id=1210134092]
 transform = Transform3D(-4.371139e-08, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -1, -4.371139e-08, -4.3711385e-08, -11, 32, 0)
-text = "You have died
-Spectate the match until the next round"
+text = "Spectate the match until the next round"
 font_size = 128
 outline_size = 32
 

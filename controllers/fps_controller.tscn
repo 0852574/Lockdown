@@ -1202,6 +1202,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1072268, 0)
 billboard = 1
 text = "get real"
 
+[node name="Healing Tick" type="Timer" parent="." unique_id=1566158464]
+wait_time = 0.33
+autostart = true
+
+[node name="Heal Delay" type="Timer" parent="." unique_id=1087385493]
+wait_time = 4.0
+one_shot = true
+
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
+[connection signal="timeout" from="Healing Tick" to="." method="_on_healing_tick_timeout"]
+[connection signal="timeout" from="Heal Delay" to="." method="_on_heal_delay_timeout"]
 
 [editable path="CameraController/Camera3D/WeaponRig/Weapon"]

@@ -18,7 +18,7 @@ func update(delta):
 	PLAYER.updateInput(speed, acceleration, deceleration)
 	PLAYER.updateVelocity()
 	setAnimationSpeed(PLAYER.velocity.length())
-	PLAYER.stamina -= 0.33
+	PLAYER.stamina -= 0.25
 	weapon.sway_weapon(delta, false)
 	weapon.weaponBob(delta, weaponBobSpeed, weaponBobH, weaponBobV)
 	
