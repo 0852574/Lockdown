@@ -153,6 +153,7 @@ func exitTrapSetup():
 
 @rpc("reliable", "any_peer", "call_local")
 func resetRound():
+	totalItems = 0
 	Global.roundReset.emit()
 	Global.respawnPlayers()
 	trapSetupMode = true
