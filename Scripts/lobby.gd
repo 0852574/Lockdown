@@ -45,23 +45,37 @@ var totalItems = 0
 
 func get_lan_ip() -> String:
 	var addresses = IP.get_local_addresses()
+	var valid_ips: Array[String] = []
 	
-	# First pass: Look for standard home network IPv4 addresses
 	for ip in addresses:
-		# Skip IPv6 addresses and the Loopback (localhost)
+		# Skip IPv6 and Loopback (localhost)
 		if ip.contains(":") or ip.begins_with("127."):
 			continue
 			
+		# Skip known virtual adapter IPs (VirtualBox, Docker, WSL, Windows Hotspot)
+		if ip.begins_with("192.168.56."): continue # VirtualBox Host-Only
+		if ip.begins_with("10.0.2."): continue # VirtualBox NAT
+		if ip.begins_with("172.17.") or ip.begins_with("172.18.") or ip.begins_with("172.19.") or ip.begins_with("172.20."): continue # Docker / WSL
+		if ip == "192.168.137.1": continue # Windows Mobile Hotspot
+		
 		# Filter for common private IPv4 ranges
 		if ip.begins_with("192.168.") or ip.begins_with("10.") or ip.begins_with("172."):
-			return ip
-			
-	# Second pass: Fallback to any active IPv4 address if the first pass fails
-	for ip in addresses:
-		if not ip.contains(":") and not ip.begins_with("127."):
-			return ip
-			
-	return "Offline"
+			if ip not in valid_ips:
+				valid_ips.append(ip)
+
+	if valid_ips.is_empty():
+		# Fallback to any active IPv4 address if the first pass fails
+		for ip in addresses:
+			if not ip.contains(":") and not ip.begins_with("127."):
+				if ip not in valid_ips:
+					valid_ips.append(ip)
+					
+	if valid_ips.is_empty():
+		return "Offline"
+	
+	# Return all found IPs separated by a newline. 
+	# The Label node will automatically display these on multiple lines!
+	return "\n".join(valid_ips)
 
 
 func _on_host_button_pressed():
@@ -96,17 +110,33 @@ func _on_join_button_pressed():
 	hud.show()
 
 	var error
-
-	if address_entry.text == "":
+	# Trim any accidental spaces the user might have typed
+	var target_ip = address_entry.text.strip_edges()
+	
+	if target_ip == "":
 		error = enet_peer.create_client("127.0.0.1", PORT)
 	else:
-		error = enet_peer.create_client(address_entry.text, PORT)
+		error = enet_peer.create_client(target_ip, PORT)
 
 	if error != OK:
 		print("Failed to create client. Error: ", error)
 		return
 
 	multiplayer.multiplayer_peer = enet_peer
+	
+	# Add signals for better debugging
+	multiplayer.connected_to_server.connect(_on_client_connected)
+	multiplayer.connection_failed.connect(_on_client_failed)
+	multiplayer.server_disconnected.connect(_on_server_disconnected)
+
+func _on_client_connected():
+	print("Successfully connected to the server!")
+
+func _on_client_failed():
+	print("Failed to connect to server. Check IP and Firewall.")
+
+func _on_server_disconnected():
+	print("Lost connection to the server.")
 
 
 func _ready() -> void:
