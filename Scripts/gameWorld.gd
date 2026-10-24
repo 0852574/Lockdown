@@ -74,7 +74,7 @@ func _ready() -> void:
 	showAnnounceText("First team to 3 wins", 5)
 	await get_tree().create_timer(5.0).timeout
 	Global.respawnPlayers()
-	resetRound()
+	rpc("resetRound")
 	#var DebugPanel = debWin.instantiate()
 	#add_child(DebugPanel)
 	#DebugPanel.visible = true
@@ -152,27 +152,8 @@ func exitTrapSetup():
 		Global.weaponManager.addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
 
 
+@rpc("reliable", "any_peer", "call_local")
 func resetRound():
-	Global.roundReset.emit()
-	Global.respawnPlayers()
-	trapSetupMode = true
-	weaponGlobal.weaponAmmoInventory = [[0,0], [0,0]]
-	weaponGlobal.weaponInventory = ["res://Weapons/Empty Weapon.tres","res://Weapons/Empty Weapon.tres"]
-	Global.weaponManager.loadWeapon()
-	Global.weaponManager.addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
-	rpc("recieveReset")
-	if Global.myCurrentTeam == "Cop":
-		Global.player.currentHeldTrap = avaliableTraps.pick_random()
-		showAnnounceText("Trap setup", 3)
-		await get_tree().create_timer(3.0).timeout
-		showAnnounceText("Place your traps and ready yourselves", 4)
-	else:
-		showAnnounceText("Round setup", 3)
-		await get_tree().create_timer(3.0).timeout
-		showAnnounceText("Plan your attack!", 4)
-
-@rpc("reliable", "any_peer")
-func recieveReset():
 	Global.roundReset.emit()
 	Global.respawnPlayers()
 	trapSetupMode = true
@@ -208,7 +189,7 @@ func updateAlivePlayers(team):
 				Global.changeScene("res://Scenes/lobby.tscn")
 				return
 			recalculateTeamNumbers()
-			resetRound()
+			rpc("resetRound")
 		elif Global.aliveRobberCount <= 0:
 			rpc("showAnnounceText", "Cops have won", 3)
 			Global.copWins += 1
@@ -219,7 +200,7 @@ func updateAlivePlayers(team):
 				Global.changeScene("res://Scenes/lobby.tscn")
 				return
 			recalculateTeamNumbers()
-			resetRound()
+			rpc("resetRound")
 
 @rpc("call_local", "reliable", "any_peer")
 func cameFromGameUpdate():
