@@ -19,6 +19,11 @@ extends Node
 
 @onready var pauseHUD = $PauseLayer
 
+@export var terminalDoor: Node3D
+@export var copsSpectateLocation : Marker3D
+@export var robbersSpectateLocation : Marker3D
+@export var mapName : String
+
 var tracked = false
 var player
 

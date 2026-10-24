@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://bpyh1pj66vo3u" path="res://Scenes/death_button.gd" id="16_j4ew0"]
 [ext_resource type="PackedScene" uid="uid://cp6m4co04ib6r" path="res://Scenes/Jump Pad.tscn" id="21_4jmuv"]
 [ext_resource type="Material" uid="uid://ce2n4s67rrvqy" path="res://Materials/Dev material Grey Glass.tres" id="22_3ngni"]
+[ext_resource type="PackedScene" uid="uid://c45hstg01x1nh" path="res://Scenes/Terminal_Door.tscn" id="23_wbbk6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u5pdl"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -106,8 +107,11 @@ font_size = 32
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yayec"]
 
-[node name="World" type="Node" unique_id=1730723652]
+[node name="World" type="Node" unique_id=1730723652 node_paths=PackedStringArray("terminalDoor", "copsSpectateLocation", "robbersSpectateLocation")]
 script = ExtResource("1_ctiuy")
+terminalDoor = NodePath("TerminalDoor")
+copsSpectateLocation = NodePath("SpawnPoints2/Cops/Marker3D")
+robbersSpectateLocation = NodePath("SpawnPoints2/Robber/Marker3D")
 
 [node name="Environment" parent="." unique_id=1851466389 instance=ExtResource("2_fr3vy")]
 
@@ -734,6 +738,9 @@ mesh = SubResource("PlaneMesh_yayec")
 transform = Transform3D(4, 0, 0, 0, -4.371139e-08, -1.6, 0, 1, -6.9938224e-08, -23.3, 3.3, -6.5)
 material_override = ExtResource("22_3ngni")
 mesh = SubResource("PlaneMesh_yayec")
+
+[node name="TerminalDoor" parent="." unique_id=214082965 instance=ExtResource("23_wbbk6")]
+transform = Transform3D(2.9802322e-08, 4.3711392e-08, 1, -4.371139e-08, 1, -4.3711385e-08, -1, -4.3711385e-08, 2.9802322e-08, 28.199999, 2, -24.7)
 
 [connection signal="body_entered" from="Terminal/Area3D" to="." method="_GUI_window_open"]
 [connection signal="close_requested" from="GUIwindow" to="GUIwindow" method="_GUI_window_close"]
