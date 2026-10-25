@@ -74,7 +74,8 @@ func _ready() -> void:
 	await get_tree().create_timer(5.0).timeout
 	showAnnounceText("First team to 3 wins", 5)
 	await get_tree().create_timer(5.0).timeout
-	rpc("resetRound")
+	if multiplayer.get_unique_id() == 1:
+		rpc("resetRound")
 	#var DebugPanel = debWin.instantiate()
 	#add_child(DebugPanel)
 	#DebugPanel.visible = true

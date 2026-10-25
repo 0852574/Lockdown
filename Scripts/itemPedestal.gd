@@ -58,7 +58,12 @@ func spawnItem():
 		
 	# 3. Tell all peers (including server via call_local) to spawn it instantly
 	rpc("replicateDroppedItem", loadedItem, dropPos, dropName)
-	print("I am CALLLLIFNINDS ")
+	var stack = get_stack()
+	if stack.size() > 1:
+		# Index 0 is my_function itself, Index 1 is the function that called it
+		var caller = stack[1]
+		print("Called by function: ", caller.function, " in script: ", caller.source, " at line: ", caller.line)
+
 
 @rpc("authority", "call_local", "reliable")
 func replicateDroppedItem(weapon, dropPos, dropName):
