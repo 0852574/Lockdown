@@ -58,6 +58,7 @@ func spawnItem():
 		
 	# 3. Tell all peers (including server via call_local) to spawn it instantly
 	rpc("replicateDroppedItem", loadedItem, dropPos, dropName)
+	print("I am CALLLLIFNINDS ")
 
 @rpc("authority", "call_local", "reliable")
 func replicateDroppedItem(weapon, dropPos, dropName):
