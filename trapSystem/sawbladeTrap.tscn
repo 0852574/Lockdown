@@ -86,7 +86,7 @@ properties/4/replication_mode = 1
 script = ExtResource("1_ckddn")
 
 [node name="Blade" type="MeshInstance3D" parent="." unique_id=1613625338]
-transform = Transform3D(1, 0, 4.3711385e-08, -4.3711385e-08, -4.371139e-08, 1, 1.9106853e-15, -1, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(2, 0, 8.742277e-08, -8.742277e-08, -8.742278e-08, 2, 3.8213705e-15, -2, -8.742278e-08, 0, 0, 0)
 rotation_order = 0
 mesh = ExtResource("1_0ymjq")
 
@@ -108,8 +108,9 @@ wait_time = 0.25
 autostart = true
 
 [node name="Base" type="StaticBody3D" parent="." unique_id=620153568]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.3, 0)
 script = ExtResource("3_060vf")
+health = 250
 
 [node name="BaseMesh" type="MeshInstance3D" parent="Base" unique_id=1780070740]
 mesh = ExtResource("2_ckddn")

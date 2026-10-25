@@ -1,18 +1,18 @@
 [gd_resource type="Resource" script_class="Weapons" format=3 uid="uid://sc0678yoejno"]
 
-[ext_resource type="ArrayMesh" uid="uid://sq8og6mxucq8" path="res://Weapons/Models/M1911/M1911_M1911 Slide.res" id="1_eilt4"]
+[ext_resource type="ArrayMesh" uid="uid://cks5jufd25axm" path="res://Weapons/Models/M1911/M1911_M1911 Slide.res" id="1_eilt4"]
 [ext_resource type="Script" uid="uid://c0afljd65dkhp" path="res://Weapons/Weapons.gd" id="1_pdj5b"]
-[ext_resource type="ArrayMesh" uid="uid://dn3jidwlbp3uf" path="res://Weapons/Models/M1911/M1911_M1911 Magazine.res" id="2_0tf7i"]
-[ext_resource type="ArrayMesh" uid="uid://b1xaeejtpuktq" path="res://Weapons/Models/M1911/M1911_M1911 Body.res" id="3_ki0wr"]
+[ext_resource type="ArrayMesh" uid="uid://8dwu735fiw8a" path="res://Weapons/Models/M1911/M1911_M1911 Magazine.res" id="2_0tf7i"]
+[ext_resource type="ArrayMesh" uid="uid://bigmbich8quw4" path="res://Weapons/Models/M1911/M1911_M1911 Body.res" id="3_ki0wr"]
 
 [resource]
 script = ExtResource("1_pdj5b")
 name = &"Blaster"
-Damage = 10
+Damage = 15
 clip = 10
 reserve = 80
 rpm = 600
-Accuracy = 4.0
+Accuracy = 2.0
 bulletScene = "uid://4vfijs3qw4nj"
 position = Vector3(0.25, -0.4, -0.5)
 rotation = Vector3(0, 90, 0)

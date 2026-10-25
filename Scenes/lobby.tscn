@@ -646,8 +646,7 @@ font_size = 192
 outline_size = 48
 
 [node name="Traps" type="Label3D" parent="." unique_id=1001325045]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, -27)
-no_depth_test = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, -26)
 text = "------------------Traps------------------
 Traps only deal damage to robbers
 A random trap is given to each cop at each new round to place down
@@ -705,7 +704,6 @@ outline_size = 24
 
 [node name="Core Game" type="Label3D" parent="." unique_id=1178263306]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -27)
-no_depth_test = true
 text = "------------------Core Game------------------
 Robbers must loot everything
 Cops must kill the robbers
@@ -715,7 +713,6 @@ outline_size = 24
 
 [node name="Robbing Items" type="Label3D" parent="." unique_id=119884134]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, -27)
-no_depth_test = true
 text = "------------------Robbing Items------------------
 Only Robbers can pick up items
 Robbers must place all items in the white floor square to win"

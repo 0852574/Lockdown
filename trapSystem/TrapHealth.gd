@@ -1,7 +1,7 @@
 extends StaticBody3D
 
 
-@export var health = 150
+@export var health = 100
 
 @rpc("any_peer", "call_local")
 func take_damage(damage, type, team):

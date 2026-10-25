@@ -26,8 +26,9 @@ var enet_peer = ENetMultiplayerPeer.new()
 var rng = RandomNumberGenerator.new()
 
 var avaliableTraps = [
-	"res://trapSystem/sawbladeTrap.tscn",
-	"res://trapSystem/sawbladeTrap.tscn",
+	#"res://trapSystem/sawbladeTrap.tscn",
+	#"res://trapSystem/gasTrap.tscn",
+	"res://trapSystem/tackShooter.tscn"
 ]
 
 #Game Manager Variables
