@@ -23,6 +23,7 @@ func _ready() -> void:
 	Global.joinButtonPressed.connect(requestItems)
 
 func _peer_connected(id: int):
+	await get_tree().process_frame
 	spawnItem()
 
 	
