@@ -162,21 +162,24 @@ func _ready() -> void:
 	menuMusicNode.playing = true
 	
 	update_money_display()
-	resetRound()
 	
 
 	var lan_ip = get_lan_ip()
-	ipLabel.text = "Host IP:\n" + lan_ip
+	ipLabel.text = "My IP:\n" + lan_ip
 	ipLabel.show()
 
 	if Global.cameFromGame == true:
 		Global.cameFromGame = false
+		if multiplayer.get_unique_id() == 1:
+			rpc("resetRound")
 		hideMainMenu()
 		hud.show()
 		weaponGlobal.weaponAmmoInventory = [[0,0], [0,0]]
 		weaponGlobal.weaponInventory = ["res://Weapons/Empty Weapon.tres","res://Weapons/Empty Weapon.tres"]
 		Global.weaponManager.loadWeapon()
 		Global.weaponManager.addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
+		return
+	resetRound()
 
 func _process(delta: float) -> void:
 	Global.playerHealth = 100
