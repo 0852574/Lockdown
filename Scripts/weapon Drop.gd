@@ -33,10 +33,9 @@ func _ready():
 	if weaponPath != null:
 		setModel(weaponPath)
 	Global.roundReset.connect(deleteWeaponDrop)
+	Global.playerJoined.connect(deleteWeaponDrop)
 	Global.joinButtonPressed.connect(deleteWeaponDrop)
-
-func _peer_connected(id: int):
-	deleteWeaponDrop()
+	
 
 
 func update():
