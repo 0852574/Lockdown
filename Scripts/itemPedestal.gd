@@ -22,6 +22,9 @@ func _ready() -> void:
 	Global.roundReset.connect(spawnItem)
 	Global.joinButtonPressed.connect(requestItems)
 
+func _peer_connected(id: int):
+	spawnItem()
+
 	
 	# 1. FIXING THE RACE CONDITION:
 	# When a client fully loads, they ask the server for any items that were 
