@@ -19,22 +19,24 @@ var spawned_items = []
 
 func _ready() -> void:
 	rng.randomize()
-	Global.roundReset.connect(spawnItem)
 	Global.joinButtonPressed.connect(requestItems)
+	if not multiplayer.get_unique_id() == 1:
+		return
+	
+	Global.roundReset.connect(spawnItem)
 	Global.playerJoined.connect(spawnItem)
 	
 	# 1. FIXING THE RACE CONDITION:
 	# When a client fully loads, they ask the server for any items that were 
 	# already spawned (in case they joined after the round started).
 func requestItems():
-	if not multiplayer.is_server():
+	if not multiplayer.get_unique_id() == 1:
 		rpc_id(1, "request_item_sync")
 
 func spawnItem():
-	await get_tree().process_frame
 	# 2. FIXING THE SERVER CHECK:
 	# Use is_server() instead of ID 1 for safety and clarity
-	if not multiplayer.is_server():
+	if not multiplayer.get_unique_id() == 1:
 		return
 			
 	# 1. Pick item and position immediately

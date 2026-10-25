@@ -75,7 +75,6 @@ func _ready() -> void:
 	await get_tree().create_timer(5.0).timeout
 	Global.respawnPlayers()
 	rpc("resetRound")
-	Global.roundReset.emit()
 	#var DebugPanel = debWin.instantiate()
 	#add_child(DebugPanel)
 	#DebugPanel.visible = true
