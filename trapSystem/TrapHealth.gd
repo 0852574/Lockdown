@@ -1,12 +1,11 @@
 extends StaticBody3D
 
 
-@export var health = 150
+@export var health = 100
 
 @rpc("any_peer", "call_local")
 func take_damage(damage, type, team):
-	#if team == "Robber":
-	if type != "trap":
+	if type != "trap" and team == "Robber":
 		health -= damage
 	
 	if health <= 0:

@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://bpyh1pj66vo3u" path="res://Scenes/death_button.gd" id="16_j4ew0"]
 [ext_resource type="PackedScene" uid="uid://cp6m4co04ib6r" path="res://Scenes/Jump Pad.tscn" id="21_4jmuv"]
 [ext_resource type="Material" uid="uid://ce2n4s67rrvqy" path="res://Materials/Dev material Grey Glass.tres" id="22_3ngni"]
+[ext_resource type="PackedScene" uid="uid://c45hstg01x1nh" path="res://Scenes/Terminal_Door.tscn" id="23_wbbk6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u5pdl"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -106,8 +107,11 @@ font_size = 32
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yayec"]
 
-[node name="World" type="Node" unique_id=1730723652]
+[node name="World" type="Node" unique_id=1730723652 node_paths=PackedStringArray("terminalDoor", "copsSpectateLocation", "robbersSpectateLocation")]
 script = ExtResource("1_ctiuy")
+terminalDoor = NodePath("TerminalDoor")
+copsSpectateLocation = NodePath("SpawnPoints2/Cops/Marker3D")
+robbersSpectateLocation = NodePath("SpawnPoints2/Robber/Marker3D")
 
 [node name="Environment" parent="." unique_id=1851466389 instance=ExtResource("2_fr3vy")]
 
@@ -302,6 +306,7 @@ mouse_filter = 1
 
 [node name="moneyLabel" type="Label" parent="UserInterface" unique_id=359434876]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 998.0
 offset_top = 4.0
@@ -312,6 +317,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="shopLabel" type="Label" parent="UserInterface" unique_id=656321435]
+visible = false
 layout_mode = 0
 offset_left = 998.0
 offset_top = 30.0
@@ -563,7 +569,7 @@ horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="PauseLayer/PausePanel/PauseVbox" unique_id=1908489897]
 layout_mode = 2
-text = "Press 'P' To Unpause"
+text = "Press 'Esc or P' To Unpause"
 horizontal_alignment = 1
 
 [node name="ExitGame" type="Button" parent="PauseLayer/PausePanel/PauseVbox" unique_id=2046067808]
@@ -601,7 +607,7 @@ shape = SubResource("BoxShape3D_x68ij")
 mesh = SubResource("BoxMesh_yy6u7")
 
 [node name="SawbladeTrap" parent="." unique_id=1923715929 instance=ExtResource("6_0f3vc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9474425, 2.047174, -27.178608)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.947443, 2.047174, -27.178608)
 
 [node name="Roof" type="StaticBody3D" parent="." unique_id=1658063438]
 transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 21.969109, 0)
@@ -643,11 +649,9 @@ outline_size = 48
 
 [node name="Traps" type="Label3D" parent="." unique_id=1001325045]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, -27)
-no_depth_test = true
 text = "------------------Traps------------------
 Traps only deal damage to robbers
-A random trap is given to each cop at each new round to place down
-Press F to place the trap down"
+Traps can be destroyed by robbers by shooting it!"
 font_size = 48
 outline_size = 24
 
@@ -661,7 +665,6 @@ outline_size = 24
 
 [node name="Welcome Robbers" type="Label3D" parent="." unique_id=522454973]
 transform = Transform3D(1, -3.5527137e-15, 0, -3.5527137e-15, 1, 1.9106853e-15, 0, 1.9106853e-15, 1, 26.4, 3, -4.9)
-no_depth_test = true
 text = "Welcome to the lobby
 You are on team Robbers"
 font_size = 48
@@ -669,11 +672,10 @@ outline_size = 24
 
 [node name="Controls" type="Label3D" parent="." unique_id=1958262389]
 transform = Transform3D(1, -3.5527137e-15, 0, -3.5527137e-15, 1, 1.9106853e-15, 0, 1.9106853e-15, 1, 23, 3.2, -5)
-no_depth_test = true
 text = "------------------Controls------------------
 
 Drop item: Q
-Interact: F
+Interact / Place trap: F
 Move: WASD
 Crouch: Ctrl
 Sprint: Shift
@@ -683,11 +685,10 @@ outline_size = 24
 
 [node name="Controls2" type="Label3D" parent="." unique_id=2133220117]
 transform = Transform3D(1, -3.5527137e-15, 0, -3.5527137e-15, 1, 1.9106853e-15, 0, 1.9106853e-15, 1, -22, 3.2, -5)
-no_depth_test = true
 text = "------------------Controls------------------
 
 Drop item: Q
-Interact: F
+Interact / Place trap: F
 Move: WASD
 Crouch: Ctrl
 Sprint: Shift
@@ -697,7 +698,6 @@ outline_size = 24
 
 [node name="Welcome Cops" type="Label3D" parent="." unique_id=1197282151]
 transform = Transform3D(1, -3.5527137e-15, 0, 3.5527137e-15, 1, 1.9106853e-15, 0, 1.9106857e-15, 1, -25, 3, -5)
-no_depth_test = true
 text = "Welcome to the lobby
 You are on team Cops"
 font_size = 48
@@ -705,20 +705,18 @@ outline_size = 24
 
 [node name="Core Game" type="Label3D" parent="." unique_id=1178263306]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -27)
-no_depth_test = true
 text = "------------------Core Game------------------
-Robbers must loot everything
-Cops must kill the robbers
+Robbers must loot everything to win
+Cops must kill the robbers to win
 Robbers can kill cops to also win"
 font_size = 48
 outline_size = 24
 
 [node name="Robbing Items" type="Label3D" parent="." unique_id=119884134]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, -27)
-no_depth_test = true
 text = "------------------Robbing Items------------------
 Only Robbers can pick up items
-Robbers must place all items in the white floor square to win"
+Robbers must place all items in the yellow zone to win!"
 font_size = 48
 outline_size = 24
 
@@ -734,6 +732,9 @@ mesh = SubResource("PlaneMesh_yayec")
 transform = Transform3D(4, 0, 0, 0, -4.371139e-08, -1.6, 0, 1, -6.9938224e-08, -23.3, 3.3, -6.5)
 material_override = ExtResource("22_3ngni")
 mesh = SubResource("PlaneMesh_yayec")
+
+[node name="TerminalDoor" parent="." unique_id=214082965 instance=ExtResource("23_wbbk6")]
+transform = Transform3D(2.9802322e-08, 4.3711392e-08, 1, -4.371139e-08, 1, -4.3711385e-08, -1, -4.3711385e-08, 2.9802322e-08, 28.199999, 2, -24.7)
 
 [connection signal="body_entered" from="Terminal/Area3D" to="." method="_GUI_window_open"]
 [connection signal="close_requested" from="GUIwindow" to="GUIwindow" method="_GUI_window_close"]

@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://dvspsmhr73myh" path="res://controllers/scripts/debug_panel.gd" id="8_1dscg"]
 [ext_resource type="LabelSettings" uid="uid://dskxen8j6183q" path="res://controllers/materials/Ammo Counter Label Settings.tres" id="9_0d06a"]
 [ext_resource type="LabelSettings" uid="uid://ymbpk3yphr8i" path="res://controllers/materials/InteractionLabelSettings.tres" id="10_jm8kb"]
-[ext_resource type="Theme" uid="uid://b4n6esmn2elnd" path="res://controllers/Themes/PauseMenuTheme.tres" id="11_61sp6"]
 [ext_resource type="Material" uid="uid://fpgiqq8ummwa" path="res://Materials/Dev material Glass.tres" id="12_5eab7"]
 [ext_resource type="ArrayMesh" uid="uid://cnp6lnibsu0tc" path="res://Maps/OverUnder/OverUnder_Cube.res" id="12_sye4v"]
 [ext_resource type="ArrayMesh" uid="uid://drc8cmbux1o1l" path="res://Maps/OverUnder/OverUnder_Cube_001.res" id="13_twu6q"]
@@ -235,8 +234,7 @@ mesh = SubResource("BoxMesh_ve51a")
 
 [node name="Label3D" type="Label3D" parent="Map/Cops Spectate Box" unique_id=618288497]
 transform = Transform3D(-4.371139e-08, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -1, -4.371139e-08, -4.3711385e-08, -11, 32, 0)
-text = "You have died
-Spectate the match until the next round"
+text = "Spectate the match until the next round"
 font_size = 128
 outline_size = 32
 
@@ -277,8 +275,7 @@ mesh = SubResource("BoxMesh_ve51a")
 
 [node name="Label3D" type="Label3D" parent="Map/Robbers Spectate Box" unique_id=1210134092]
 transform = Transform3D(-4.371139e-08, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -1, -4.371139e-08, -4.3711385e-08, -11, 32, 0)
-text = "You have died
-Spectate the match until the next round"
+text = "Spectate the match until the next round"
 font_size = 128
 outline_size = 32
 
@@ -389,56 +386,8 @@ transform = Transform3D(0.2774824, 0, 0.96073073, 0, 1, 0, -0.96073073, 0, 0.277
 [node name="Marker3D4" type="Marker3D" parent="SpawnPoints/Cops" unique_id=194448217]
 transform = Transform3D(0.2774824, 0, 0.96073073, 0, 1, 0, -0.96073073, 0, 0.2774824, -20.261839, 3.9191132, -6.3780556)
 
-[node name="PauseLayer" type="CanvasLayer" parent="." unique_id=1072914668]
-visible = false
-
-[node name="PausePanel" type="Panel" parent="PauseLayer" unique_id=686927151]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -298.0
-offset_top = -215.0
-offset_right = 298.0
-offset_bottom = 215.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("11_61sp6")
-
-[node name="PauseVbox" type="VBoxContainer" parent="PauseLayer/PausePanel" unique_id=932693463]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.5
-offset_top = -25.0
-offset_right = 48.5
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="PauseLayer/PausePanel/PauseVbox" unique_id=1867114184]
-layout_mode = 2
-text = "heeheehoo"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="PauseLayer/PausePanel/PauseVbox" unique_id=137376078]
-layout_mode = 2
-text = "ooheehehee"
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="PauseLayer/PausePanel/PauseVbox" unique_id=1675782982]
-layout_mode = 2
-text = "Button that does nothing"
-
 [node name="ItemCollectionVolume" parent="." unique_id=409276444 instance=ExtResource("17_0d06a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.156555, 1.9594203, 1.0985107)
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 57.156555, 1.7594204, 1.0985107)
 
 [node name="ItemPedestal" parent="." unique_id=1849080789 instance=ExtResource("2_q4oia")]
 transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -4.3711385e-08, -20.666664, 1.5000004, -5.233334)
@@ -446,17 +395,17 @@ transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.37
 [node name="ItemPedestal3" parent="." unique_id=28812881 instance=ExtResource("2_q4oia")]
 transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -4.3711385e-08, -20.666664, 1.5000004, -0.033333898)
 
+[node name="ItemPedestal2" parent="." unique_id=2106139460 instance=ExtResource("2_q4oia")]
+transform = Transform3D(1, 0, 0, 0, 1, -1.6420284e-15, 0, -1.6420282e-15, 1, -4, 11, 4)
+
+[node name="ItemPedestal4" parent="." unique_id=815790846 instance=ExtResource("2_q4oia")]
+transform = Transform3D(1, 0, 0, 0, 1, -1.6420284e-15, 0, -1.6420282e-15, 1, -4, 11, -4)
+
+[node name="ItemPedestal6" parent="." unique_id=1395401276 instance=ExtResource("2_q4oia")]
+transform = Transform3D(1, 0, 0, 0, 1, -1.6420284e-15, 0, -1.6420282e-15, 1, -6, 11, 0)
+
 [node name="ItemPedestal5" parent="." unique_id=2000253223 instance=ExtResource("2_q4oia")]
 transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -4.3711385e-08, -20.666664, 1.5000004, 5.166666)
-
-[node name="ItemPedestal2" parent="." unique_id=894749991 instance=ExtResource("2_q4oia")]
-transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -4.3711385e-08, -4.666664, 11, -5.233334)
-
-[node name="ItemPedestal4" parent="." unique_id=1549331429 instance=ExtResource("2_q4oia")]
-transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -4.3711385e-08, -6.666664, 10.9, -0.033333898)
-
-[node name="ItemPedestal6" parent="." unique_id=1430450547 instance=ExtResource("2_q4oia")]
-transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -4.3711385e-08, -4.666664, 11, 5.166666)
 
 [node name="Terminal" type="MeshInstance3D" parent="." unique_id=965305013]
 transform = Transform3D(0.48608938, 1.5029517e-08, 0.012745708, -1.5975438e-08, 0.48625654, 3.5878045e-08, -0.012745708, -3.6284458e-08, 0.48608938, 1.3942832, 1.4621267, 4.0449743)
@@ -489,6 +438,7 @@ mouse_filter = 1
 
 [node name="moneyLabel" type="Label" parent="UserInterface" unique_id=1288718335]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 998.0
 offset_top = 4.0
@@ -499,6 +449,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="shopLabel" type="Label" parent="UserInterface" unique_id=558596708]
+visible = false
 layout_mode = 0
 offset_left = 998.0
 offset_top = 30.0
@@ -706,5 +657,50 @@ theme_override_styles/background = SubResource("StyleBoxFlat_0d06a")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jm8kb")
 rounded = true
 
+[node name="PauseLayer" type="CanvasLayer" parent="." unique_id=2016349203]
+visible = false
+
+[node name="PausePanel" type="Panel" parent="PauseLayer" unique_id=1296127818]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -298.0
+offset_top = -215.0
+offset_right = 298.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseVbox" type="VBoxContainer" parent="PauseLayer/PausePanel" unique_id=1510273851]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.082214765
+anchor_top = 0.093023255
+anchor_right = 0.9177852
+anchor_bottom = 0.90697676
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="PauseLayer/PausePanel/PauseVbox" unique_id=1971324927]
+layout_mode = 2
+size_flags_vertical = 1
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="PauseLayer/PausePanel/PauseVbox" unique_id=2057299990]
+layout_mode = 2
+text = "Press 'Esc or P' To Unpause"
+horizontal_alignment = 1
+
+[node name="ExitGame" type="Button" parent="PauseLayer/PausePanel/PauseVbox" unique_id=1625080271]
+layout_mode = 2
+text = "Quit Game"
+
 [connection signal="close_requested" from="GUIwindow" to="GUIwindow" method="_GUI_window_close"]
 [connection signal="body_entered" from="Terminal/Area3D" to="." method="_GUI_window_open"]
+[connection signal="pressed" from="PauseLayer/PausePanel/PauseVbox/ExitGame" to="." method="_on_exit_game_pressed"]

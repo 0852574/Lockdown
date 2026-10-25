@@ -26,8 +26,9 @@ var enet_peer = ENetMultiplayerPeer.new()
 var rng = RandomNumberGenerator.new()
 
 var avaliableTraps = [
-	"res://trapSystem/sawbladeTrap.tscn",
-	"res://trapSystem/sawbladeTrap.tscn",
+	#"res://trapSystem/sawbladeTrap.tscn",
+	#"res://trapSystem/gasTrap.tscn",
+	"res://trapSystem/tackShooter.tscn"
 ]
 
 #Game Manager Variables
@@ -73,15 +74,11 @@ func _ready() -> void:
 	await get_tree().create_timer(5.0).timeout
 	showAnnounceText("First team to 3 wins", 5)
 	await get_tree().create_timer(5.0).timeout
-	Global.respawnPlayers()
-	resetRound()
+	rpc("resetRound")
 	#var DebugPanel = debWin.instantiate()
 	#add_child(DebugPanel)
 	#DebugPanel.visible = true
 
-func _unhandled_input(_event):
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
 
 		
 func pause(): #this probably isnt the best way to do this but it works
@@ -144,7 +141,6 @@ func exitTrapSetup():
 		Global.player.trapInstance = null
 		Global.player.loadedTrap = null
 		Global.player.hasInstancedTrap = false
-		Global.roundReset.emit()
 		Global.respawnPlayers()
 		weaponGlobal.weaponAmmoInventory = [[0,0], [0,0]]
 		weaponGlobal.weaponInventory = ["res://Weapons/Empty Weapon.tres","res://Weapons/Empty Weapon.tres"]
@@ -152,26 +148,9 @@ func exitTrapSetup():
 		Global.weaponManager.addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
 
 
+@rpc("reliable", "any_peer", "call_local")
 func resetRound():
-	Global.roundReset.emit()
-	Global.respawnPlayers()
-	trapSetupMode = true
-	weaponGlobal.weaponAmmoInventory = [[0,0], [0,0]]
-	weaponGlobal.weaponInventory = ["res://Weapons/Empty Weapon.tres","res://Weapons/Empty Weapon.tres"]
-	Global.weaponManager.loadWeapon()
-	Global.weaponManager.addWeapon("res://Weapons/Blaster.tres", true, 0, 0)
-	rpc("recieveReset")
-	if Global.myCurrentTeam == "Cop":
-		Global.player.currentHeldTrap = avaliableTraps.pick_random()
-		showAnnounceText("Trap setup", 3)
-		await get_tree().create_timer(3.0).timeout
-		showAnnounceText("Place your traps and ready yourselves", 4)
-	else:
-		showAnnounceText("Round setup", 3)
-		await get_tree().create_timer(3.0).timeout
-		showAnnounceText("Plan your attack!", 4)
-@rpc("reliable", "any_peer")
-func recieveReset():
+	totalItems = 0
 	Global.roundReset.emit()
 	Global.respawnPlayers()
 	trapSetupMode = true
@@ -198,7 +177,7 @@ func updateAlivePlayers(team):
 			Global.aliveRobberCount -= 1
 		
 		if Global.aliveCopCount <= 0:
-			rpc("showAnnounceText", "Robbers have won")
+			rpc("showAnnounceText", "Robbers have won", 3)
 			Global.robberWins += 1
 			await get_tree().create_timer(3.0).timeout
 			if Global.robberWins >= 3:
@@ -207,9 +186,9 @@ func updateAlivePlayers(team):
 				Global.changeScene("res://Scenes/lobby.tscn")
 				return
 			recalculateTeamNumbers()
-			resetRound()
+			rpc("resetRound")
 		elif Global.aliveRobberCount <= 0:
-			rpc("showAnnounceText", "Cops have won")
+			rpc("showAnnounceText", "Cops have won", 3)
 			Global.copWins += 1
 			await get_tree().create_timer(3.0).timeout
 			if Global.copWins >= 3:
@@ -218,7 +197,7 @@ func updateAlivePlayers(team):
 				Global.changeScene("res://Scenes/lobby.tscn")
 				return
 			recalculateTeamNumbers()
-			resetRound()
+			rpc("resetRound")
 
 @rpc("call_local", "reliable", "any_peer")
 func cameFromGameUpdate():
@@ -240,3 +219,8 @@ var current_balance = moneyGlobal.get_bank_balance()
 func update_money_display() -> void:
 	money.text = "Money: " + str(current_balance)
 	print("Player wallet: " + str(current_balance))
+
+
+func _on_exit_game_pressed() -> void:
+
+	get_tree().quit()

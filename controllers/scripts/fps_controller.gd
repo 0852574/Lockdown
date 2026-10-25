@@ -27,6 +27,7 @@ var hasInstancedTrap = false
 @onready var damageVignette = $CameraController/Camera3D/CanvasLayer/damageVignette
 @onready var interactionCast = %trapPlaceCast
 @onready var trapPlaceCast = %trapPlaceCast
+@onready var healDelayTimer = $"Heal Delay"
 
 var MOUSE_SENSITIVITY : float = 0.125
 var _mouse_input : bool = false
@@ -45,6 +46,7 @@ var gravity = 12
 var stamina = 100
 
 var is_interacting: bool = false
+var autoHealing = false
 
 var mapFiles = [
 	"res://Maps/OverUnder.tscn",
@@ -93,9 +95,6 @@ func _input(event):
 
 	if not is_multiplayer_authority():
 		return
-
-	if event.is_action_pressed("exit"):
-		get_tree().quit()
 	
 	if event.is_action_pressed("debug"):
 		if get_tree().current_scene.scene_file_path == "res://Scenes/lobby.tscn":
@@ -171,9 +170,10 @@ func _process(delta: float) -> void:
 	cameraOffset = lerp(cameraOffset, Vector3(0,0,0), 0.05)
 	damageVignette.material.set_shader_parameter("intensity", move_toward(damageVignette.material.get_shader_parameter("intensity"), 0.0, 0.01))  
 
-	if stamina < 101 and stateMachine.currentState != $PlayerStateMachine/SprintingPlayerState:
+	if stamina < 101 and stateMachine.currentState != $PlayerStateMachine/SprintingPlayerState and stateMachine.currentState != $PlayerStateMachine/JumpingPlayerState:
 		stamina += 0.15
 	Global.staminaBar.value = stamina
+	
 
 	if Input.is_action_just_pressed("debugAction"):
 		currentHeldTrap = "res://trapSystem/sawbladeTrap.tscn"
@@ -229,6 +229,8 @@ func take_damage(damage, type, team):
 		return
 	if team != Global.myCurrentTeam:
 		Global.playerHealth -= damage
+		autoHealing = false
+		healDelayTimer.start(6)
 		damageVignette.material.set_shader_parameter("intensity", damageVignette.material.get_shader_parameter("intensity") + 0.25)
 		damageVignette.material.set_shader_parameter("intensity", clampf(damageVignette.material.get_shader_parameter("intensity"), 0.0, 0.75))  
 		Global.updateHealth()
@@ -288,3 +290,12 @@ func replicateTrapPlacement(trapPath, trapName, trapPos, traprot):
 	trapInstanceClient.global_position = trapPos
 	trapInstanceClient.rotation = traprot
 	get_tree().root.get_node("World").add_child(trapInstanceClient)
+
+
+func _on_heal_delay_timeout() -> void:
+	autoHealing = true
+
+
+func _on_healing_tick_timeout() -> void:
+	if Global.playerHealth < 100 and autoHealing:
+		Global.playerHealth += 1
