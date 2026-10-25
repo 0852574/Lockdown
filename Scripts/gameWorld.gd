@@ -79,9 +79,6 @@ func _ready() -> void:
 	#add_child(DebugPanel)
 	#DebugPanel.visible = true
 
-func _unhandled_input(_event):
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
 
 		
 func pause(): #this probably isnt the best way to do this but it works
@@ -222,3 +219,8 @@ var current_balance = moneyGlobal.get_bank_balance()
 func update_money_display() -> void:
 	money.text = "Money: " + str(current_balance)
 	print("Player wallet: " + str(current_balance))
+
+
+func _on_exit_game_pressed() -> void:
+
+	get_tree().quit()

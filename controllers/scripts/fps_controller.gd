@@ -95,9 +95,6 @@ func _input(event):
 
 	if not is_multiplayer_authority():
 		return
-
-	if event.is_action_pressed("exit"):
-		get_tree().quit()
 	
 	if event.is_action_pressed("debug"):
 		if get_tree().current_scene.scene_file_path == "res://Scenes/lobby.tscn":

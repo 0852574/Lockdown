@@ -306,6 +306,7 @@ mouse_filter = 1
 
 [node name="moneyLabel" type="Label" parent="UserInterface" unique_id=359434876]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 998.0
 offset_top = 4.0
@@ -316,6 +317,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="shopLabel" type="Label" parent="UserInterface" unique_id=656321435]
+visible = false
 layout_mode = 0
 offset_left = 998.0
 offset_top = 30.0
@@ -567,7 +569,7 @@ horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="PauseLayer/PausePanel/PauseVbox" unique_id=1908489897]
 layout_mode = 2
-text = "Press 'P' To Unpause"
+text = "Press 'Esc or P' To Unpause"
 horizontal_alignment = 1
 
 [node name="ExitGame" type="Button" parent="PauseLayer/PausePanel/PauseVbox" unique_id=2046067808]
@@ -605,7 +607,7 @@ shape = SubResource("BoxShape3D_x68ij")
 mesh = SubResource("BoxMesh_yy6u7")
 
 [node name="SawbladeTrap" parent="." unique_id=1923715929 instance=ExtResource("6_0f3vc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9474425, 2.047174, -27.178608)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.947443, 2.047174, -27.178608)
 
 [node name="Roof" type="StaticBody3D" parent="." unique_id=1658063438]
 transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 21.969109, 0)
@@ -646,11 +648,10 @@ font_size = 192
 outline_size = 48
 
 [node name="Traps" type="Label3D" parent="." unique_id=1001325045]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, -26)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, -27)
 text = "------------------Traps------------------
 Traps only deal damage to robbers
-A random trap is given to each cop at each new round to place down
-Press F to place the trap down"
+Traps can be destroyed by robbers by shooting it!"
 font_size = 48
 outline_size = 24
 
@@ -674,7 +675,7 @@ transform = Transform3D(1, -3.5527137e-15, 0, -3.5527137e-15, 1, 1.9106853e-15, 
 text = "------------------Controls------------------
 
 Drop item: Q
-Interact: F
+Interact / Place trap: F
 Move: WASD
 Crouch: Ctrl
 Sprint: Shift
@@ -687,7 +688,7 @@ transform = Transform3D(1, -3.5527137e-15, 0, -3.5527137e-15, 1, 1.9106853e-15, 
 text = "------------------Controls------------------
 
 Drop item: Q
-Interact: F
+Interact / Place trap: F
 Move: WASD
 Crouch: Ctrl
 Sprint: Shift
@@ -705,8 +706,8 @@ outline_size = 24
 [node name="Core Game" type="Label3D" parent="." unique_id=1178263306]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -27)
 text = "------------------Core Game------------------
-Robbers must loot everything
-Cops must kill the robbers
+Robbers must loot everything to win
+Cops must kill the robbers to win
 Robbers can kill cops to also win"
 font_size = 48
 outline_size = 24
@@ -715,7 +716,7 @@ outline_size = 24
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, -27)
 text = "------------------Robbing Items------------------
 Only Robbers can pick up items
-Robbers must place all items in the white floor square to win"
+Robbers must place all items in the yellow zone to win!"
 font_size = 48
 outline_size = 24
 
