@@ -103,6 +103,7 @@ func _on_host_button_pressed():
 
 	print("Server started.")
 	print("Maximum players: ", MAX_PLAYERS)
+	ipLabel.text = ipLabel.text + "\nPress G to start game"
 	Global.roundReset.emit()
 
 func _on_join_button_pressed():
